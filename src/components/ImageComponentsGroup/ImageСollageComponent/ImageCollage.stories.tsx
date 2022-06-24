@@ -2,7 +2,7 @@ import { ImageCollage } from "./ImageCollageComponent";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 export default {
-  title: "Images/Default Image Collage",
+  title: "Images/DefaultCollage",
   component: ImageCollage,
 } as ComponentMeta<typeof ImageCollage>;
 
