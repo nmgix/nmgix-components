@@ -1,4 +1,4 @@
-## UI-kit for porfolio project
+# UI-kit for porfolio project
 
 > Этот текст в русском переводе находится [здесь](https://github.com/Nmgix/nmgix-components/blob/main/README_RU.md)
 
