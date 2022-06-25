@@ -17,11 +17,11 @@ DefaultCollage.args = {
       label: "default label",
     },
     {
-      src: "https://feminissimo.ru/core/fileman/Uploads/Учимся%20читать%20играя%20Часть3/Азбука%20для%20Детей%20в%20виде%20Карточек/Русский%20Алфавит%20Цветные%20Карточки/cvetnie_kartochki_3.jpg",
+      src: "https://avatars.mds.yandex.net/i?id=25de337fb355b3f3308d64e7a2138b2c-5275535-images-thumbs&n=13",
       label: "default label",
     },
     {
-      src: "https://www.tulapressa.ru/wp-content/images/5da4fbc5a9c684.61334794.jpg",
+      src: "https://avatars.mds.yandex.net/i?id=25de337fb355b3f3308d64e7a2138b2c-5275535-images-thumbs&n=13",
       label: "default label",
     },
     {

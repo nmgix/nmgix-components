@@ -9,7 +9,7 @@ type ImageCollageProps = {
 export const ImageCollage: React.FC<ImageCollageProps> = ({ images }) => {
   return (
     <div className='image-collage'>
-      <Image src={images[0].src} label={""} index={0} />
+      <Image {...images[0]} index={0} showLabel={true} />
       {(JSON.parse(JSON.stringify(images)) as ImageProps[]).splice(1, 3).map(({ src, label }, index) => (
         <Image src={src} key={label + index} label={""} index={index} />
       ))}

@@ -5,11 +5,14 @@ export type ImageProps = {
   src: string;
   label: string;
   labelOnHover?: boolean;
+  showLabel?: boolean;
   index?: number;
 };
 
-export const Image: React.FC<ImageProps> = ({ src, label, labelOnHover, index }) => {
-  const [shownLabel, setShowLabel] = useState<boolean>(labelOnHover ? labelOnHover : true);
+export const Image: React.FC<ImageProps> = ({ src, label, labelOnHover, showLabel, index }) => {
+  const [shownLabel, setShowLabel] = useState<boolean>(
+    labelOnHover !== undefined ? labelOnHover : showLabel !== undefined ? showLabel : true
+  );
   const handleLabelShow = (show: boolean) => {
     if (labelOnHover) {
       setShowLabel(show);
@@ -22,6 +25,7 @@ export const Image: React.FC<ImageProps> = ({ src, label, labelOnHover, index })
         onMouseEnter={() => handleLabelShow(true)}
         onMouseLeave={() => handleLabelShow(false)}
         alt={label}
+        draggable={false}
       />
       {label.length > 0 && shownLabel ? (
         <p>
