@@ -1,9 +1,9 @@
 # UI-библиотека для разработки сайта-портфолио
 
-English version of this text is [there]("https://github.com/Nmgix/nmgix-components/blob/main/README_EN.md")
+> English version of this text is [there](https://github.com/Nmgix/nmgix-components/blob/main/README_EN.md)
 
 Острая необходимость в отдельном UI-ките появилась с осознанием того, что мне надоело иметь и компоненты, и логику вместе в одном месте.
 При создании портфолио я не смогу испортить компонент в остальных местах (конечно, если очень постараюсь, то смогу) проекта. При необходимости создания отдельного случая (например, необычная кнопка) я могу сделать отдельный объект для конкретного назначения.
 Может быть, эта UI-библиотека в будущем станет основополагающим не только этого проекта.
 
-Todo-лист комопонентов можно найти [здесь]("https://github.com/Nmgix/nmgix-components/blob/main/TODO_RU.md").
+Todo-лист комопонентов можно найти [здесь](https://github.com/Nmgix/nmgix-components/blob/main/TODO_RU.md).
