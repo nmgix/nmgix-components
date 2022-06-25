@@ -1,4 +1,4 @@
-export { Alert } from "./components/AlertComponent";
+export { HeaderAlert } from "./components/AlertComponentsGroup/HeaderAlertComponent";
 export { Button } from "./components/ButtonComponent";
 export { HTIV } from "./components/HTIVComponent";
 export { HintComponent } from "./components/HintComponent";
