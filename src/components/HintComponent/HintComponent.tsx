@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-type hintProps = {
+type HintProps = {
   content: {
     title: string;
     description: string;
@@ -9,7 +9,7 @@ type hintProps = {
   switchOption?: (e: any) => void;
 };
 
-export const HintComponent: React.FC<hintProps> = ({ content, hideTimeout, switchOption }) => {
+export const HintComponent: React.FC<HintProps> = ({ content, hideTimeout, switchOption }) => {
   const [activeHint, setActiveHint] = useState<boolean>(true);
   useEffect(() => {
     var hideHintTimeout = setTimeout(() => setActiveHint(false), hideTimeout);

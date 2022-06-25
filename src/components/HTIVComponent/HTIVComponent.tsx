@@ -1,11 +1,11 @@
 // HighlightTextInViewComponent
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 
-type htivProps = {
+type HtivProps = {
   children: React.ReactElement;
 };
 
-export const HTIV: React.FC<htivProps> = ({ children }) => {
+export const HTIV: React.FC<HtivProps> = ({ children }) => {
   const observerOptions = {
     root: document.querySelector(".htiv-observer"),
     rootMargin: "0px",

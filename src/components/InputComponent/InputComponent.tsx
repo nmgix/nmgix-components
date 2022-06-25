@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import "./_input.scss";
 
-type inputProps = {
+type InputProps = {
   label: React.ReactNode;
 };
 
-export const Input: React.FC<inputProps> = ({ label }) => {
+export const Input: React.FC<InputProps> = ({ label }) => {
   const [state, setState] = useState<string>("");
   const handleChange = (e: React.ChangeEvent) => {
     //
