@@ -9,7 +9,7 @@ type HintProps = {
   switchOption?: (e: any) => void;
 };
 
-export const HintComponent: React.FC<HintProps> = ({ content, hideTimeout, switchOption }) => {
+export const Hint: React.FC<HintProps> = ({ content, hideTimeout, switchOption }) => {
   const [activeHint, setActiveHint] = useState<boolean>(true);
   useEffect(() => {
     var hideHintTimeout = setTimeout(() => setActiveHint(false), hideTimeout);

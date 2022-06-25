@@ -3,7 +3,7 @@ import { FixedAlert } from "./FixedAlert";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 export default {
-  title: "Alerts/Default Alert",
+  title: "Generic/Alerts/Fixed Alert",
   component: FixedAlert,
 } as ComponentMeta<typeof FixedAlert>;
 
@@ -13,4 +13,4 @@ const GenericAlert: ComponentStory<typeof FixedAlert> = () => (
   </FixedAlert>
 );
 
-export const DefaultAlert = GenericAlert.bind({});
+export const DefaultFixedAlert = GenericAlert.bind({});

@@ -3,7 +3,7 @@ import { HeaderAlert } from "./HeaderAlert";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 export default {
-  title: "Alerts/Default Alert",
+  title: "Generic/Alerts/Header Alert",
   component: HeaderAlert,
 } as ComponentMeta<typeof HeaderAlert>;
 
@@ -13,4 +13,4 @@ const GenericAlert: ComponentStory<typeof HeaderAlert> = () => (
   </HeaderAlert>
 );
 
-export const DefaultAlert = GenericAlert.bind({});
+export const DefaultHeaderAlert = GenericAlert.bind({});

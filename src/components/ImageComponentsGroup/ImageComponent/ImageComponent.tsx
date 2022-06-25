@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./_image.scss";
 
 export type ImageProps = {
   src: string;
@@ -7,7 +8,7 @@ export type ImageProps = {
   index?: number;
 };
 
-export const ImageComponent: React.FC<ImageProps> = ({ src, label, labelOnHover, index }) => {
+export const Image: React.FC<ImageProps> = ({ src, label, labelOnHover, index }) => {
   const [shownLabel, setShowLabel] = useState<boolean>(labelOnHover ? labelOnHover : true);
   const handleLabelShow = (show: boolean) => {
     if (labelOnHover) {

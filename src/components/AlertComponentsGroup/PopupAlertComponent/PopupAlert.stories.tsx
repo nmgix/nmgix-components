@@ -3,7 +3,7 @@ import { PopupAlert } from "./PopupAlert";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 export default {
-  title: "Alerts/Default Alert",
+  title: "Generic/Alerts/Popup Alert",
   component: PopupAlert,
 } as ComponentMeta<typeof PopupAlert>;
 
@@ -13,4 +13,4 @@ const GenericAlert: ComponentStory<typeof PopupAlert> = () => (
   </PopupAlert>
 );
 
-export const DefaultAlert = GenericAlert.bind({});
+export const DefaultPopupAlert = GenericAlert.bind({});
