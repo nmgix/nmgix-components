@@ -61,14 +61,18 @@ The component will be marked as done when all the conditions for creating and co
         [ ] Customize history
         [ ] Document component (TSDoc)
 
-## [ ] Component Highlight TextBox with Focus (HTIV)
+## [ ] Component Highlight TextBox In Focus (HTIV)
 
     Need to do:
+        [x] Logic for highlighting current element(s)
+        [ ] Make styling and a layout
+        [x] Correct component behavior while beeing in couple with other components
         [ ] Write tests for:
             1. there is no block highlighting if this mode is turned off in the general context
-            2. Checking the highlight of the block when scrolling the page (the difference between the blocks in terms of content)
+            2. checking the highlight of the block when scrolling the page (the difference between the blocks in terms of content)
+            3. checking for correct text highlighting in different scroll position (with other components and without)
         [ ] Customize history
-        [ ] Document component (TSDoc)
+        [x] Document component (TSDoc)
 
 ## [ ] Component Icon
 
