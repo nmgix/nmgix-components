@@ -1,0 +1,14 @@
+.hints-wrapper {
+  padding: 0;
+  z-index: 3;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* this value will be replaced with max width of body or something similar */
+  display: flex;
+  flex-direction: column;
+
+  transform: translate(0%, -50%);
+  box-shadow: 0px 0px 10px 5px rgb(255, 255, 255);
+  background-color: rgba(255, 255, 255, 1);
+}

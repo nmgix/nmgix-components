@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Hint } from "./HintComponent";
 
 export default {
-  title: "Generic/Hints/Common",
+  title: "Generic/Hints/Hint",
   component: Hint,
 } as ComponentMeta<typeof Hint>;
 
@@ -18,4 +18,5 @@ DefaultHint.args = {
   },
   hideTimeout: 10000,
   switchOption: () => console.log("switched some option state"),
+  type: "fixed",
 };

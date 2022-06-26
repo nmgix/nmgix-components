@@ -67,6 +67,7 @@ The component will be marked as done when all the conditions for creating and co
         [x] Logic for highlighting current element(s)
         [ ] Make styling and a layout
         [x] Correct component behavior while beeing in couple with other components
+        [x] Add ability to place hints
         [ ] Write tests for:
             1. there is no block highlighting if this mode is turned off in the general context
             2. checking the highlight of the block when scrolling the page (the difference between the blocks in terms of content)
