@@ -8,7 +8,7 @@ export default {
 } as ComponentMeta<typeof HeaderAlert>;
 
 const GenericAlert: ComponentStory<typeof HeaderAlert> = () => (
-  <HeaderAlert>
+  <HeaderAlert type='notification'>
     Какой-то sample текст, чтобы обратить <b>внимание</b> читателя на эту информацию
   </HeaderAlert>
 );

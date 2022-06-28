@@ -1,7 +1,14 @@
 Checklist of what needs to be done.
 The component will be marked as done when all the conditions for creating and configuring the component are met.
 
-## [ ] Component Notification
+## Global Todo
+
+    [x] Connect fonts, they dont resolve normally for now
+    > The problem was that webpack didn't want to recognize fonts and was trying to combine them with .ts and .tsx extensions. Key to solution was to use url("/resources/fonts/FONT_NAME/FONT.EXTENSION") (not "./", "/" as it is absoulte path) where root was ./src (storybook package.json setup to seek static files in "./src").
+    Also I  didn't had to load index.scss file in .storybook/preview.js to run it properly.
+    [ ] Setup compilation so scss files get in final build
+
+## [ ] Component Alert
 
     Need to do:
         [ ] Multiple color presets (eg alert or notification)
@@ -68,6 +75,7 @@ The component will be marked as done when all the conditions for creating and co
         [ ] Make styling and a layout
         [x] Correct component behavior while beeing in couple with other components
         [x] Add ability to place hints
+        [ ] Make highlighting option switchable
         [ ] Write tests for:
             1. there is no block highlighting if this mode is turned off in the general context
             2. checking the highlight of the block when scrolling the page (the difference between the blocks in terms of content)

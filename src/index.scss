@@ -1,0 +1,13 @@
+@use "./resources/fonts/Inter/fontsInter";
+
+$color-notification: #0057ff;
+$color-warning: #ff0000;
+$color-interest: #ffc700;
+$color-background-alter: #fff;
+$color-background-default: #000;
+
+body,
+html,
+* {
+  font-family: "Inter";
+}
