@@ -1,0 +1,65 @@
+@use "../../index";
+
+.alert {
+  display: flex;
+  justify-content: center;
+
+  &-content {
+    color: #fff;
+    font-weight: 200;
+  }
+
+  &-preset {
+    &-notification {
+      color: transparentize(index.$color-notification, 0.3);
+      background-color: index.$color-notification;
+    }
+
+    &-warning {
+      color: transparentize(index.$color-warning, 0.3);
+      background-color: index.$color-warning;
+    }
+
+    &-interest {
+      color: transparentize(index.$color-interest, 0.3);
+      background-color: index.$color-interest;
+    }
+
+    &-success {
+      color: transparentize(index.$color-success, 0.3);
+      background-color: index.$color-success;
+    }
+  }
+
+  &-header {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    width: 100%;
+    height: auto;
+    padding: 10px 0;
+
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+
+    box-shadow: 0px -2px 25px;
+  }
+
+  &-window-fixed,
+  &-fixed {
+    width: fit-content;
+    height: auto;
+    padding: 10px 15px;
+
+    border-radius: 10px;
+
+    box-shadow: 0px -2px 25px;
+
+    margin: 10px;
+  }
+
+  &-window-fixed {
+    position: fixed;
+  }
+}

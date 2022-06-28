@@ -1,3 +1,3 @@
 import * as React from "react";
 import { fireEvent, render } from "@testing-library/react";
-import { PopupAlert } from "./PopupAlert";
+import { Alert } from "./Alert";
