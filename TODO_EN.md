@@ -16,16 +16,18 @@ Need to do:
 
 - [x] Multiple color presets (eg alert or notification) for each type
 - [x] Glow to match background color
-- [ ] Autoscrollable text that doesn't fit into the component's viewport
+- [x] Autoscrollable text that doesn't fit into the component's viewport
+  > Current realisation is a bit simpler than expected. Was expected that content will be animatied if it overflows parent. But for now Alert will check if content length is more that hardcoded value (trimming off HTML tags).
 - [x] Fixed position for HeaderAlert either in page or window
 - [x] Fixed position for WindowFixedAlert in the window
 - [x] Fixed position for FixedAlert in the page
+- [ ] Alert Stack
 - [ ] Write tests for:
 
-  1.  text autoscroll (check state)
-  2.  maintaining the correct position when scrolling the page
+  1.  maintaining the correct position when scrolling the page
+  2.  testing Alert Stack functionality (adding and removing alerts, with and without timer)
 
-- [ ] Customize stories for each component
+- [x] Customize stories for each component
 - [x] Document component (TSDoc)
 
 ## [ ] Component Button
