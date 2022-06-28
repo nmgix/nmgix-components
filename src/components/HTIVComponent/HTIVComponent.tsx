@@ -22,7 +22,8 @@ const observerOptions: IntersectionObserverInit = {
  * @param optionState responsible for actually highlighting text, can be changed in context(settings).
  * @param children any tags except plain text
  * @param hints will render hints in their fixed or absolute position, for fixed - element (where the hint is going to be) and hint has to
- have same id, for example 'hint3' * @returns {React.FC<HtivProps>} Functional Component
+ have same id, for example 'hint3' 
+ * @returns {React.FC<HtivProps>} Functional Component
  */
 export const HTIV: React.FC<HtivProps> = ({ children, optionState, hints }) => {
   const [currentHints, setHints] = useState<HintProps[] | undefined>(hints);
