@@ -21,14 +21,14 @@ Need to do:
 - [x] Fixed position for HeaderAlert either in page or window
 - [x] Fixed position for WindowFixedAlert in the window
 - [x] Fixed position for FixedAlert in the page
-- [ ] Alert Stack
+- [x] Alert Stack
 - [ ] Write tests for:
 
   1.  maintaining the correct position when scrolling the page
   2.  testing Alert Stack functionality (adding and removing alerts, with and without timer)
 
 - [x] Customize stories for each component
-- [x] Document component (TSDoc)
+- [x] Document components (TSDoc)
 
 ## [ ] Component Button
 

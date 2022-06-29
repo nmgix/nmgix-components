@@ -1,0 +1,105 @@
+@use "../../index";
+
+.alert {
+  &-component {
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+
+    padding: 10px 15px;
+    max-width: calc(100% - 30px);
+  }
+
+  &-stack {
+    list-style-type: none;
+    padding: 0;
+
+    & > *:not(:last-child) {
+      margin-bottom: 15px;
+    }
+  }
+
+  &-content {
+    color: #fff;
+    font-weight: 200;
+    text-align: center;
+    font-size: 14px;
+
+    &-scroll {
+      @keyframes scrollText {
+        from {
+          transform: translateX(0%);
+        }
+        to {
+          transform: translateX(-25%);
+        }
+      }
+
+      white-space: nowrap;
+      display: inline-block;
+      animation: scrollText 10s infinite linear;
+
+      & > * {
+        margin: 0 10px;
+      }
+
+      &:hover {
+        animation-play-state: paused;
+      }
+    }
+  }
+
+  &-preset {
+    &-notification {
+      color: transparentize(index.$color-notification, 0.3);
+      background-color: index.$color-notification;
+    }
+
+    &-warning {
+      color: transparentize(index.$color-warning, 0.3);
+      background-color: index.$color-warning;
+    }
+
+    &-interest {
+      color: transparentize(index.$color-interest, 0.3);
+      background-color: index.$color-interest;
+    }
+
+    &-success {
+      color: transparentize(index.$color-success, 0.3);
+      background-color: index.$color-success;
+    }
+  }
+
+  &-header {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    width: calc(100% - 20px);
+    /* width: calc(100% - 20px - 20px); */
+    height: auto;
+    /* margin: 0 10px 10px 10px; mobile margins*/
+
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+
+    box-shadow: 0px -2px 25px;
+  }
+
+  &-window-fixed,
+  &-fixed {
+    width: fit-content;
+    height: auto;
+
+    border-radius: 10px;
+
+    box-shadow: 0px -2px 25px;
+
+    /* margin: 10px; */
+  }
+
+  &-window-fixed {
+    position: fixed;
+  }
+}

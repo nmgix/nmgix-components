@@ -1,12 +1,7 @@
 import ReactDOMServer from "react-dom/server";
 import React from "react";
+import { AlertProps } from "../types";
 import "./_alert.scss";
-
-export type AlertProps = {
-  children: React.ReactElement;
-  scheme: "notification" | "warning" | "interest" | "success";
-  type: "header" | "window-fixed" | "fixed";
-};
 
 /**
  * Alert Component.
@@ -19,7 +14,7 @@ export type AlertProps = {
  */
 export const Alert: React.FC<AlertProps> = ({ children, scheme, type }) => {
   return (
-    <div className={`alert alert-${type} alert-preset-${scheme}`}>
+    <div className={`alert-component alert-${type} alert-preset-${scheme}`}>
       {ReactDOMServer.renderToString(children).length > 80 ? (
         <>
           <span className='alert-content alert-content-scroll'>
