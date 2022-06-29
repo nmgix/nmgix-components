@@ -104,7 +104,7 @@ Need to do:
 - [ ] Implement the component system as SVG elements
 - [ ] Document component (TSDoc)
 
-## [ ] Image Component
+## [ ] Component Image
 
 Need to do:
 
@@ -116,7 +116,7 @@ Need to do:
 - [ ] Customize history
 - [ ] Document component (TSDoc)
 
-## [ ] Input Component
+## [ ] Component Input
 
 Need to do:
 
@@ -138,3 +138,16 @@ Need to do:
 - [ ] Add an arrow icon after the text (either at the very top right or at the end of the text)
 - [ ] Customize history
 - [ ] Document component (TSDoc)
+
+## [ ] Component Theme
+
+Need to do:
+
+- [x] Change theme hook to handle theme state
+- [ ] Write tests for:
+
+  1. checking conformity of current theme and colors of components dependent on it
+  2. checking saving current theme in mock localStorage
+
+- [x] Customize history
+- [x] Document component (TSDoc)
