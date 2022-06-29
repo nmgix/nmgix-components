@@ -3,7 +3,8 @@
     margin-top: 35%;
     margin-bottom: 100px;
     /* mock margins to test correct highlighting in storybook */
-    width: 50%;
+    /*width: 100%; */
+    width: 100%;
     position: relative;
 
     & > * {

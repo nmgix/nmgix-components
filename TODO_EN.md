@@ -84,7 +84,7 @@ Need to do:
 Need to do:
 
 - [x] Logic for highlighting current element(s)
-- [ ] Make styling and a layout
+- [x] Make styling and a layout
 - [x] Correct component behavior while beeing in couple with other components
 - [x] Add ability to place hints
 - [ ] Make highlighting option switchable
@@ -94,7 +94,7 @@ Need to do:
   2.  checking the highlight of the block when scrolling the page (the difference between the blocks in terms of content)
   3.  checking for correct text highlighting in different scroll position (with other components and without)
 
-- [ ] Customize history
+- [x] Customize history
 - [x] Document component (TSDoc)
 
 ## [ ] Component Icon

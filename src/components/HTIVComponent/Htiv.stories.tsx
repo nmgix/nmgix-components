@@ -6,7 +6,12 @@ export default {
   component: HTIV,
 } as ComponentMeta<typeof HTIV>;
 
-const GenericHTIV: ComponentStory<typeof HTIV> = (args) => <HTIV {...args} />;
+const GenericHTIV: ComponentStory<typeof HTIV> = (args) => (
+  <div style={{ width: "50%" }}>
+    {" "}
+    <HTIV {...args} />;
+  </div>
+);
 
 export const DefaultHTIV = GenericHTIV.bind({});
 
@@ -132,9 +137,9 @@ DefaultHTIV.args = {
   optionState: true,
 };
 
-export const HTIVwithHints = GenericHTIV.bind({});
+export const HTIVWithHints = GenericHTIV.bind({});
 
-HTIVwithHints.args = {
+HTIVWithHints.args = {
   children: (
     <>
       <p>

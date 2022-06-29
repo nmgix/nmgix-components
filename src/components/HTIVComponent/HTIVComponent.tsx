@@ -39,27 +39,54 @@ export const HTIV: React.FC<HtivProps> = ({ children, optionState, hints }) => {
       }
     });
   };
-  const observer = new IntersectionObserver(observerCallback, observerOptions);
+  const [observer] = useState<IntersectionObserver>(new IntersectionObserver(observerCallback, observerOptions));
 
   useEffect(() => {
     var targetParent = HTIVref.current;
-    // document.querySelector(".htiv-children");
     if (targetParent) {
       if ("IntersectionObserver" in window) {
         for (var i = 0; i < targetParent.children.length; i++) {
           if (optionState === false) {
-            console.log("unsubscribed");
+            observer.disconnect();
             targetParent.children[i].classList.remove("active");
             observer.unobserve(targetParent.children[i]);
           } else {
-            // doesnt work
-            console.log("subscribed");
             observer.observe(targetParent.children[i]);
           }
         }
       }
     }
   }, [optionState]);
+
+  useEffect(() => {
+    if (HTIVref.current) {
+      if (currentHints) {
+        setHints(
+          currentHints.map((hint, i) => {
+            for (var i = 0; i < HTIVref.current!.children.length; i++) {
+              if (HTIVref.current!.children[i].id === hint.id) {
+                var side = `${HTIVref.current!.offsetWidth + HTIVref.current!.offsetLeft}px`;
+                var top = `${(HTIVref.current!.children[i] as HTMLDivElement).offsetTop}px`;
+                hint.styles =
+                  i % 2 == 0
+                    ? {
+                        position: "absolute",
+                        left: side,
+                        top: top,
+                      }
+                    : {
+                        position: "absolute",
+                        right: side,
+                        top: top,
+                      };
+              }
+            }
+            return hint;
+          })
+        );
+      }
+    }
+  }, [HTIVref.current]);
 
   return (
     <div className='htiv-wrapper'>
