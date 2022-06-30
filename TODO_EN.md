@@ -68,7 +68,7 @@ Need to do:
 Need to do:
 
 - [ ] The logic of the hint location (most likely a fixed position relative to a given point or anchor point)
-- [ ] A tooltip can be of two types: - `hint-info` > It is purely informative, it is possible to completely disable it in the settings - `hint-mode` > Mandatory hint, which is not turned off through the settings, is necessary to notify a person about the current mode (for example, the highlight mode of the current block in the window focus)
+- [ ] A tooltip can be of two types: - `hint-info` > It is purely informative, it is possible to completely disable it in the settings - `hint-mode` > Mandatory hint, which is not turned off through the settings, is necessary to notify a user about the current mode (for example, the highlight mode of the current block in the window focus)
 - [ ] Write tests for:
 
   1.  checking the correct location in conjunction with other components
@@ -87,7 +87,7 @@ Need to do:
 - [x] Make styling and a layout
 - [x] Correct component behavior while beeing in couple with other components
 - [x] Add ability to place hints
-- [ ] Make highlighting option switchable
+- [x] Make highlighting option switchable
 - [ ] Write tests for:
 
   1.  there is no block highlighting if this mode is turned off in the general context

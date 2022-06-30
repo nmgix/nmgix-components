@@ -15,30 +15,9 @@ const GenericAlert: ComponentStory<typeof Alert> = (args) => (
   </div>
 );
 
-export const NotificationFixedAlert = GenericAlert.bind({});
-NotificationFixedAlert.args = {
+export const DefaultFixedAlert = GenericAlert.bind({});
+DefaultFixedAlert.args = {
   children: <>Добавлен новый предмет!</>,
   scheme: "notification",
-  type: "fixed",
-};
-
-export const WarningFixedAlert = GenericAlert.bind({});
-WarningFixedAlert.args = {
-  children: <>Добавлен новый предмет!</>,
-  scheme: "warning",
-  type: "fixed",
-};
-
-export const InterestFixedAlert = GenericAlert.bind({});
-InterestFixedAlert.args = {
-  children: <>Добавлен новый предмет!</>,
-  scheme: "interest",
-  type: "fixed",
-};
-
-export const SuccessFixedAlert = GenericAlert.bind({});
-SuccessFixedAlert.args = {
-  children: <>Добавлен новый предмет!</>,
-  scheme: "success",
   type: "fixed",
 };

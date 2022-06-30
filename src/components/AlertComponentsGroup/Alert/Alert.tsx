@@ -1,5 +1,5 @@
 import ReactDOMServer from "react-dom/server";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { AlertProps } from "../types";
 import "./_alert.scss";
 
@@ -13,8 +13,14 @@ import "./_alert.scss";
  * @returns {React.FC<AlertProps>} Functional Component.
  */
 export const Alert: React.FC<AlertProps> = ({ children, scheme, type }) => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    console.log(ref.current!.getBoundingClientRect());
+  }, [ref.current, ref]);
+
   return (
-    <div className={`alert-component alert-${type} alert-preset-${scheme}`}>
+    <div className={`alert-component alert-${type} alert-preset-${scheme}`} ref={ref}>
       {ReactDOMServer.renderToString(children).length > 80 ? (
         <>
           <span className='alert-content alert-content-scroll'>

@@ -28,5 +28,6 @@
     "skipLibCheck": true /* Skip type checking all .d.ts files. */
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "build", "scripts"]
+  "exclude": ["node_modules", "build", "scripts"],
+  "types": ["node_modules/@types/*", "@testing-library/jest-dom"]
 }
