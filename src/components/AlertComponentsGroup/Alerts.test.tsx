@@ -1,17 +1,11 @@
 import { screen, fireEvent, render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import { Alert } from "./Alert";
-import { AlertProps, AlertRef, AvailableSchemes } from "./types";
+import { AlertProps, AlertRef, AlertStackChildProps, AvailableSchemes } from "./types";
 import { AlertStack } from "./AlertStack/AlertStack";
-import { forwardRef } from "react";
+import React, { forwardRef } from "react";
 
-jest.mock("react", () => {
-  const actualModule = jest.requireActual("react");
-  return {
-    ...actualModule,
-    useRefMock: jest.fn(),
-  };
-});
+jest.useRealTimers();
 
 describe("Alerts", () => {
   describe("Alert Component", () => {
@@ -34,7 +28,7 @@ describe("Alerts", () => {
 
       // expect(alertHeaderComponent).toHaveStyle("top: 0px");
       // that took me half of the day to setup environment and 5 minutes to realize that my approach was wrong
-      expect(alertHeaderComponent!.getBoundingClientRect().top).toBe(0);
+      expect(alertHeaderComponent!.getBoundingClientRect().top).toEqual(0);
     });
 
     it("Fixed Alert to be in top", () => {
@@ -46,8 +40,8 @@ describe("Alerts", () => {
 
       const { container } = render(<Alert {...alertProps} />);
 
-      expect(container!.getBoundingClientRect().top).toBe(0);
-      expect(container!.getBoundingClientRect().left).toBe(0);
+      expect(container!.getBoundingClientRect().top).toEqual(0);
+      expect(container!.getBoundingClientRect().left).toEqual(0);
     });
 
     it("Window-Fixed Alert to be in sticky position", () => {
@@ -65,7 +59,7 @@ describe("Alerts", () => {
 
       fireEvent.scroll(window, { target: { scrollY: "50vh" } });
 
-      expect(container!.getBoundingClientRect().top).toBe(0);
+      expect(container!.getBoundingClientRect().top).toEqual(0);
     });
   });
   describe("Alert Stack Component", () => {
@@ -86,32 +80,32 @@ describe("Alerts", () => {
         type: "fixed",
       },
     ];
-    const mockRef: { current: AlertRef } = { current: { addAlert: (alert: AlertProps) => {}, removeAlert: () => {} } };
 
-    it("Alert Stack no timer functionality", () => {
-      // const { container } = render(<AlertStack alerts={alerts} timeout={null} />);
+    it("Alert Stack with no timer functionality", () => {
+      // i didn't figure out how to implement ref as in stories
+      const props: { alerts: AlertProps[]; timeout: number | null } = {
+        alerts: alerts,
+        timeout: null,
+      };
 
-      const Component = forwardRef<AlertRef>((props, ref) => (
-        <AlertStack alerts={alerts} timeout={null} ref={mockRef} />
-      ));
-      const { container } = render(<Component />);
+      const { container } = render(<AlertStack {...props} />);
 
-      expect(container.firstChild!.childNodes.length).toBe(3);
-
-      // const randomNum = (min: number, max: number) => Math.floor(Math.random() * (max - min) + min);
-      // const availableSchemes = Object.keys(AvailableSchemes).filter(
-      //   (key) => !isNaN(Number(AvailableSchemes[key as keyof typeof AvailableSchemes]))
-      // );
-
-      // mockRef.current?.addAlert({
-      //   children: <>Текст уведомления</>,
-      //   scheme: availableSchemes[randomNum(0, availableSchemes.length)] as keyof typeof AvailableSchemes,
-      //   type: "fixed",
-      // });
-
-      // console.log(container.firstChild!.childNodes.length);
-
-      // expect(container.firstChild!.childNodes.length).toBe(4);
+      expect(container.firstChild!.childNodes.length).toEqual(3);
     });
+
+    // it("Alert Stack with timer functionality", async () => {
+    //   const props: { alerts: AlertProps[]; timeout: number | null } = {
+    //     alerts: alerts,
+    //     timeout: 3000,
+    //   };
+
+    //   const { container } = render(<AlertStack {...props} />);
+
+    //   expect(container.firstChild!.childNodes.length).toEqual(3);
+
+    //   // jest.setTimeout(5000);
+
+    //   // expect(container.firstChild!.childNodes.length).toEqual(0);
+    // });
   });
 });

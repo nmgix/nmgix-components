@@ -24,8 +24,8 @@ Need to do:
 - [x] Alert Stack
 - [ ] Write tests for:
 
-  1.  maintaining the correct position when scrolling the page
-  2.  testing Alert Stack functionality (adding and removing alerts, with and without timer)
+  1. [x] maintaining the correct position when scrolling the page
+  2. [ ] testing Alert Stack functionality (adding and removing alerts, with and without timer)
 
 - [x] Customize stories for each component
 - [x] Document components (TSDoc)
