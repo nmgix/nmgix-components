@@ -1,11 +1,14 @@
 .htiv {
   &-wrapper {
-    margin-top: 35%;
+    /* margin-top: 60%; *.
     margin-bottom: 100px;
     /* mock margins to test correct highlighting in storybook */
     /*width: 100%; */
     width: 100%;
     position: relative;
+    text-align: justify;
+
+    color: var(--color-background-alter);
 
     & > * {
       font-weight: 300;

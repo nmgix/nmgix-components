@@ -3,7 +3,7 @@ import "./_htiv.scss";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Hint, HintProps, HintsWrapper } from "../HintComponentsGroup";
 
-type HtivProps = {
+export type HTIVProps = {
   optionState: boolean;
   children: React.ReactNode;
   hints?: HintProps[];
@@ -11,8 +11,8 @@ type HtivProps = {
 
 const observerOptions: IntersectionObserverInit = {
   root: null,
-  rootMargin: "-47% 0px -50% 0px",
-  threshold: 0.05,
+  rootMargin: "-47% 0px -52% 0px",
+  threshold: 0.00005,
 };
 
 /**
@@ -23,9 +23,9 @@ const observerOptions: IntersectionObserverInit = {
  * @param children any tags except plain text
  * @param hints will render hints in their fixed or absolute position, for fixed - element (where the hint is going to be) and hint has to
  have same id, for example 'hint3' 
- * @returns {React.FC<HtivProps>} Functional Component
+ * @returns {React.FC<HTIVProps>} Functional Component
  */
-export const HTIV: React.FC<HtivProps> = ({ children, optionState, hints }) => {
+export const HTIV: React.FC<HTIVProps> = ({ children, optionState, hints }) => {
   const [currentHints, setHints] = useState<HintProps[] | undefined>(hints);
   const HTIVref = useRef<HTMLDivElement>(null);
   const observerCallback: IntersectionObserverCallback = (entries, observer) => {
@@ -58,34 +58,44 @@ export const HTIV: React.FC<HtivProps> = ({ children, optionState, hints }) => {
     }
   }, [optionState]);
 
-  useEffect(() => {
+  const correctHintsPosition = () => {
     if (HTIVref.current) {
       if (currentHints) {
         setHints(
-          currentHints.map((hint, i) => {
-            for (var i = 0; i < HTIVref.current!.children.length; i++) {
-              if (HTIVref.current!.children[i].id === hint.id) {
-                var side = `${HTIVref.current!.offsetWidth + HTIVref.current!.offsetLeft}px`;
-                var top = `${(HTIVref.current!.children[i] as HTMLDivElement).offsetTop}px`;
-                hint.styles =
-                  i % 2 == 0
-                    ? {
-                        position: "absolute",
-                        left: side,
-                        top: top,
-                      }
-                    : {
-                        position: "absolute",
-                        right: side,
-                        top: top,
-                      };
+          currentHints
+            .filter((hint) => hint.type === "fixed")
+            .map((hint, i) => {
+              for (var j = 0; j < HTIVref.current!.children.length; j++) {
+                if (HTIVref.current!.children[j].id === hint.id) {
+                  var side = `${HTIVref.current!.offsetWidth - HTIVref.current!.offsetLeft}px`;
+                  var top = `${
+                    (HTIVref.current!.children[j] as HTMLDivElement).offsetTop + HTIVref.current!.offsetTop
+                  }px`;
+                  hint.styles =
+                    (i + 1) % 2 == 0
+                      ? {
+                          position: "absolute",
+                          left: side,
+                          top: top,
+                        }
+                      : {
+                          position: "absolute",
+                          right: side,
+                          top: top,
+                        };
+                }
               }
-            }
-            return hint;
-          })
+              return hint;
+            })
         );
       }
     }
+  };
+  const [resizeObserver] = useState<ResizeObserver>(new ResizeObserver(correctHintsPosition));
+
+  useEffect(() => {
+    correctHintsPosition();
+    resizeObserver.observe(HTIVref.current!);
   }, [HTIVref.current]);
 
   return (
@@ -94,7 +104,11 @@ export const HTIV: React.FC<HtivProps> = ({ children, optionState, hints }) => {
         {children}
       </div>
       {hints ? <HintsWrapper hints={hints} /> : <></>}
-      {currentHints ? currentHints.filter((hint) => hint.type === "fixed").map((hint) => <Hint {...hint} />) : <></>}
+      {currentHints ? (
+        currentHints.map((hint) => <Hint {...hint} key={hint.id ? hint.id : hint.content.title} />)
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

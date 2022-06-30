@@ -1,5 +1,5 @@
-import { AlertProps, AlertRef } from "../../types";
-import { AlertStack, AlertStackChild } from "../../AlertStack/AlertStack";
+import { AlertProps, AlertRef } from "../types";
+import { AlertStack, AlertStackChild } from "../AlertStack/AlertStack";
 import { mount } from "enzyme";
 import React, { Ref } from "react";
 

@@ -1,14 +1,22 @@
+@use "../../../index.scss";
+
 .hints-wrapper {
   padding: 0;
   z-index: 3;
   position: fixed;
   top: 50%;
-  left: 50%;
+  left: 75vw;
   /* this value will be replaced with max width of body or something similar */
   display: flex;
   flex-direction: column;
 
   transform: translate(0%, -50%);
-  box-shadow: 0px 0px 10px 5px rgb(255, 255, 255);
-  background-color: rgba(255, 255, 255, 1);
+  width: calc(100vw - 80vw + 40px);
+
+  & > * {
+    width: calc(100vw - 80vw) !important;
+    color: var(--color-background-alter);
+    background-color: var(--color-background-default);
+    box-shadow: 0px 0px 25px 15px var(--color-background-default);
+  }
 }

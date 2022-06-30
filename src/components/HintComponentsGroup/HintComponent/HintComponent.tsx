@@ -13,7 +13,7 @@ export type HintProps = {
   switchOption?: (e: any) => void;
 };
 
-export const Hint: React.FC<HintProps> = ({ content, hideTimeout, switchOption, styles }) => {
+export const Hint: React.FC<HintProps> = ({ content, hideTimeout, switchOption, styles, id }) => {
   const [activeHint, setActiveHint] = useState<boolean>(true);
   useEffect(() => {
     if (hideTimeout > 0) {
@@ -23,11 +23,11 @@ export const Hint: React.FC<HintProps> = ({ content, hideTimeout, switchOption, 
       clearTimeout(hideHintTimeout);
     };
   }, []);
-  useEffect(() => {
-    console.log(styles);
-  }, [styles]);
   return (
-    <div className='hint-wrapper' style={{ display: activeHint ? "block" : "none", ...styles }}>
+    <div
+      className='hint-wrapper'
+      id={`hint-component${"-" + id}`}
+      style={{ display: activeHint ? "block" : "none", ...styles }}>
       <div className='hint-control'>
         <button onClick={() => setActiveHint(false)}>убрать эту информацию Х</button>
         {switchOption ? (

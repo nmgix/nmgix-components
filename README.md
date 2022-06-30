@@ -1,3 +1,5 @@
+<img src="git.content/preview_ru.png"/>
+
 # UI-библиотека для разработки сайта-портфолио
 
 > English version of this text is [there](https://github.com/Nmgix/nmgix-components/blob/main/README_EN.md)

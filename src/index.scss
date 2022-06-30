@@ -1,17 +1,29 @@
 @use "./resources/fonts/Inter/fontsInter";
 
+// $colours: (
 $color-notification: #0057ff;
 $color-warning: #ff0000;
 $color-interest: #ffc700;
 $color-success: #00ba29;
-// $color-background-alter: #fff;
-// $color-background-default: #000;
+// );
+
+// :root {
+//   @each $key, $value in $colours {
+//     --#{$key}: #{$value};
+//   }
+// }
 
 body,
 html,
 * {
   font-family: "Inter";
   transition: all 100ms ease-in-out;
+}
+
+body,
+html {
+  background-color: var(--color-background-default);
+  color: var(-color-background-alter);
 }
 
 html[data-theme="dark"] {

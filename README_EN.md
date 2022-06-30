@@ -1,3 +1,5 @@
+<img src="git.content/preview_en.png"/>
+
 # UI-kit for porfolio project
 
 > Этот текст в русском переводе находится [здесь](https://github.com/Nmgix/nmgix-components/blob/main/README.md)

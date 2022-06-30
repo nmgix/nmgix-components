@@ -27,7 +27,7 @@ Need to do:
   1. [x] maintaining the correct position when scrolling the page
   2. [ ] testing Alert Stack functionality (adding and removing alerts, with and without timer)
 
-- [x] Customize stories for each component
+- [x] Setup stories for each component
 - [x] Document components (TSDoc)
 
 ## [ ] Component Button
@@ -43,7 +43,7 @@ Need to do:
   2.  practicing the function that was set during creation
   3.  working out skeleton animation (class or state)
 
-- [ ] Customize history
+- [ ] Setup history
 - [ ] Document (TSDoc)
 
 ## [ ] Component Cell
@@ -60,7 +60,7 @@ Need to do:
   3.  working out skeleton animation (class or state)
   4.  drawing tooltips under the first three levels
 
-- [ ] Customize history
+- [ ] Setup history
 - [ ] Document each component (TSDoc)
 
 ## [ ] Component Tooltip
@@ -76,7 +76,7 @@ Need to do:
   3.  checking the mock state after disabling the mock setting by pressing the "turn off this mode" button
   4.  Checking for prompt deletion after timeout
 
-- [ ] Customize history
+- [ ] Setup history
 - [ ] Document component (TSDoc)
 
 ## [ ] Component Highlight TextBox In Focus (HTIV)
@@ -88,13 +88,14 @@ Need to do:
 - [x] Correct component behavior while beeing in couple with other components
 - [x] Add ability to place hints
 - [x] Make highlighting option switchable
+- [x] Change fixed-to-element hints' position on window witdh change
 - [ ] Write tests for:
 
   1.  there is no block highlighting if this mode is turned off in the general context
   2.  checking the highlight of the block when scrolling the page (the difference between the blocks in terms of content)
   3.  checking for correct text highlighting in different scroll position (with other components and without)
 
-- [x] Customize history
+- [x] Setup history
 - [x] Document component (TSDoc)
 
 ## [ ] Component Icon
@@ -113,7 +114,7 @@ Need to do:
 
   1.  working out skeleton animation (class or state)
 
-- [ ] Customize history
+- [ ] Setup history
 - [ ] Document component (TSDoc)
 
 ## [ ] Component Input
@@ -128,7 +129,7 @@ Need to do:
   1.  checking the compliance of the input processing with its type (file upload, text filling for text inputs)
   2.  pattern checking
 
-- [ ] Customize history under (component | components)
+- [ ] Setup history for (component | components)
 - [ ] Document (each) component (TSDoc)
 
 ## [ ] Component Link
@@ -136,7 +137,7 @@ Need to do:
 Need to do:
 
 - [ ] Add an arrow icon after the text (either at the very top right or at the end of the text)
-- [ ] Customize history
+- [ ] Setup history
 - [ ] Document component (TSDoc)
 
 ## [ ] Component Theme
@@ -149,5 +150,13 @@ Need to do:
   1. checking conformity of current theme and colors of components dependent on it
   2. checking saving current theme in mock localStorage
 
-- [x] Customize history
+- [x] Setup history
+- [x] Document component (TSDoc)
+
+## [ ] Component App Wrapper
+
+Need to do:
+
+- [x] Styling
+- [x] Setup history
 - [x] Document component (TSDoc)

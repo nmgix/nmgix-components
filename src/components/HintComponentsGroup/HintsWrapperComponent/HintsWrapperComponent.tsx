@@ -8,7 +8,7 @@ export const HintsWrapper: React.FC<{ hints: HintProps[] }> = ({ hints }) => {
       {hints
         .filter((hint) => hint.type === "absolute")
         .map((hint, i) => (
-          <Hint {...hint} />
+          <Hint {...hint} key={hint.id ? hint.id : hint.content.title} />
         ))}
     </ul>
   );

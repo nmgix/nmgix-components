@@ -1,6 +1,6 @@
 import { fireEvent, render } from "@testing-library/react";
-import { Alert } from "../../Alert";
-import { AlertProps } from "../../types";
+import { Alert } from "../Alert";
+import { AlertProps } from "../types";
 
 jest.useRealTimers();
 

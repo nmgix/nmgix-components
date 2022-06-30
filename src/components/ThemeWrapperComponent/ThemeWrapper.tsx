@@ -1,13 +1,20 @@
-import React from "react";
+import React, { forwardRef, useImperativeHandle } from "react";
 import { Themes, useTheme } from "../../hooks/useTheme";
+
+export type ThemeRef = {
+  currentTheme: keyof typeof Themes;
+  updateTheme: (theme: keyof typeof Themes) => void;
+  changeToNextTheme: () => void;
+} | null;
 
 /**
  * ThemeWrapper component.
  * Corresponds to global theme of platform app is launched on, alternatively gets it from localStorage.
  * @returns {React.FC} Functional Component.
  */
-export const ThemeWrapper: React.FC = () => {
+export const ThemeWrapper = forwardRef<ThemeRef, { children: React.ReactNode }>(({ children }, ref) => {
   const { currentTheme, updateTheme } = useTheme();
+  // better to make on React.Context but i just want to fun with refs bacause of lack of use it usually
 
   const changeToNextTheme = () => {
     var themeIndex = Themes[currentTheme];
@@ -19,10 +26,11 @@ export const ThemeWrapper: React.FC = () => {
     }
   };
 
-  return (
-    <div>
-      <div>Текущая тема {currentTheme}</div>
-      <button onClick={changeToNextTheme}>Сменить тему</button>
-    </div>
-  );
-};
+  useImperativeHandle(ref, () => ({
+    currentTheme,
+    updateTheme,
+    changeToNextTheme,
+  }));
+
+  return <>{children}</>;
+});
