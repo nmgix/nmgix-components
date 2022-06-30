@@ -15,10 +15,6 @@ import "./_alert.scss";
 export const Alert: React.FC<AlertProps> = ({ children, scheme, type }) => {
   const ref = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    console.log(ref.current!.getBoundingClientRect());
-  }, [ref.current, ref]);
-
   return (
     <div className={`alert-component alert-${type} alert-preset-${scheme}`} ref={ref}>
       {ReactDOMServer.renderToString(children).length > 80 ? (

@@ -1,13 +1,10 @@
-import { screen, fireEvent, render } from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
-import { Alert } from "./Alert";
-import { AlertProps, AlertRef, AlertStackChildProps, AvailableSchemes } from "./types";
-import { AlertStack } from "./AlertStack/AlertStack";
-import React, { forwardRef } from "react";
+import { fireEvent, render } from "@testing-library/react";
+import { Alert } from "../../Alert";
+import { AlertProps } from "../../types";
 
 jest.useRealTimers();
 
-describe("Alerts", () => {
+describe("Alerts/Functional", () => {
   describe("Alert Component", () => {
     it("Header Alert to be in top after scroll", () => {
       const alertProps: AlertProps = {
@@ -61,51 +58,5 @@ describe("Alerts", () => {
 
       expect(container!.getBoundingClientRect().top).toEqual(0);
     });
-  });
-  describe("Alert Stack Component", () => {
-    let alerts: AlertProps[] = [
-      {
-        children: <>Добавлен товар</>,
-        scheme: "success",
-        type: "fixed",
-      },
-      {
-        children: <>Добавлен товар</>,
-        scheme: "success",
-        type: "fixed",
-      },
-      {
-        children: <>Добавлен товар</>,
-        scheme: "success",
-        type: "fixed",
-      },
-    ];
-
-    it("Alert Stack with no timer functionality", () => {
-      // i didn't figure out how to implement ref as in stories
-      const props: { alerts: AlertProps[]; timeout: number | null } = {
-        alerts: alerts,
-        timeout: null,
-      };
-
-      const { container } = render(<AlertStack {...props} />);
-
-      expect(container.firstChild!.childNodes.length).toEqual(3);
-    });
-
-    // it("Alert Stack with timer functionality", async () => {
-    //   const props: { alerts: AlertProps[]; timeout: number | null } = {
-    //     alerts: alerts,
-    //     timeout: 3000,
-    //   };
-
-    //   const { container } = render(<AlertStack {...props} />);
-
-    //   expect(container.firstChild!.childNodes.length).toEqual(3);
-
-    //   // jest.setTimeout(5000);
-
-    //   // expect(container.firstChild!.childNodes.length).toEqual(0);
-    // });
   });
 });

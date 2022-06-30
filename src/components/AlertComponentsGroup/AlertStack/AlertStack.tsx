@@ -11,7 +11,7 @@ import { AlertProps, AlertRef, AlertStackChildProps } from "../types";
  * @param {(id: number) => void} removeElement is got from parent, used as callback function after timeout (if is set).
  * @returns {React.FC} Functional Component.
  */
-const AlertStackChild: React.FC<{
+export const AlertStackChild: React.FC<{
   alert: AlertStackChildProps;
   timeout: number | null;
   removeElement: (id: number) => void;
