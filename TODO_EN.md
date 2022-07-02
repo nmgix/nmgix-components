@@ -34,8 +34,8 @@ Need to do:
 
 Need to do:
 
-- [ ] Several presets (colors (like alert or information) and sizes)
-- [ ] Design flexibility: changeable border, background color, shadow
+- [x] Several presets (colors (like alert or information) and sizes)
+- [x] Design flexibility: changeable border, background color, shadow
 - [ ] Make skeleton loading state
 - [ ] Write tests for:
 
@@ -44,7 +44,7 @@ Need to do:
   3.  working out skeleton animation (class or state)
 
 - [ ] Setup history
-- [ ] Document (TSDoc)
+- [x] Document (TSDoc)
 
 ## [ ] Component Cell
 
@@ -100,10 +100,16 @@ Need to do:
 
 ## [ ] Component Icon
 
-Need to do:
+> Was chosen to use Font Awesome icons
 
-- [ ] Implement the component system as SVG elements
-- [ ] Document component (TSDoc)
+To add new icon, complete these steps:
+
+1.  Added new icon in library in App Wrapper
+2.  Import <FontAwesomeIcon/> and choose icon that you imported, for example
+
+```js
+<FontAwesomeIcon icon={"arrow-right-long"} />
+```
 
 ## [ ] Component Image
 

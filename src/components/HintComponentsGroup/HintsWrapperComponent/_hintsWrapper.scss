@@ -5,7 +5,7 @@
   z-index: 3;
   position: fixed;
   top: 50%;
-  left: 75vw;
+  left: 74.5vw;
   /* this value will be replaced with max width of body or something similar */
   display: flex;
   flex-direction: column;
@@ -17,6 +17,6 @@
     width: calc(100vw - 80vw) !important;
     color: var(--color-background-alter);
     background-color: var(--color-background-default);
-    box-shadow: 0px 0px 25px 15px var(--color-background-default);
+    box-shadow: 20px 0px 25px 15px var(--color-background-default);
   }
 }

@@ -1,0 +1,45 @@
+$opacityList: (
+  "transparent": 0,
+  "low-opacity": 0.25,
+  "medium-opacity": 0.5,
+  "quarter-opacity": 0.75,
+  "full-opacity": 1,
+);
+$sizes: (
+  "xs": 0.25em,
+  "s": 0.75em,
+  "m": 1em,
+  "x": 1.25em,
+  "xl": 1.5em,
+);
+
+.button {
+  cursor: pointer;
+  border: none;
+  display: flex;
+  justify-content: center;
+  padding: 7px 10px;
+  border-radius: 5px;
+
+  font-size: 1em;
+  font-weight: 700;
+
+  color: var(--color-background-alter);
+  background-color: var(--color-background-default);
+
+  &:hover {
+    opacity: 1 !important;
+  }
+
+  @each $size, $value in $sizes {
+    $key: $size;
+    &-size-#{$key} {
+      font-size: #{$value};
+
+      svg {
+        margin-left: 0.2em;
+        font-size: calc(#{$value} + 0.75em);
+      }
+    }
+  }
+}

@@ -191,7 +191,7 @@ const GenericAppContainer: ComponentStory<typeof AppContainer> = () => (
         width: "calc(100% - 40px)",
         height: "30vh",
         background: "var(--color-background-default)",
-        border: "1px solid var(--color-background-alter)",
+        border: "2px solid var(--color-background-alter)",
         borderRadius: "25px",
         margin: "20px 0",
         padding: "20px",

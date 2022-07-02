@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Button, buttonTypes } from "../../../components/ButtonComponent";
 import "./_hint.scss";
 
 export type HintProps = {
@@ -29,22 +30,33 @@ export const Hint: React.FC<HintProps> = ({ content, hideTimeout, switchOption, 
       id={`hint-component${"-" + id}`}
       style={{ display: activeHint ? "block" : "none", ...styles }}>
       <div className='hint-control'>
-        <button onClick={() => setActiveHint(false)}>убрать эту информацию Х</button>
+        {/* <button onClick={() => setActiveHint(false)}>убрать эту информацию Х</button> */}
+        <Button
+          children='убрать эту информацию'
+          opacity={0.3}
+          size={"s"}
+          onClick={() => setActiveHint(false)}
+          {...buttonTypes.noBorderCross}
+        />
         {switchOption ? (
-          <button
+          <Button
+            children='выключить этот режим'
+            opacity={0.25}
+            size={"s"}
+            color='warning'
             onClick={(e) => {
               switchOption(e);
               setActiveHint(false);
-            }}>
-            выключить этот режим Х
-          </button>
+            }}
+            {...buttonTypes.noBorderCross}
+          />
         ) : (
           <></>
         )}
       </div>
       <div className='hint-content'>
-        <h3>{content.title}</h3>
-        <span>{content.description}</span>
+        <h3 className='hint-content-title'>{content.title}</h3>
+        <span className='hint-content-description'>{content.description}</span>
       </div>
     </div>
   );

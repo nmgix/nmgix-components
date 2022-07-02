@@ -1,23 +1,26 @@
 @use "./resources/fonts/Inter/fontsInter";
 
-// $colours: (
 $color-notification: #0057ff;
 $color-warning: #ff0000;
 $color-interest: #ffc700;
 $color-success: #00ba29;
-// );
 
-// :root {
-//   @each $key, $value in $colours {
-//     --#{$key}: #{$value};
-//   }
-// }
+$colors: (
+  "color-notification": #0057ff,
+  "color-warning": #ff0000,
+  "color-interest": #ffc700,
+  "color-success": #00ba29,
+);
 
 body,
 html,
 * {
   font-family: "Inter";
   transition: all 100ms ease-in-out;
+
+  @each $key, $value in $colors {
+    --#{$key}: rgba(#{red($value), green($value), blue($value)}, 1);
+  }
 }
 
 body,
@@ -27,16 +30,16 @@ html {
 }
 
 html[data-theme="dark"] {
-  --color-background-default: #000;
-  --color-background-alter: #fff;
+  --color-background-default: rgba(0, 0, 0, 1);
+  --color-background-alter: rgba(255, 255, 255, 1);
 }
 
 html[data-theme="light"] {
-  --color-background-default: #fff;
-  --color-background-alter: #000;
+  --color-background-default: rgba(255, 255, 255, 1);
+  --color-background-alter: rgba(0, 0, 0, 1);
 }
 
 html[data-theme="hacker"] {
-  --color-background-default: #000;
-  --color-background-alter: rgb(14, 168, 0);
+  --color-background-default: rgba(0, 0, 0, 1);
+  --color-background-alter: rgba(14, 168, 0, 1);
 }
