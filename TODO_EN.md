@@ -36,14 +36,12 @@ Need to do:
 
 - [x] Several presets (colors (like alert or information) and sizes)
 - [x] Design flexibility: changeable border, background color, shadow
-- [ ] Make skeleton loading state
 - [ ] Write tests for:
 
   1.  content overflow
   2.  practicing the function that was set during creation
-  3.  working out skeleton animation (class or state)
 
-- [ ] Setup history
+- [x] Setup history
 - [x] Document (TSDoc)
 
 ## [ ] Component Cell
@@ -52,7 +50,7 @@ Need to do:
 
 - [ ] Cell arrangement logic > Grid cells should be located randomly, but relative to the limits of their level (for example, information about yourself can only be located from 2 cells and below)
 - [ ] Make skeleton loading state for cells
-- [ ] Different sizes (2x2 - default, 1x2 (2 _ 1x2), 2x1 (2 _ 2x1), 2x3 (and possibly 3x2))
+- [ ] Different sizes (2x2 - default, 1x2 (2 _ 1x2), 2x1 (2 _ 2x1), 2x3 (and possibly 3x2), 2x4, 4x2, 3x4, 4x3, 4x4)
 - [ ] Write tests for:
 
   1.  the ratio of the content type to the level and the location of the cell with this level
