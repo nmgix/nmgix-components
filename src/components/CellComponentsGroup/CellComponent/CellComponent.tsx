@@ -1,12 +1,12 @@
 import React from "react";
-import { CellTypes } from "../types";
+import { Cell } from "../types";
 import "./_cell.scss";
 
 export type CellProps = {
-  type: CellTypes;
+  type: Cell;
   children: React.ReactNode;
 };
 
-export const Cell: React.FC<CellProps> = ({ type, children }) => {
+export const CellComponent: React.FC<CellProps> = ({ type, children }) => {
   return <div>{children}</div>;
 };

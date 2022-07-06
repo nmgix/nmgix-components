@@ -1,15 +1,28 @@
-export type CellTypeOrdinary = "2x2";
-export type CellTypeHalf = "1x2" | "2x1";
-export type CellTypeUnordinary = "2x3" | "3x2";
-export type CellTypeHuge = "2x4" | "4x2" | "3x4" | "4x3" | "4x4";
-export type CellTypes = CellTypeOrdinary | CellTypeHalf | CellTypeUnordinary | CellTypeHuge;
+// export type CellTypeOrdinary = "2x2";
+// export type CellTypeHalf = "1x2" | "2x1";
+// export type CellTypeUnordinary = "2x3" | "3x2";
+// export type CellTypeHuge = "2x4" | "4x2" | "3x4" | "4x3" | "4x4";
+// export type CellTypes = CellTypeOrdinary | CellTypeHalf | CellTypeUnordinary | CellTypeHuge;
+
+interface CellTypeOrdinary extends Cell {}
+
+export interface Cell {
+  width: number;
+  height: number;
+}
 
 export type Scheme = {
   level: number | number[];
-  defaultSize: CellTypes;
-  minimumSize: CellTypes | CellTypes[];
-  desirableSize: CellTypes | CellTypes[];
+  defaultSize: Cell;
+  minimumSize: Cell[];
+  desirableSize: Cell[];
 };
+
+export interface SetupScheme {
+  id: number;
+  size: Cell;
+  scheme: Scheme;
+}
 
 export interface DefaultData {
   id: number;

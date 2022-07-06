@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Link } from "../../LinkComponent";
-import { Cell, CellProps } from "../CellComponent";
+import { CellComponent, CellProps } from "../CellComponent";
 import { CellGrid } from "./CellGridComponent";
 
 export default {
@@ -8,26 +8,26 @@ export default {
   component: CellGrid,
 } as ComponentMeta<typeof CellGrid>;
 
-const gridData: CellProps[] = [
-  {
-    children: <Link content='пример ссылки в ячейке' link='#' />,
-  },
-  {
-    children: <Link content='пример ссылки в ячейке' link='#' />,
-  },
-  {
-    children: <Link content='пример ссылки в ячейке' link='#' />,
-  },
-  {
-    children: <Link content='пример ссылки в ячейке' link='#' />,
-  },
-];
+// const gridData: CellProps[] = [
+//   {
+//     children: <Link content='пример ссылки в ячейке' link='#' />,
+//   },
+//   {
+//     children: <Link content='пример ссылки в ячейке' link='#' />,
+//   },
+//   {
+//     children: <Link content='пример ссылки в ячейке' link='#' />,
+//   },
+//   {
+//     children: <Link content='пример ссылки в ячейке' link='#' />,
+//   },
+// ];
 
-const GenericCellGrid: ComponentStory<typeof CellGrid> = () => (
+const GenericCellGrid: ComponentStory<typeof CellGrid> = (args) => (
   <CellGrid>
-    {gridData.map((cellData) => (
-      <Cell {...cellData} />
-    ))}
+    {/* {gridData.map((cellData) => (
+      <CellComponent {...cellData} />
+    ))} */}
   </CellGrid>
 );
 

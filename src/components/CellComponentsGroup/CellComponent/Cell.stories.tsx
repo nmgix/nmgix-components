@@ -1,13 +1,13 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Link } from "../../LinkComponent";
-import { Cell } from "./CellComponent";
+import { CellComponent } from "./CellComponent";
 
 export default {
   title: "Generic/Cells/Cell",
-  component: Cell,
-} as ComponentMeta<typeof Cell>;
+  component: CellComponent,
+} as ComponentMeta<typeof CellComponent>;
 
-const GenericCell: ComponentStory<typeof Cell> = (args) => <Cell {...args} />;
+const GenericCell: ComponentStory<typeof CellComponent> = (args) => <CellComponent {...args} />;
 
 export const DefaultCell = GenericCell.bind({});
 

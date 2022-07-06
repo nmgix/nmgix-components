@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import { NewsletterDataTypes, Scheme } from "../types";
+import { NewsletterDataTypes, Scheme, SetupScheme } from "../types";
+import { Cell } from "../types";
 import "./_cellGrid.scss";
 
 type CellGridProps = {
@@ -15,9 +16,22 @@ const dataExample: NewsletterDataTypes[] = [
     url: "test-mindbox",
     scheme: {
       level: 1,
-      defaultSize: "2x2",
-      minimumSize: "2x2",
-      desirableSize: "2x2",
+      defaultSize: {
+        width: 2,
+        height: 2,
+      },
+      desirableSize: [
+        {
+          width: 2,
+          height: 2,
+        },
+      ],
+      minimumSize: [
+        {
+          width: 2,
+          height: 2,
+        },
+      ],
     },
     techStack: ["React", "Typescript", "Local Storage"],
     time: 5,
@@ -31,9 +45,26 @@ const dataExample: NewsletterDataTypes[] = [
     url: "test-funbox",
     scheme: {
       level: 1,
-      defaultSize: "2x2",
-      desirableSize: "2x2",
-      minimumSize: ["1x2", "2x1"],
+      defaultSize: {
+        width: 2,
+        height: 2,
+      },
+      desirableSize: [
+        {
+          width: 2,
+          height: 2,
+        },
+      ],
+      minimumSize: [
+        {
+          width: 1,
+          height: 2,
+        },
+        {
+          width: 2,
+          height: 1,
+        },
+      ],
     },
     techStack: ["React", "Typescript"],
     time: 5,
@@ -50,9 +81,22 @@ const dataExample: NewsletterDataTypes[] = [
     date: "15/03/22",
     scheme: {
       level: [1, 2],
-      defaultSize: "2x2",
-      desirableSize: "2x2",
-      minimumSize: "2x2",
+      defaultSize: {
+        width: 2,
+        height: 2,
+      },
+      desirableSize: [
+        {
+          width: 2,
+          height: 2,
+        },
+      ],
+      minimumSize: [
+        {
+          width: 2,
+          height: 2,
+        },
+      ],
     },
     techStack: ["React", "Typescript"],
     time: 5,
@@ -64,9 +108,22 @@ const dataExample: NewsletterDataTypes[] = [
     extraOrdinaryRenderHandler: "github-stats",
     scheme: {
       level: 2,
-      defaultSize: "2x1",
-      desirableSize: "2x1",
-      minimumSize: "2x1",
+      defaultSize: {
+        width: 2,
+        height: 1,
+      },
+      desirableSize: [
+        {
+          width: 2,
+          height: 1,
+        },
+      ],
+      minimumSize: [
+        {
+          width: 2,
+          height: 1,
+        },
+      ],
     },
   },
   {
@@ -75,9 +132,22 @@ const dataExample: NewsletterDataTypes[] = [
     extraOrdinaryRenderHandler: "udemy-stats",
     scheme: {
       level: [2, 3, 4],
-      defaultSize: "2x2",
-      desirableSize: "2x2",
-      minimumSize: "2x1",
+      defaultSize: {
+        width: 2,
+        height: 2,
+      },
+      desirableSize: [
+        {
+          width: 2,
+          height: 2,
+        },
+      ],
+      minimumSize: [
+        {
+          width: 2,
+          height: 1,
+        },
+      ],
     },
   },
   {
@@ -86,9 +156,22 @@ const dataExample: NewsletterDataTypes[] = [
     extraOrdinaryRenderHandler: "freecodecamp-stats",
     scheme: {
       level: [2, 3, 4],
-      defaultSize: "2x2",
-      desirableSize: "2x2",
-      minimumSize: "2x1",
+      defaultSize: {
+        width: 2,
+        height: 2,
+      },
+      desirableSize: [
+        {
+          width: 2,
+          height: 2,
+        },
+      ],
+      minimumSize: [
+        {
+          width: 2,
+          height: 1,
+        },
+      ],
     },
   },
   {
@@ -97,9 +180,22 @@ const dataExample: NewsletterDataTypes[] = [
     extraOrdinaryRenderHandler: "about-yourself",
     scheme: {
       level: [2, 3, 4, 5],
-      defaultSize: "2x2",
-      desirableSize: "2x3",
-      minimumSize: "2x2",
+      defaultSize: {
+        width: 2,
+        height: 3,
+      },
+      desirableSize: [
+        {
+          width: 2,
+          height: 3,
+        },
+      ],
+      minimumSize: [
+        {
+          width: 2,
+          height: 1,
+        },
+      ],
     },
     description: [
       <p>
@@ -124,10 +220,9 @@ const dataExample: NewsletterDataTypes[] = [
 
 export const CellGrid: React.FC<CellGridProps> = ({ children }) => {
   const GridGenerator = (dataArray: NewsletterDataTypes[]) => {
-    var currentScheme: NewsletterDataTypes[] = [];
-    console.log(dataArray);
+    var currentScheme: SetupScheme[] = [];
 
-    const firstIteration = (schemes: NewsletterDataTypes[]) => {
+    const firstIteration = (schemes: NewsletterDataTypes[]): SetupScheme[] => {
       var sortedData = schemes.sort((scheme1, scheme2) => {
         var firstValue =
           typeof scheme1.scheme.level === "number" ? scheme1.scheme.level : Math.max(...scheme1.scheme.level);
@@ -137,18 +232,150 @@ export const CellGrid: React.FC<CellGridProps> = ({ children }) => {
         return firstValue - secondValue;
       });
 
-      var horizontalPerRowLimit = 4;
-      var verticalPerLevelLimit = 2;
-
-      return sortedData;
+      return sortedData.map((data) => {
+        return { id: data.id, size: data.scheme.defaultSize, scheme: data.scheme };
+      });
     };
 
     currentScheme = firstIteration(dataArray);
-    console.log(dataArray);
+
+    const secondIteration = (schemes: SetupScheme[]): SetupScheme[] => {
+      var horizontalPerRowLimit = 4;
+      var verticalPerLevelLimit = 2;
+
+      // массив массивов элементов, разделенных на уровень с индекса 0
+      var levelSeparated: SetupScheme[][] = [];
+      var desireMap: number[];
+
+      // получить максимальное значение уровня у элемента (бывает массив, например [2,3,4,5])
+      const getMaxLevel = (currentScheme: SetupScheme) =>
+        typeof currentScheme.scheme.level === "number"
+          ? (currentScheme.scheme.level as number)
+          : Math.max(...(currentScheme.scheme.level as number[]));
+
+      // цикл 2^n для сортировки элементов по уровням
+      for (var i = 0; i <= getMaxLevel(schemes[schemes.length - 1]) - 1; i++) {
+        var levelArray: SetupScheme[] = [];
+
+        for (var j = 0; j < schemes.length; j++) {
+          var level = getMaxLevel(schemes[j]);
+          if (level - 1 === i) {
+            levelArray.push(schemes[j]);
+          }
+        }
+
+        levelSeparated.push(levelArray);
+        continue;
+      }
+
+      // чтобы убрать пустые уровни
+      // console.log("levelSeparated before sorting", levelSeparated);
+      levelSeparated = levelSeparated.filter((array) => array.length > 0);
+      // console.log("levelSeparated after sorting", levelSeparated);
+
+      function randomIntFromInterval(min: number, max: number) {
+        // min and max included
+        return Math.floor(Math.random() * (max - min + 1) + min);
+      }
+
+      // карта приоритетов по расширение или уменьшению, если у двух блоков
+      // стоит одинаковое число, приоритет будет у второго блока, первый будет уменьшаться, наверное
+      desireMap = levelSeparated.map(() => randomIntFromInterval(0, 1));
+
+      // console.log(desireMap);
+      // console.log(levelSeparated);
+
+      const getTotalCells = (arrays: SetupScheme[][]) => {
+        return arrays.map((array) => {
+          return array.reduce((acc, curr) => acc + curr.size.width * curr.size.height, 0);
+        });
+      };
+      var totalCells = getTotalCells(levelSeparated);
+
+      // логика по настройке массива, установке правильных размеров
+      const balanceLevels = (schemes: SetupScheme[][]) => {
+        schemes = schemes.map((levelArray, i) => {
+          let localTotalCells = totalCells[i];
+
+          if (localTotalCells > horizontalPerRowLimit * verticalPerLevelLimit) {
+            if (i !== 0) {
+              // если предыдущий лвл имеет большинство
+              if (desireMap[i - 1] == 1) {
+                // меньшинство
+                levelArray = levelArray.map((levelScheme) => {
+                  levelScheme.size = levelScheme.scheme.desirableSize.find((size) => size.width > 1)!;
+                  return levelScheme;
+                });
+              } else {
+                // большинство
+                levelArray = levelArray.map((levelScheme) => {
+                  levelScheme.size = levelScheme.scheme.minimumSize.find((size) => size.width > 1)!;
+                  return levelScheme;
+                });
+              }
+            } else {
+              // если первый лвл из всех, то если в меньшинство
+              if (desireMap[i] == 0) {
+                levelArray = levelArray.map((levelScheme) => {
+                  levelScheme.size = levelScheme.scheme.minimumSize.find((size) => size.width > 1)!;
+                  return levelScheme;
+                });
+              } else {
+                // если в большинство
+                levelArray = levelArray.map((levelScheme) => {
+                  levelScheme.size = levelScheme.scheme.desirableSize.find((size) => size.width > 1)!;
+                  return levelScheme;
+                });
+              }
+            }
+            // логика по сжатию или удалению элементов если не влазят,
+            // не удаление если в его месте есть пустое пространство,
+            // надо будет разбираться где он выпирает и влазит ли это в другой уровень
+          } else {
+            // это если клеток общее кол-во меньше чем лимит
+            if (desireMap[i] == 0) {
+              levelArray = levelArray.map((levelScheme) => {
+                levelScheme.size = levelScheme.scheme.minimumSize.find((size) => size.width > 1)!;
+                return levelScheme;
+              });
+            } else {
+              levelArray = levelArray.map((levelScheme) => {
+                levelScheme.size = levelScheme.scheme.desirableSize.find((size) => size.width > 1)!;
+                return levelScheme;
+              });
+            }
+          }
+
+          return levelArray;
+        });
+
+        var totalLevelSum = totalCells.length * (horizontalPerRowLimit * verticalPerLevelLimit);
+        if (totalLevelSum > totalCells.reduce((acc, cur) => acc + cur, 0)) {
+          // пытаться расширить элементы
+        } else {
+          // пытаться уменьшить и скомпоновать
+        }
+
+        // if(totalCells > horizontalPerRowLimit * verticalPerLevelLimit){
+        //   balanceLevels(schemes)
+        // }
+        return schemes;
+      };
+
+      // вызов логики расстановки размеров
+      balanceLevels(levelSeparated);
+
+      // флат всех лволов в один большой массив, мб чтобы третйи шаг делать, этот двойной массив
+      // как раз и будет основным, с лвлами, а общий flat будет в самом конце
+      return levelSeparated.flat();
+    };
+
+    currentScheme = secondIteration(currentScheme);
+    console.log("after second iteration ", currentScheme);
     // можно будет вызывать эту функцию чтобы попробовать сделать другую схему и принять её если она не равна предыдущей
 
-    // в первой итерации идёт распределение какие данные на какой уровень идут, какие на первый, какие на второй и пр.
-    // в первой итерации всем дефолтное для них пространство, дальше уже будет исходить из правил по схеме
+    // // в первой итерации идёт распределение какие данные на какой уровень идут, какие на первый, какие на второй и пр.
+    // // в первой итерации всем дефолтное для них пространство, дальше уже будет исходить из правил по схеме
     // во второй итерации элементы, которые не влазили на свой уровень будут пытаться объединиться с элементами своего уровня (2 2х2 будут пытаться в 2 2х1 или 2 1х2)
     // во второй итерации будет так же попытка расставить элементы в их desirable размерах
     //(приоритет на большие или приоритет будет рандомный для лволов
