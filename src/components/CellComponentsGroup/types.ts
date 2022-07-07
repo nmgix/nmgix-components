@@ -1,30 +1,18 @@
-// export type CellTypeOrdinary = "2x2";
-// export type CellTypeHalf = "1x2" | "2x1";
-// export type CellTypeUnordinary = "2x3" | "3x2";
-// export type CellTypeHuge = "2x4" | "4x2" | "3x4" | "4x3" | "4x4";
-// export type CellTypes = CellTypeOrdinary | CellTypeHalf | CellTypeUnordinary | CellTypeHuge;
-
-interface CellTypeOrdinary extends Cell {}
-
 export interface Cell {
   width: number;
   height: number;
 }
 
 export type Scheme = {
-  level: number | number[];
+  size: Cell | null;
+  level: number[];
   defaultSize: Cell;
   minimumSize: Cell[];
   desirableSize: Cell[];
 };
 
-export interface SetupScheme {
-  id: number;
-  size: Cell;
-  scheme: Scheme;
-}
-
 export interface DefaultData {
+  type: string;
   id: number;
   title: string;
   scheme: Scheme;
@@ -35,20 +23,50 @@ export interface DefaultData {
 
 // может быть будет генератор ссылок по типу информации, хз
 export interface ArticleData extends DefaultData {
+  type: "article";
   time: number; // to read, in minutes
   date: string;
   url: string;
   techStack: string[];
 }
 
-export interface ExtraordinaryData extends DefaultData {
-  title: string;
-  extraOrdinaryRenderHandler: string | any;
-  // пока что текст, может быть будут типы хэндлеров которые будут расширять общий интерфейс или класс с методами рендера, пока хз
+export interface CoursesData extends DefaultData {
+  type: "lessons";
+  //   пока что неиспользуемая переменная, будет отвечать за окраску окантовки курсов и общего блока -> будет необходимо
+  // немного переделать метод рендера чтобы родитель окрашивался (вряд ли полностью переделывать рендер, скорее какой-то аля switch case)
+  borderColor: string;
+  courses: {
+    title: string;
+    teacher: string;
+    mark: {
+      stars: number;
+      starsMax: number;
+    };
+    completePersantage: number;
+  }[];
 }
 
-export type NewsletterDataTypes = ArticleData | ExtraordinaryData | DefaultData;
-// в рендере если не будет extraOrdinaryRenderHandler, то будут применяться
-// дефолтный рендер по типу? (как-то читать типы надо будет или добавить поле,
-// может быть сделаю тип внутри DefaultData и уберу вообще вот этот тип,
-// будет общий и в зависимости от него будет выбирать рендер информации)
+export interface GitData extends DefaultData {
+  type: "git";
+  gitData: {
+    commitsPerYear: number;
+    commitsImg: string;
+    commitPersentage?: number;
+    pullRequestsPersentage?: number;
+    codeReviewPersentage?: number;
+    issuesPersentage?: number;
+  };
+}
+
+export interface BioData extends DefaultData {
+  type: "bio";
+  description: React.ReactNode[];
+}
+
+// export interface ExtraOrdinaryData extends DefaultData {
+//   title: string;
+//   extraOrdinaryRenderHandler: string | any;
+//   // пока что текст, может быть будут типы хэндлеров которые будут расширять общий интерфейс или класс с методами рендера, пока хз
+// }
+
+export type NewsletterDataTypes = ArticleData | CoursesData | BioData | GitData;
