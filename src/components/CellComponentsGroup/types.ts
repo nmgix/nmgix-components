@@ -32,6 +32,7 @@ export interface ArticleData extends DefaultData {
 
 export interface CoursesData extends DefaultData {
   type: "lessons";
+
   //   пока что неиспользуемая переменная, будет отвечать за окраску окантовки курсов и общего блока -> будет необходимо
   // немного переделать метод рендера чтобы родитель окрашивался (вряд ли полностью переделывать рендер, скорее какой-то аля switch case)
   borderColor: string;
@@ -60,13 +61,13 @@ export interface GitData extends DefaultData {
 
 export interface BioData extends DefaultData {
   type: "bio";
-  description: React.ReactNode[];
+  // пока что временно ReactNode, а не ReactNode[]
+  description: React.ReactNode;
 }
 
-// export interface ExtraOrdinaryData extends DefaultData {
-//   title: string;
-//   extraOrdinaryRenderHandler: string | any;
-//   // пока что текст, может быть будут типы хэндлеров которые будут расширять общий интерфейс или класс с методами рендера, пока хз
-// }
-
 export type NewsletterDataTypes = ArticleData | CoursesData | BioData | GitData;
+
+export type ReverseShift = {
+  index: number;
+  shiftAmount: number;
+};

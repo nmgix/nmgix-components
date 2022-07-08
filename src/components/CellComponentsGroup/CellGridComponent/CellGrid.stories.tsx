@@ -1,4 +1,5 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { AppContainer } from "../../AppContainer";
 import { Link } from "../../LinkComponent";
 import { CellComponent, CellProps } from "../CellComponent";
 import { CellGrid } from "./CellGridComponent";
@@ -24,11 +25,13 @@ export default {
 // ];
 
 const GenericCellGrid: ComponentStory<typeof CellGrid> = (args) => (
-  <CellGrid>
-    {/* {gridData.map((cellData) => (
-      <CellComponent {...cellData} />
-    ))} */}
-  </CellGrid>
+  <AppContainer loaded={true}>
+    <CellGrid>
+      {/* {gridData.map((cellData) => (
+        <CellComponent {...cellData} />
+      ))} */}
+    </CellGrid>
+  </AppContainer>
 );
 
 export const DefaultCellGrid = GenericCellGrid.bind({});

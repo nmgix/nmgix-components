@@ -1,6 +1,6 @@
 import React from "react";
 import { Cell, NewsletterDataTypes, ArticleData } from "../types";
-import "./_cell.scss";
+import "../_cell.scss";
 
 export type CellProps = {
   data: NewsletterDataTypes;
@@ -11,7 +11,7 @@ export const CellComponent: React.FC<CellProps> = ({ data }) => {
     /* вообще должен быть Link, ну ладно, там пока с extraOrdinaryRenderMethod не понятно */
   }
   return (
-    <div className={`cell cell-width-${data.scheme.size!.width} cell-height-${data.scheme.size!.height}`}>
+    <li className={`cell cell-width-${data.scheme.size!.width} cell-height-${data.scheme.size!.height}`}>
       {/* пример тестовое MindBox и Funbox */}
       <div style={{ display: "flex", flexDirection: data.scheme.size!.height > 1 ? "column" : "row" }}>
         {data.image ? <img src={data.image} alt={data.title + " img"} /> : <></>}
@@ -91,13 +91,13 @@ export const CellComponent: React.FC<CellProps> = ({ data }) => {
               </div>
             ) : data.type === "bio" ? (
               // тут скорее всего будет проблемное место
-              <p>{data.description}</p>
+              <div>{data.description}</div>
             ) : (
               <></>
             )
           }
         </div>
       </div>
-    </div>
+    </li>
   );
 };

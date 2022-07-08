@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { CellComponent } from "../CellComponent";
-import { NewsletterDataTypes, Scheme } from "../types";
+import { getRandomInt } from "../helpers";
+import { NewsletterDataTypes, ReverseShift, Scheme } from "../types";
 import { Cell } from "../types";
-import "./_cellGrid.scss";
+import "../_cell.scss";
 
 type CellGridProps = {
   children: React.ReactNode;
@@ -18,7 +19,7 @@ const dataExample: NewsletterDataTypes[] = [
     url: "test-mindbox",
     scheme: {
       size: null,
-      level: [1],
+      level: [1, 2],
       defaultSize: {
         width: 2,
         height: 2,
@@ -38,7 +39,7 @@ const dataExample: NewsletterDataTypes[] = [
     },
     techStack: ["React", "Typescript", "Local Storage"],
     time: 5,
-    image: "test-mindbox-preview.jpeg",
+    // image: "test-mindbox-preview.jpeg",
   },
   {
     id: 1,
@@ -49,7 +50,7 @@ const dataExample: NewsletterDataTypes[] = [
     url: "test-funbox",
     scheme: {
       size: null,
-      level: [1],
+      level: [1, 2],
       defaultSize: {
         width: 2,
         height: 2,
@@ -73,7 +74,7 @@ const dataExample: NewsletterDataTypes[] = [
     },
     techStack: ["React", "Typescript"],
     time: 5,
-    image: "test-funbox-preview.jpeg",
+    // image: "test-funbox-preview.jpeg",
   },
   {
     id: 2,
@@ -107,7 +108,7 @@ const dataExample: NewsletterDataTypes[] = [
     },
     techStack: ["React", "Typescript"],
     time: 5,
-    image: "iga-bank-preview.jpeg",
+    // image: "iga-bank-preview.jpeg",
   },
   {
     id: 3,
@@ -185,7 +186,7 @@ const dataExample: NewsletterDataTypes[] = [
     ],
     scheme: {
       size: null,
-      level: [2, 3, 4],
+      level: [4, 5],
       defaultSize: {
         width: 2,
         height: 2,
@@ -204,43 +205,40 @@ const dataExample: NewsletterDataTypes[] = [
       ],
     },
   },
-  // {
-  //   id: 5,
-  //   title: "Пройденные курсы FreeCodeCamp",
-  //   type: 'lessons',
-  //   courses: [
-  //     {
-
-  //     }
-  //   ],
-  //   scheme: {
-  //     size: null,
-  //     level: [2, 3, 4],
-  //     defaultSize: {
-  //       width: 2,
-  //       height: 2,
-  //     },
-  //     desirableSize: [
-  //       {
-  //         width: 2,
-  //         height: 2,
-  //       },
-  //     ],
-  //     minimumSize: [
-  //       {
-  //         width: 2,
-  //         height: 1,
-  //       },
-  //     ],
-  //   },
-  // },
+  {
+    id: 5,
+    title: "Пройденные курсы FreeCodeCamp",
+    type: "lessons",
+    courses: [],
+    borderColor: "dark-blue",
+    scheme: {
+      size: null,
+      level: [4],
+      defaultSize: {
+        width: 2,
+        height: 2,
+      },
+      desirableSize: [
+        {
+          width: 2,
+          height: 2,
+        },
+      ],
+      minimumSize: [
+        {
+          width: 2,
+          height: 1,
+        },
+      ],
+    },
+  },
   {
     id: 6,
     title: "Немного о себе",
     type: "bio",
     scheme: {
       size: null,
-      level: [2, 3, 4, 5],
+      level: [7],
       defaultSize: {
         width: 2,
         height: 3,
@@ -258,206 +256,167 @@ const dataExample: NewsletterDataTypes[] = [
         },
       ],
     },
-    description: [
-      <p>
-        С 2019 года начал изучать базу веб-разработки (HTML, CSS, JS) на SoloLearn и freeCodeCamp. Параллельно начал
-        обучаться в КБТ по специальности “Информационные системы и программирование”.
-      </p>,
-      <p>
-        В 2020 году открыл для себя Udemy, купил пару курсов (React от Непомнящего, NodeJS от Минина и пр.) и
-        параллельно начал пилить pet-проекты.
-      </p>,
-      <p>
-        В 2021 (примерно) начал изучать TS (Typescript) и постепенно замещать им обыкновенный JS т.к. больше нравится
-        синтаксис C#.
-      </p>,
-      <p>
-        С момента начала изучения TS вплоть до сегодняшнего дня полностью перестал использовать ванильный JS и пишу
-        приложения (фронт - React и бек - NodeJS+Express) только с типизацией (пока несильной).
-      </p>,
-    ],
+    // пока что временно ReactNode, а не ReactNode[]
+    description: (
+      <>
+        <p>
+          С 2019 года начал изучать базу веб-разработки (HTML, CSS, JS) на SoloLearn и freeCodeCamp. Параллельно начал
+          обучаться в КБТ по специальности “Информационные системы и программирование”.
+        </p>
+        ,
+        <p>
+          В 2020 году открыл для себя Udemy, купил пару курсов (React от Непомнящего, NodeJS от Минина и пр.) и
+          параллельно начал пилить pet-проекты.
+        </p>
+        ,
+        <p>
+          В 2021 (примерно) начал изучать TS (Typescript) и постепенно замещать им обыкновенный JS т.к. больше нравится
+          синтаксис C#.
+        </p>
+        ,
+        <p>
+          С момента начала изучения TS вплоть до сегодняшнего дня полностью перестал использовать ванильный JS и пишу
+          приложения (фронт - React и бек - NodeJS+Express) только с типизацией (пока несильной).
+        </p>
+        ,
+      </>
+    ),
   },
 ];
 
 export const CellGrid: React.FC<CellGridProps> = ({ children }) => {
-  // const GridGenerator = (dataArray: NewsletterDataTypes[]) => {
-  //   var currentScheme: SetupScheme[] = [];
+  const [renderScheme, setRenderScheme] = useState<[NewsletterDataTypes[], string]>([[], ""]);
 
-  //   const firstIteration = (schemes: NewsletterDataTypes[]): SetupScheme[] => {
-  //     var sortedData = schemes.sort((scheme1, scheme2) => {
-  //       var firstValue =
-  //         typeof scheme1.scheme.level === "number" ? scheme1.scheme.level : Math.max(...scheme1.scheme.level);
-  //       var secondValue =
-  //         typeof scheme2.scheme.level === "number" ? scheme2.scheme.level : Math.max(...scheme2.scheme.level);
+  const GridGenerator = (dataArray: NewsletterDataTypes[]): [NewsletterDataTypes[], string] => {
+    var result = dataArray;
 
-  //       return firstValue - secondValue;
-  //     });
+    // рандомное выставление уровней элементам где level - массив, если число одно, оно и останется, иначе рандомное
+    result = result.map((data) => {
+      data.scheme.level =
+        data.scheme.level.length < 2
+          ? [data.scheme.level.at(0)!]
+          : [data.scheme.level.at(getRandomInt(0, data.scheme.level.length - 1))!];
+      return data;
+    });
 
-  //     return sortedData.map((data) => {
-  //       return { id: data.id, size: data.scheme.defaultSize, scheme: data.scheme };
-  //     });
-  //   };
+    // // если есть пропущенные лвлы
+    var reverseShifts: ReverseShift[] = [];
 
-  //   currentScheme = firstIteration(dataArray);
+    // пробегается по уровням от 0 вкл до условно 7 невкл
+    for (var j = 0; j < result[result.length - 1].scheme.level[0]; j++) {
+      // ищет все элементы с текущем уровнем (zero-based, а level нет, так что  +1)
+      var foundDataWithLevel = result.filter((data) => data.scheme.level[0] === j + 1);
+      // если длинна массива 0, т.е. текущего уровня (индекс + 1 из-за лвла) нет
+      if (foundDataWithLevel.length === 0) {
+        //                                            если индекс в массиве равен индексу цикла +1 (лвл) или
+        //                                                           просто индексу (прошлому лвлу)
+        var actualReverseShift = reverseShifts.find((shift) => shift.index === j + 1 || shift.index === j);
+        if (actualReverseShift) {
+          actualReverseShift.shiftAmount = actualReverseShift.shiftAmount + 1;
+        } else {
+          var newReverseShift: ReverseShift = {
+            index: j + 1,
+            shiftAmount: 1,
+          };
+          reverseShifts.push(newReverseShift);
+        }
+      } else {
+        continue;
+      }
+    }
+    console.log(reverseShifts);
 
-  //   const secondIteration = (schemes: SetupScheme[]): SetupScheme[] => {
-  //     var horizontalPerRowLimit = 4;
-  //     var verticalPerLevelLimit = 2;
+    // сортировка по уровням, градация
+    result = result.sort((data1, data2) => data1.scheme.level.at(0)! - data2.scheme.level.at(0)!);
+    console.log(result);
 
-  //     // массив массивов элементов, разделенных на уровень с индекса 0
-  //     var levelSeparated: SetupScheme[][] = [];
-  //     var desireMap: number[];
+    // после уменьшения лвлов при появлении новой дыры (следующего объекта в reverseShifts, будет добавлять значение shiftAmount)
+    // потому что в прошлых значения уже вычтено допустим два, а тут ещё два, в итоге у каждого объекта с неправильным лвлом необходимо убирать 4 уровня
+    var totalShift = 0;
 
-  //     // получить максимальное значение уровня у элемента (бывает массив, например [2,3,4,5])
-  //     const getMaxLevel = (currentScheme: SetupScheme) =>
-  //       typeof currentScheme.scheme.level === "number"
-  //         ? (currentScheme.scheme.level as number)
-  //         : Math.max(...(currentScheme.scheme.level as number[]));
+    result = result.map((data, i) => {
+      var foundShift = reverseShifts.find((shift) => data.scheme.level[0] > shift.index);
+      if (foundShift) {
+        totalShift = totalShift + foundShift.shiftAmount;
+        data.scheme.level[0] = data.scheme.level[0] - totalShift;
+      }
 
-  //     // цикл 2^n для сортировки элементов по уровням
-  //     for (var i = 0; i <= getMaxLevel(schemes[schemes.length - 1]) - 1; i++) {
-  //       var levelArray: SetupScheme[] = [];
+      return data;
+    });
 
-  //       for (var j = 0; j < schemes.length; j++) {
-  //         var level = getMaxLevel(schemes[j]);
-  //         if (level - 1 === i) {
-  //           levelArray.push(schemes[j]);
-  //         }
-  //       }
+    // выставление рандомного размера каждому элементу
+    // (пока что нерекурсивный, не проверяет все ли влазят)
 
-  //       levelSeparated.push(levelArray);
-  //       continue;
-  //     }
+    const handleSize = (array: NewsletterDataTypes[]): NewsletterDataTypes[] => {
+      array = array.map((data) => {
+        // либо из маленьких размеров, либо из больших
+        var minMax = getRandomInt(0, 1);
+        data.scheme.size =
+          minMax === 0
+            ? data.scheme.minimumSize[getRandomInt(0, data.scheme.minimumSize.length - 1)]
+            : data.scheme.desirableSize[getRandomInt(0, data.scheme.desirableSize.length - 1)];
+        return data;
+      });
 
-  //     // чтобы убрать пустые уровни
-  //     // console.log("levelSeparated before sorting", levelSeparated);
-  //     levelSeparated = levelSeparated.filter((array) => array.length > 0);
-  //     // console.log("levelSeparated after sorting", levelSeparated);
+      return array;
+    };
 
-  //     function randomIntFromInterval(min: number, max: number) {
-  //       // min and max included
-  //       return Math.floor(Math.random() * (max - min + 1) + min);
-  //     }
+    result = handleSize(result);
 
-  //     // карта приоритетов по расширение или уменьшению, если у двух блоков
-  //     // стоит одинаковое число, приоритет будет у второго блока, первый будет уменьшаться, наверное
-  //     desireMap = levelSeparated.map(() => randomIntFromInterval(0, 1));
+    // логика создания строчки для grid-template-columns
+    // var gridTemplateResult = [
+    //   'AABB', //первый уровень, заместо букв будут айди
+    //   'AACC',
+    //   'DDCC',
+    //   'EEEF',
+    //   'EEEF',
+    //   'GGHH',
+    //   'IIHH'
+    // ]
+    var gridTemplateResult: string[][] = new Array<string[]>(result[result.length - 1].scheme.level[0]).fill([
+      "",
+      "",
+      "",
+      "",
+    ]);
+    result.map((data) => {
+      // отвечает за какой индекс будем пытаться заполнить
+      // например, начало заполнения от 2
+      // [ '', 'вот этот', '', '' ]
+      // надо проверять, влазит ли элемент путём проверки всех строчек в этом массиве,
+      // начиная с первой пустой проверять каждую следующую на пустоту, индекс первой пустой в rowShift
+      var rowShift = 0;
+      // от rowShift будет начинаться заполнение
+      // если индексы дальше не пустые, идти циклом дальше искать свободное место
 
-  //     // console.log(desireMap);
-  //     // console.log(levelSeparated);
+      for (var i = 0; i < data.scheme.level[0] + data.scheme.size!.height; i++) {
+        if (
+          i + 1 === data.scheme.level[0] ||
+          (i + 1 > data.scheme.level[0] && i + 1 < data.scheme.level[0] + data.scheme.size!.height)
+        ) {
+          // значит нашли правильный массив по УРОВНЮ или по ВЫСОТЕ от уровня!
+          var targetStringArray = gridTemplateResult[i + 1];
 
-  //     const getTotalCells = (arrays: SetupScheme[][]) => {
-  //       return arrays.map((array) => {
-  //         return array.reduce((acc, curr) => acc + curr.size.width * curr.size.height, 0);
-  //       });
-  //     };
-  //     var totalCells = getTotalCells(levelSeparated);
+          console.log(data.id, "match", targetStringArray);
+        } else {
+          console.log(data.id, "not match");
+        }
+      }
+    });
 
-  //     // логика по настройке массива, установке правильных размеров
-  //     const balanceLevels = (schemes: SetupScheme[][]) => {
-  //       schemes = schemes.map((levelArray, i) => {
-  //         let localTotalCells = totalCells[i];
-
-  //         if (localTotalCells > horizontalPerRowLimit * verticalPerLevelLimit) {
-  //           if (i !== 0) {
-  //             // если предыдущий лвл имеет большинство
-  //             if (desireMap[i - 1] == 1) {
-  //               // меньшинство
-  //               levelArray = levelArray.map((levelScheme) => {
-  //                 levelScheme.size = levelScheme.scheme.desirableSize.find((size) => size.width > 1)!;
-  //                 return levelScheme;
-  //               });
-  //             } else {
-  //               // большинство
-  //               levelArray = levelArray.map((levelScheme) => {
-  //                 levelScheme.size = levelScheme.scheme.minimumSize.find((size) => size.width > 1)!;
-  //                 return levelScheme;
-  //               });
-  //             }
-  //           } else {
-  //             // если первый лвл из всех, то если в меньшинство
-  //             if (desireMap[i] == 0) {
-  //               levelArray = levelArray.map((levelScheme) => {
-  //                 levelScheme.size = levelScheme.scheme.minimumSize.find((size) => size.width > 1)!;
-  //                 return levelScheme;
-  //               });
-  //             } else {
-  //               // если в большинство
-  //               levelArray = levelArray.map((levelScheme) => {
-  //                 levelScheme.size = levelScheme.scheme.desirableSize.find((size) => size.width > 1)!;
-  //                 return levelScheme;
-  //               });
-  //             }
-  //           }
-  //           // логика по сжатию или удалению элементов если не влазят,
-  //           // не удаление если в его месте есть пустое пространство,
-  //           // надо будет разбираться где он выпирает и влазит ли это в другой уровень
-  //         } else {
-  //           // это если клеток общее кол-во меньше чем лимит
-  //           if (desireMap[i] == 0) {
-  //             levelArray = levelArray.map((levelScheme) => {
-  //               levelScheme.size = levelScheme.scheme.minimumSize.find((size) => size.width > 1)!;
-  //               return levelScheme;
-  //             });
-  //           } else {
-  //             levelArray = levelArray.map((levelScheme) => {
-  //               levelScheme.size = levelScheme.scheme.desirableSize.find((size) => size.width > 1)!;
-  //               return levelScheme;
-  //             });
-  //           }
-  //         }
-
-  //         return levelArray;
-  //       });
-
-  //       var totalLevelSum = totalCells.length * (horizontalPerRowLimit * verticalPerLevelLimit);
-  //       if (totalLevelSum > totalCells.reduce((acc, cur) => acc + cur, 0)) {
-  //         // пытаться расширить элементы
-  //       } else {
-  //         // пытаться уменьшить и скомпоновать
-  //       }
-
-  //       // if(totalCells > horizontalPerRowLimit * verticalPerLevelLimit){
-  //       //   balanceLevels(schemes)
-  //       // }
-  //       return schemes;
-  //     };
-
-  //     // вызов логики расстановки размеров
-  //     balanceLevels(levelSeparated);
-
-  //     // флат всех лволов в один большой массив, мб чтобы третйи шаг делать, этот двойной массив
-  //     // как раз и будет основным, с лвлами, а общий flat будет в самом конце
-  //     return levelSeparated.flat();
-  //   };
-
-  //   currentScheme = secondIteration(currentScheme);
-  //   console.log("after second iteration ", currentScheme);
-  //   // можно будет вызывать эту функцию чтобы попробовать сделать другую схему и принять её если она не равна предыдущей
-
-  //   // // в первой итерации идёт распределение какие данные на какой уровень идут, какие на первый, какие на второй и пр.
-  //   // // в первой итерации всем дефолтное для них пространство, дальше уже будет исходить из правил по схеме
-  //   // во второй итерации элементы, которые не влазили на свой уровень будут пытаться объединиться с элементами своего уровня (2 2х2 будут пытаться в 2 2х1 или 2 1х2)
-  //   // во второй итерации будет так же попытка расставить элементы в их desirable размерах
-  //   //(приоритет на большие или приоритет будет рандомный для лволов
-  //   //(у каждого лвла приоритет сверху и снизу, т.е. между первым и вторым приоритет на маленькие элементы чтобы особо не пересекались, а у второго с третьим на большие))
-  //   // третий шаг (мб и второй) скорее всего будут рекурсивные но с лимитом (который с каждой рекурсией добавляется)
-  //   // и мб результат этой функции будет в Next сохраняться и выдаваться статикой какое-то время чтобы не жрать мощности железа
-  // };
-
-  const [renderScheme, setRenderScheme] = useState<NewsletterDataTypes[]>([]);
-
-  const GridGenerator = (dataArray: NewsletterDataTypes[]) => {};
+    // gridTemplateResult.map((string) => string.split("").join(" ")).join(" ")
+    return [result, ""];
+  };
 
   useEffect(() => {
-    GridGenerator(dataExample);
+    setRenderScheme(GridGenerator(dataExample));
   }, []);
 
   return (
-    <div className='cell-grid'>
-      {renderScheme.map((scheme) => (
+    <ul className='cell-grid' style={{ gridTemplateAreas: renderScheme[1] }}>
+      {renderScheme[0].map((scheme) => (
         <CellComponent data={scheme} key={scheme.id} />
       ))}
-    </div>
+    </ul>
   );
 };
