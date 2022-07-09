@@ -68,6 +68,6 @@ export interface BioData extends DefaultData {
 export type NewsletterDataTypes = ArticleData | CoursesData | BioData | GitData;
 
 export type ReverseShift = {
-  index: number;
+  level: number;
   shiftAmount: number;
 };

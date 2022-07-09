@@ -291,32 +291,25 @@ export const CellGrid: React.FC<CellGridProps> = ({ children }) => {
     var result: NewsletterDataTypes[] = dataArray;
     var notFitted: NewsletterDataTypes[] = [];
 
-    // рандомное выставление уровней элементам где level - массив, если число одно, оно и останется, иначе рандомное
     result = result.map((data) => {
-      data.scheme.level =
-        data.scheme.level.length < 2
-          ? [data.scheme.level.at(0)!]
-          : [data.scheme.level.at(getRandomInt(0, data.scheme.level.length - 1))!];
+      var index = getRandomInt(0, data.scheme.level.length - 1);
+      data.scheme.level = data.scheme.level.length < 2 ? [data.scheme.level.at(0)!] : [data.scheme.level.at(index)!];
       return data;
     });
 
-    // // если есть пропущенные лвлы
+    result = result.sort((data1, data2) => data1.scheme.level.at(0)! - data2.scheme.level.at(0)!);
+
     var reverseShifts: ReverseShift[] = [];
 
-    // пробегается по уровням от 0 вкл до условно 7 невкл
-    for (var j = 0; j < result[result.length - 1].scheme.level[0]; j++) {
-      // ищет все элементы с текущем уровнем (zero-based, а level нет, так что  +1)
-      var foundDataWithLevel = result.filter((data) => data.scheme.level[0] === j + 1);
-      // если длинна массива 0, т.е. текущего уровня (индекс + 1 из-за лвла) нет
+    for (var j = 1; j < result[result.length - 1].scheme.level[0] + 1; j++) {
+      var foundDataWithLevel = result.filter((data) => data.scheme.level[0] === j);
       if (foundDataWithLevel.length === 0) {
-        //                                            если индекс в массиве равен индексу цикла +1 (лвл) или
-        //                                                           просто индексу (прошлому лвлу)
-        var actualReverseShift = reverseShifts.find((shift) => shift.index === j + 1 || shift.index === j);
+        var actualReverseShift = reverseShifts.find((shift) => shift.level === j || shift.level === j - 1);
         if (actualReverseShift) {
           actualReverseShift.shiftAmount = actualReverseShift.shiftAmount + 1;
         } else {
           var newReverseShift: ReverseShift = {
-            index: j + 1,
+            level: j,
             shiftAmount: 1,
           };
           reverseShifts.push(newReverseShift);
@@ -325,32 +318,24 @@ export const CellGrid: React.FC<CellGridProps> = ({ children }) => {
         continue;
       }
     }
-    console.log(reverseShifts);
 
-    // сортировка по уровням, градация
-    result = result.sort((data1, data2) => data1.scheme.level.at(0)! - data2.scheme.level.at(0)!);
-    console.log(result);
-
-    // после уменьшения лвлов при появлении новой дыры (следующего объекта в reverseShifts, будет добавлять значение shiftAmount)
-    // потому что в прошлых значения уже вычтено допустим два, а тут ещё два, в итоге у каждого объекта с неправильным лвлом необходимо убирать 4 уровня
     var totalShift = 0;
 
     result = result.map((data, i) => {
-      var foundShift = reverseShifts.find((shift) => data.scheme.level[0] > shift.index);
+      var foundShift = reverseShifts.find((shift, i) => data.scheme.level[0] >= shift.level);
+      if (foundShift) {
+        reverseShifts = reverseShifts.filter((shift) => shift !== foundShift);
+      }
       if (foundShift) {
         totalShift = totalShift + foundShift.shiftAmount;
-        data.scheme.level[0] = data.scheme.level[0] - totalShift;
       }
+      data.scheme.level[0] = data.scheme.level[0] - totalShift;
 
       return data;
     });
 
-    // выставление рандомного размера каждому элементу
-    // (пока что нерекурсивный, не проверяет все ли влазят)
-
     const handleSize = (array: NewsletterDataTypes[]): NewsletterDataTypes[] => {
       array = array.map((data) => {
-        // либо из маленьких размеров, либо из больших
         var minMax = getRandomInt(0, 1);
         data.scheme.size =
           minMax === 0
@@ -364,121 +349,101 @@ export const CellGrid: React.FC<CellGridProps> = ({ children }) => {
 
     result = handleSize(result);
 
-    // логика создания строчки для grid-template-columns
-    var allElementsHeightSum = result.reduce((acc, curr) => acc + curr.scheme.size!.height, 0);
-    // var gridTemplateResult: string[][] = new Array<string[]>(allElementsHeightSum).fill([".", ".", ".", "."]);
-    //                                                             точки будут филлерами для пустых ячеек (в конце)
-    var gridTemplateResult: string[][] = new Array<string[]>(allElementsHeightSum).fill(["", "", "", ""]);
-    console.log(gridTemplateResult);
-    // поиск свободного места и установка его айдшников в сободные поля (или ничего не устанавливать если не влезло)
-    const findAndSet = (id: string, data: Scheme, row: number = 0) => {
-      var fits: boolean = true;
-      var fittedElements: number = 0;
+    // var allElementsHeightSum = result.reduce((acc, curr) => acc + curr.scheme.size!.height, 0);
+    // var gridTemplateResult: string[][] = new Array<string[]>(allElementsHeightSum).fill(["", "", "", ""]);
+    // console.log(gridTemplateResult);
+    // const findAndSet = (id: string, data: Scheme, row: number = 0) => {
+    //   var fits: boolean = true;
+    //   var fittedElements: number = 0;
 
-      var currentRow = row;
-      var targetColumn: null | number = null;
+    //   var currentRow = row;
+    //   var targetColumn: null | number = null;
 
-      const findRowWithEmptyColumn = (row: number, targetColumn: number | null): any => {
-        if (row >= gridTemplateResult.length) {
-          console.log("Не получилось" /* , targetColumn, row */);
-          return false;
-        }
+    //   const findRowWithEmptyColumn = (row: number, targetColumn: number | null): any => {
+    //     if (row >= gridTemplateResult.length) {
+    //       console.log("Не получилось" /* , targetColumn, row */);
+    //       return false;
+    //     }
 
-        // console.log("тут мы ищем в ряду свободное пространство");
+    //     // console.log(row, gridTemplateResult);
 
-        // тут мы ищем в ряду свободное пространство
-        if (targetColumn === null) {
-          for (var j = 0; j < gridTemplateResult[row].length - data.size!.width; j++) {
-            // console.log(j, gridTemplateResult[row].length, data.size!.width);
-            var notOccupiedColumn = gridTemplateResult[row].findIndex((space) => space.length === 0);
-            if (notOccupiedColumn !== -1) {
-              targetColumn = notOccupiedColumn;
-              break;
-            } else {
-              continue;
-            }
-          }
-        }
-        // если не нашли в ряду свободного пространства ИЛИ текущий минимальный свободный индекс + ширина оъекта больше чем ширина ряда,
-        // например текущий индекс (по zero-based 2, а ширина 3, то суммарно уже 5),
-        // то опускаемся на ряд ниже
+    //     if (targetColumn === null) {
+    //       for (var j = 0; j < gridTemplateResult[row].length - data.size!.width; j++) {
+    //         var notOccupiedColumn = gridTemplateResult[row].findIndex((space) => space.length === 0);
+    //         if (notOccupiedColumn !== -1) {
+    //           targetColumn = notOccupiedColumn;
+    //           break;
+    //         } else {
+    //           continue;
+    //         }
+    //       }
+    //     }
+    //     if (
+    //       targetColumn === null ||
+    //       (targetColumn && targetColumn + data.size!.width > gridTemplateResult[row].length)
+    //     ) {
+    //       // console.log("не нашлось свободное место");
+    //       currentRow = currentRow + 1;
+    //       findRowWithEmptyColumn(currentRow, null);
+    //     } else {
+    //       // console.log("нашлось свободное место");
+    //       // if (row > data.size!.height) {
+    //       //   gridTemplateResult.map((row, i) => {
+    //       //     if (i >= currentRow - data.size!.height && i <= currentRow) {
+    //       //       for (var j = targetColumn!; j < row.length; j++) {
+    //       //         row[j] = id;
+    //       //       }
+    //       //     }
+    //       //   });
+    //       //   return true;
+    //       // } else {
+    //       //   for (
+    //       //     var j = targetColumn + 1;
+    //       //     j < targetColumn + data.size!.width && j <= gridTemplateResult[row].length;
+    //       //     j++
+    //       //   ) {
+    //       //     if (j === gridTemplateResult[row].length && fits && fittedElements % data.size!.width === 0) {
+    //       //       currentRow = currentRow + 1;
+    //       //       return findRowWithEmptyColumn(currentRow, targetColumn);
+    //       //     }
+    //       //     if (gridTemplateResult[row][j].length === 0) {
+    //       //       fits = true;
+    //       //       fittedElements = fittedElements + 1;
+    //       //       continue;
+    //       //     } else {
+    //       //       fits = false;
+    //       //       fittedElements = 0;
+    //       //       continue;
+    //       //     }
+    //       //   }
+    //       //   if (!fits || fittedElements !== data.size!.width) {
+    //       //     currentRow = currentRow + 1;
+    //       //     return findRowWithEmptyColumn(currentRow, null);
+    //       //   }
+    //       // }
+    //     }
+    //   };
+    //   findRowWithEmptyColumn(currentRow, targetColumn);
 
-        if (
-          targetColumn === null ||
-          (targetColumn && targetColumn + data.size!.width > gridTemplateResult[row].length)
-        ) {
-          // console.log(
-          //   !targetColumn,
-          //   targetColumn && targetColumn + data.size!.width > gridTemplateResult[row].length
-          // );
-          currentRow = currentRow + 1;
-          // console.log("то опускаемся на ряд ниже");
-          findRowWithEmptyColumn(currentRow, null);
-        } else {
-          // тут пытаться заняться следующие колонки ряда, если ничего не получается, тоже findRowWith... с рядом ниже
-          for (
-            var j = targetColumn + 1;
-            j < targetColumn + data.size!.width && j <= gridTemplateResult[row].length;
-            j++
-          ) {
-            // если это уже граница, т.е. 4-й индекс (хотя их всего 3) и все влезает
-            if (j === gridTemplateResult[row].length && fits && fittedElements % data.size!.width === 0) {
-              currentRow = currentRow + 1;
-              // console.log("если это уже граница, т.е. 4-й индекс");
-              return findRowWithEmptyColumn(currentRow, targetColumn);
-            }
+    //   gridTemplateResult.map((row) =>
+    //     row.map((column) => {
+    //       if (column.length === 0) {
+    //         column = ".";
+    //       }
+    //     })
+    //   );
+    // };
 
-            // если текущий элемент пустой, то всё хорошо
-            if (gridTemplateResult[row][j].length === 0) {
-              fits = true;
-              fittedElements = fittedElements + 1;
-              continue;
-            } else {
-              fits = false;
-              fittedElements = 0;
-              continue;
-            }
-          }
+    // dataArray.map((data) => {
+    //   if (data.scheme.level.length === 1) {
+    //     console.log("level ", data.scheme.level[0]);
+    //     findAndSet(`cell-${data.id}`, data.scheme, data.scheme.level[0]);
+    //   }
+    // });
 
-          if (!fits || fittedElements !== data.size!.width) {
-            currentRow = currentRow + 1;
-            // console.log("если что-то не влезло, что-то не получилось");
-            return findRowWithEmptyColumn(currentRow, null);
-          }
+    // "'" + gridTemplateResult.map((arr) => arr.join(" ")).join("' '") + "'"
 
-          // console.log("Всё сделано, всё влезло", targetColumn, row);
-          gridTemplateResult.map((row, i) => {
-            if (i >= currentRow - data.size!.height && i <= currentRow) {
-              for (var j = targetColumn!; j < row.length; j++) {
-                row[j] = id;
-              }
-            }
-          });
-          return true;
-
-          // если получается этот ряд занять, то пытаться занять следующий ряд, если всё получается и высота элемента кончается
-          // то элемент добавлен, иначе к шагу 1
-        }
-      };
-      findRowWithEmptyColumn(currentRow, targetColumn);
-
-      // установка точек в незанятых полях
-      gridTemplateResult.map((row) =>
-        row.map((column) => {
-          if (column.length === 0) {
-            column = ".";
-          }
-        })
-      );
-    };
-
-    dataArray.map((data) => {
-      if (data.scheme.level.length === 1) {
-        findAndSet(`cell-${data.id}`, data.scheme, data.scheme.level[0]);
-      }
-    });
-
-    return [result, "'" + gridTemplateResult.map((arr) => arr.join(" ")).join("' '") + "'"];
+    return [result, ""];
   };
 
   useEffect(() => {
