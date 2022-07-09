@@ -288,7 +288,8 @@ export const CellGrid: React.FC<CellGridProps> = ({ children }) => {
   const [renderScheme, setRenderScheme] = useState<[NewsletterDataTypes[], string]>([[], ""]);
 
   const GridGenerator = (dataArray: NewsletterDataTypes[]): [NewsletterDataTypes[], string] => {
-    var result = dataArray;
+    var result: NewsletterDataTypes[] = dataArray;
+    var notFitted: NewsletterDataTypes[] = [];
 
     // рандомное выставление уровней элементам где level - массив, если число одно, оно и останется, иначе рандомное
     result = result.map((data) => {
@@ -364,48 +365,120 @@ export const CellGrid: React.FC<CellGridProps> = ({ children }) => {
     result = handleSize(result);
 
     // логика создания строчки для grid-template-columns
-    // var gridTemplateResult = [
-    //   'AABB', //первый уровень, заместо букв будут айди
-    //   'AACC',
-    //   'DDCC',
-    //   'EEEF',
-    //   'EEEF',
-    //   'GGHH',
-    //   'IIHH'
-    // ]
-    var gridTemplateResult: string[][] = new Array<string[]>(result[result.length - 1].scheme.level[0]).fill([
-      "",
-      "",
-      "",
-      "",
-    ]);
-    result.map((data) => {
-      // отвечает за какой индекс будем пытаться заполнить
-      // например, начало заполнения от 2
-      // [ '', 'вот этот', '', '' ]
-      // надо проверять, влазит ли элемент путём проверки всех строчек в этом массиве,
-      // начиная с первой пустой проверять каждую следующую на пустоту, индекс первой пустой в rowShift
-      var rowShift = 0;
-      // от rowShift будет начинаться заполнение
-      // если индексы дальше не пустые, идти циклом дальше искать свободное место
+    var allElementsHeightSum = result.reduce((acc, curr) => acc + curr.scheme.size!.height, 0);
+    // var gridTemplateResult: string[][] = new Array<string[]>(allElementsHeightSum).fill([".", ".", ".", "."]);
+    //                                                             точки будут филлерами для пустых ячеек (в конце)
+    var gridTemplateResult: string[][] = new Array<string[]>(allElementsHeightSum).fill(["", "", "", ""]);
+    console.log(gridTemplateResult);
+    // поиск свободного места и установка его айдшников в сободные поля (или ничего не устанавливать если не влезло)
+    const findAndSet = (id: string, data: Scheme, row: number = 0) => {
+      var fits: boolean = true;
+      var fittedElements: number = 0;
 
-      for (var i = 0; i < data.scheme.level[0] + data.scheme.size!.height; i++) {
-        if (
-          i + 1 === data.scheme.level[0] ||
-          (i + 1 > data.scheme.level[0] && i + 1 < data.scheme.level[0] + data.scheme.size!.height)
-        ) {
-          // значит нашли правильный массив по УРОВНЮ или по ВЫСОТЕ от уровня!
-          var targetStringArray = gridTemplateResult[i + 1];
+      var currentRow = row;
+      var targetColumn: null | number = null;
 
-          console.log(data.id, "match", targetStringArray);
-        } else {
-          console.log(data.id, "not match");
+      const findRowWithEmptyColumn = (row: number, targetColumn: number | null): any => {
+        if (row >= gridTemplateResult.length) {
+          console.log("Не получилось" /* , targetColumn, row */);
+          return false;
         }
+
+        // console.log("тут мы ищем в ряду свободное пространство");
+
+        // тут мы ищем в ряду свободное пространство
+        if (targetColumn === null) {
+          for (var j = 0; j < gridTemplateResult[row].length - data.size!.width; j++) {
+            // console.log(j, gridTemplateResult[row].length, data.size!.width);
+            var notOccupiedColumn = gridTemplateResult[row].findIndex((space) => space.length === 0);
+            if (notOccupiedColumn !== -1) {
+              targetColumn = notOccupiedColumn;
+              break;
+            } else {
+              continue;
+            }
+          }
+        }
+        // если не нашли в ряду свободного пространства ИЛИ текущий минимальный свободный индекс + ширина оъекта больше чем ширина ряда,
+        // например текущий индекс (по zero-based 2, а ширина 3, то суммарно уже 5),
+        // то опускаемся на ряд ниже
+
+        if (
+          targetColumn === null ||
+          (targetColumn && targetColumn + data.size!.width > gridTemplateResult[row].length)
+        ) {
+          // console.log(
+          //   !targetColumn,
+          //   targetColumn && targetColumn + data.size!.width > gridTemplateResult[row].length
+          // );
+          currentRow = currentRow + 1;
+          // console.log("то опускаемся на ряд ниже");
+          findRowWithEmptyColumn(currentRow, null);
+        } else {
+          // тут пытаться заняться следующие колонки ряда, если ничего не получается, тоже findRowWith... с рядом ниже
+          for (
+            var j = targetColumn + 1;
+            j < targetColumn + data.size!.width && j <= gridTemplateResult[row].length;
+            j++
+          ) {
+            // если это уже граница, т.е. 4-й индекс (хотя их всего 3) и все влезает
+            if (j === gridTemplateResult[row].length && fits && fittedElements % data.size!.width === 0) {
+              currentRow = currentRow + 1;
+              // console.log("если это уже граница, т.е. 4-й индекс");
+              return findRowWithEmptyColumn(currentRow, targetColumn);
+            }
+
+            // если текущий элемент пустой, то всё хорошо
+            if (gridTemplateResult[row][j].length === 0) {
+              fits = true;
+              fittedElements = fittedElements + 1;
+              continue;
+            } else {
+              fits = false;
+              fittedElements = 0;
+              continue;
+            }
+          }
+
+          if (!fits || fittedElements !== data.size!.width) {
+            currentRow = currentRow + 1;
+            // console.log("если что-то не влезло, что-то не получилось");
+            return findRowWithEmptyColumn(currentRow, null);
+          }
+
+          // console.log("Всё сделано, всё влезло", targetColumn, row);
+          gridTemplateResult.map((row, i) => {
+            if (i >= currentRow - data.size!.height && i <= currentRow) {
+              for (var j = targetColumn!; j < row.length; j++) {
+                row[j] = id;
+              }
+            }
+          });
+          return true;
+
+          // если получается этот ряд занять, то пытаться занять следующий ряд, если всё получается и высота элемента кончается
+          // то элемент добавлен, иначе к шагу 1
+        }
+      };
+      findRowWithEmptyColumn(currentRow, targetColumn);
+
+      // установка точек в незанятых полях
+      gridTemplateResult.map((row) =>
+        row.map((column) => {
+          if (column.length === 0) {
+            column = ".";
+          }
+        })
+      );
+    };
+
+    dataArray.map((data) => {
+      if (data.scheme.level.length === 1) {
+        findAndSet(`cell-${data.id}`, data.scheme, data.scheme.level[0]);
       }
     });
 
-    // gridTemplateResult.map((string) => string.split("").join(" ")).join(" ")
-    return [result, ""];
+    return [result, "'" + gridTemplateResult.map((arr) => arr.join(" ")).join("' '") + "'"];
   };
 
   useEffect(() => {
