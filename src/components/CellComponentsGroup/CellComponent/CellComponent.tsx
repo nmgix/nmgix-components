@@ -11,7 +11,9 @@ export const CellComponent: React.FC<CellProps> = ({ data }) => {
     /* вообще должен быть Link, ну ладно, там пока с extraOrdinaryRenderMethod не понятно */
   }
   return (
-    <li className={`cell cell-width-${data.scheme.size!.width} cell-height-${data.scheme.size!.height}`}>
+    <li
+      className={`cell cell-width-${data.scheme.size!.width} cell-height-${data.scheme.size!.height}`}
+      style={{ gridArea: `cell-${data.id}` }}>
       {/* пример тестовое MindBox и Funbox */}
       <div style={{ display: "flex", flexDirection: data.scheme.size!.height > 1 ? "column" : "row" }}>
         {data.image ? <img src={data.image} alt={data.title + " img"} /> : <></>}

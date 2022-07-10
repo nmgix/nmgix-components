@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { CellComponent } from "../CellComponent";
-import { getRandomInt } from "../helpers";
+import { getRandomInt, matrix } from "../helpers";
 import { NewsletterDataTypes, ReverseShift, Scheme } from "../types";
 import { Cell } from "../types";
 import "../_cell.scss";
@@ -346,104 +346,74 @@ export const CellGrid: React.FC<CellGridProps> = ({ children }) => {
 
       return array;
     };
-
     result = handleSize(result);
 
+    var cellsHeightPerLevel = 2;
     // var allElementsHeightSum = result.reduce((acc, curr) => acc + curr.scheme.size!.height, 0);
-    // var gridTemplateResult: string[][] = new Array<string[]>(allElementsHeightSum).fill(["", "", "", ""]);
-    // console.log(gridTemplateResult);
-    // const findAndSet = (id: string, data: Scheme, row: number = 0) => {
-    //   var fits: boolean = true;
-    //   var fittedElements: number = 0;
+    var maxLevel = result[result.length - 1].scheme.level[0] * cellsHeightPerLevel;
+    var gridTemplateResult: string[][] = matrix(4, maxLevel, ".");
+    var notFitted: NewsletterDataTypes[] = [];
 
-    //   var currentRow = row;
-    //   var targetColumn: null | number = null;
+    const findAndSet = (id: string, data: NewsletterDataTypes, row: number = 0) => {
+      var targetColumn: null | number = null;
 
-    //   const findRowWithEmptyColumn = (row: number, targetColumn: number | null): any => {
-    //     if (row >= gridTemplateResult.length) {
-    //       console.log("Не получилось" /* , targetColumn, row */);
-    //       return false;
-    //     }
+      const recoursiveFind = () => {
+        console.log("called", `targetColumn ${targetColumn}`);
+        if (
+          row > data.scheme.level[0] * cellsHeightPerLevel + data.scheme.size!.height ||
+          gridTemplateResult[row] === undefined
+        ) {
+          // console.log("не нашёл место");
+          notFitted.push(data);
+          return false;
+        }
+        // console.log("running");
 
-    //     // console.log(row, gridTemplateResult);
+        // если нет целевого стратового индекса в строке
+        if (targetColumn === null) {
+          // в строке ищем свободное поле
+          for (var i = 0; i < gridTemplateResult[row].length; i++) {
+            // если поле пустое И индекс-1 + ширина объекта (минус за счёт того, что за его место встанет объект) меньше ширины строки
+            if (
+              gridTemplateResult[row][i] === "." &&
+              i - 1 + data.scheme.size!.width < gridTemplateResult[row].length
+            ) {
+              targetColumn = i;
+              break;
+            } else {
+              continue;
+            }
+          }
 
-    //     if (targetColumn === null) {
-    //       for (var j = 0; j < gridTemplateResult[row].length - data.size!.width; j++) {
-    //         var notOccupiedColumn = gridTemplateResult[row].findIndex((space) => space.length === 0);
-    //         if (notOccupiedColumn !== -1) {
-    //           targetColumn = notOccupiedColumn;
-    //           break;
-    //         } else {
-    //           continue;
-    //         }
-    //       }
-    //     }
-    //     if (
-    //       targetColumn === null ||
-    //       (targetColumn && targetColumn + data.size!.width > gridTemplateResult[row].length)
-    //     ) {
-    //       // console.log("не нашлось свободное место");
-    //       currentRow = currentRow + 1;
-    //       findRowWithEmptyColumn(currentRow, null);
-    //     } else {
-    //       // console.log("нашлось свободное место");
-    //       // if (row > data.size!.height) {
-    //       //   gridTemplateResult.map((row, i) => {
-    //       //     if (i >= currentRow - data.size!.height && i <= currentRow) {
-    //       //       for (var j = targetColumn!; j < row.length; j++) {
-    //       //         row[j] = id;
-    //       //       }
-    //       //     }
-    //       //   });
-    //       //   return true;
-    //       // } else {
-    //       //   for (
-    //       //     var j = targetColumn + 1;
-    //       //     j < targetColumn + data.size!.width && j <= gridTemplateResult[row].length;
-    //       //     j++
-    //       //   ) {
-    //       //     if (j === gridTemplateResult[row].length && fits && fittedElements % data.size!.width === 0) {
-    //       //       currentRow = currentRow + 1;
-    //       //       return findRowWithEmptyColumn(currentRow, targetColumn);
-    //       //     }
-    //       //     if (gridTemplateResult[row][j].length === 0) {
-    //       //       fits = true;
-    //       //       fittedElements = fittedElements + 1;
-    //       //       continue;
-    //       //     } else {
-    //       //       fits = false;
-    //       //       fittedElements = 0;
-    //       //       continue;
-    //       //     }
-    //       //   }
-    //       //   if (!fits || fittedElements !== data.size!.width) {
-    //       //     currentRow = currentRow + 1;
-    //       //     return findRowWithEmptyColumn(currentRow, null);
-    //       //   }
-    //       // }
-    //     }
-    //   };
-    //   findRowWithEmptyColumn(currentRow, targetColumn);
+          // если не нашли свободное поле, ищем на строке ниже
+          if (targetColumn === null) {
+            // console.log("если не нашли свободное поле, ищем на строке ниже");
+            row++;
+          }
+          recoursiveFind();
+        } else {
+          // если есть индекс старта
 
-    //   gridTemplateResult.map((row) =>
-    //     row.map((column) => {
-    //       if (column.length === 0) {
-    //         column = ".";
-    //       }
-    //     })
-    //   );
-    // };
+          for (var i = 0; i < data.scheme.size!.height; i++) {
+            for (var j = 0; j < data.scheme.size!.width; j++) {
+              gridTemplateResult[row + i][targetColumn + j] = id;
+            }
+          }
 
-    // dataArray.map((data) => {
-    //   if (data.scheme.level.length === 1) {
-    //     console.log("level ", data.scheme.level[0]);
-    //     findAndSet(`cell-${data.id}`, data.scheme, data.scheme.level[0]);
-    //   }
-    // });
+          console.log(gridTemplateResult);
 
-    // "'" + gridTemplateResult.map((arr) => arr.join(" ")).join("' '") + "'"
+          return true;
+        }
+      };
+      recoursiveFind();
+    };
 
-    return [result, ""];
+    // установка элементов
+    result.map((data) => {
+      findAndSet(`cell-${data.id}`, data, data.scheme.level[0] - 1);
+    });
+
+    return [result, "'" + gridTemplateResult.map((arr) => arr.join(" ")).join("' '") + "'"];
   };
 
   useEffect(() => {
