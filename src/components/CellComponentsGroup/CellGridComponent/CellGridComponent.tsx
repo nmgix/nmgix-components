@@ -6,287 +6,10 @@ import { Cell } from "../types";
 import "../_cell.scss";
 
 type CellGridProps = {
-  children: React.ReactNode;
+  data: NewsletterDataTypes[];
 };
 
-const dataExample: NewsletterDataTypes[] = [
-  {
-    id: 0,
-    type: "article",
-    title: "Тестовое TODO для Mindbox",
-    description: "Небольшое приложение со стандартным функционалом и записью всех действий в LocalStorage.",
-    date: "15/03/22",
-    url: "test-mindbox",
-    scheme: {
-      size: null,
-      level: [1, 2],
-      defaultSize: {
-        width: 2,
-        height: 2,
-      },
-      desirableSize: [
-        {
-          width: 2,
-          height: 2,
-        },
-      ],
-      minimumSize: [
-        {
-          width: 2,
-          height: 2,
-        },
-      ],
-    },
-    techStack: ["React", "Typescript", "Local Storage"],
-    time: 5,
-    // image: "test-mindbox-preview.jpeg",
-  },
-  {
-    id: 1,
-    type: "article",
-    title: "Тестовое в Funbox",
-    description: "Небольшое приложение со стандартным функционалом и записью всех действий в LocalStorage.",
-    date: "15/03/22",
-    url: "test-funbox",
-    scheme: {
-      size: null,
-      level: [1, 2],
-      defaultSize: {
-        width: 2,
-        height: 2,
-      },
-      desirableSize: [
-        {
-          width: 2,
-          height: 2,
-        },
-      ],
-      minimumSize: [
-        {
-          width: 1,
-          height: 2,
-        },
-        {
-          width: 2,
-          height: 1,
-        },
-      ],
-    },
-    techStack: ["React", "Typescript"],
-    time: 5,
-    // image: "test-funbox-preview.jpeg",
-  },
-  {
-    id: 2,
-    type: "article",
-    title: "Liga Bank",
-    url: "liga-bank",
-    // будет ограничение по кол-ву слов либо через тег <p> либо обрезать по кол-ву символов по-словно (не резать слова, если не влазит - просто удалять)
-    // Проект сделан как верстка одной страницы по макету, дальше додумывался дизайн и сама верстка...
-    description:
-      "Проект сделан как верстка одной страницы по макету, дальше додумывался дизайн и сама верстка, которая подразумевала собой только первую страницу.",
-    date: "15/03/22",
-    scheme: {
-      size: null,
-      level: [1, 2],
-      defaultSize: {
-        width: 2,
-        height: 2,
-      },
-      desirableSize: [
-        {
-          width: 2,
-          height: 2,
-        },
-      ],
-      minimumSize: [
-        {
-          width: 2,
-          height: 2,
-        },
-      ],
-    },
-    techStack: ["React", "Typescript"],
-    time: 5,
-    // image: "iga-bank-preview.jpeg",
-  },
-  {
-    id: 3,
-    title: "Github Stats",
-    type: "git",
-    gitData: {
-      commitsImg: "",
-      commitsPerYear: 408,
-      commitPersentage: 96,
-      pullRequestsPersentage: 4,
-    },
-    scheme: {
-      size: null,
-      level: [2],
-      defaultSize: {
-        width: 2,
-        height: 1,
-      },
-      desirableSize: [
-        {
-          width: 2,
-          height: 1,
-        },
-      ],
-      minimumSize: [
-        {
-          width: 2,
-          height: 1,
-        },
-      ],
-    },
-  },
-  {
-    id: 4,
-    title: "Пройденные курсы Udemy",
-    type: "lessons",
-    borderColor: "#5624D0",
-    courses: [
-      {
-        title: "NodeJS",
-        teacher: "Владилен Минин",
-        mark: {
-          stars: 3.7,
-          starsMax: 5,
-        },
-        completePersantage: 100,
-      },
-      {
-        title: "React с нуля",
-        teacher: "Михаил Непомнящий",
-        mark: {
-          stars: 4,
-          starsMax: 5,
-        },
-        completePersantage: 90,
-      },
-      {
-        title: "Typescript: The Comlete Developer's Guide",
-        teacher: "Stephen Grider",
-        mark: {
-          stars: 4,
-          starsMax: 5,
-        },
-        completePersantage: 75,
-      },
-      {
-        title: "The Ultimate MySQL Bootcamp: Go from SQL Beginner to Expert",
-        teacher: "Colt Steele, Ian Shoonover",
-        mark: {
-          stars: 5,
-          starsMax: 5,
-        },
-        completePersantage: 50,
-      },
-    ],
-    scheme: {
-      size: null,
-      level: [4, 5],
-      defaultSize: {
-        width: 2,
-        height: 2,
-      },
-      desirableSize: [
-        {
-          width: 2,
-          height: 2,
-        },
-      ],
-      minimumSize: [
-        {
-          width: 2,
-          height: 1,
-        },
-      ],
-    },
-  },
-  {
-    id: 5,
-    title: "Пройденные курсы FreeCodeCamp",
-    type: "lessons",
-    courses: [],
-    borderColor: "dark-blue",
-    scheme: {
-      size: null,
-      level: [4],
-      defaultSize: {
-        width: 2,
-        height: 2,
-      },
-      desirableSize: [
-        {
-          width: 2,
-          height: 2,
-        },
-      ],
-      minimumSize: [
-        {
-          width: 2,
-          height: 1,
-        },
-      ],
-    },
-  },
-  {
-    id: 6,
-    title: "Немного о себе",
-    type: "bio",
-    scheme: {
-      size: null,
-      level: [7],
-      defaultSize: {
-        width: 2,
-        height: 3,
-      },
-      desirableSize: [
-        {
-          width: 2,
-          height: 3,
-        },
-      ],
-      minimumSize: [
-        {
-          width: 2,
-          height: 1,
-        },
-      ],
-    },
-    // пока что временно ReactNode, а не ReactNode[]
-    description: (
-      <>
-        <p>
-          С 2019 года начал изучать базу веб-разработки (HTML, CSS, JS) на SoloLearn и freeCodeCamp. Параллельно начал
-          обучаться в КБТ по специальности “Информационные системы и программирование”.
-        </p>
-        ,
-        <p>
-          В 2020 году открыл для себя Udemy, купил пару курсов (React от Непомнящего, NodeJS от Минина и пр.) и
-          параллельно начал пилить pet-проекты.
-        </p>
-        ,
-        <p>
-          В 2021 (примерно) начал изучать TS (Typescript) и постепенно замещать им обыкновенный JS т.к. больше нравится
-          синтаксис C#.
-        </p>
-        ,
-        <p>
-          С момента начала изучения TS вплоть до сегодняшнего дня полностью перестал использовать ванильный JS и пишу
-          приложения (фронт - React и бек - NodeJS+Express) только с типизацией (пока несильной).
-        </p>
-        ,
-      </>
-    ),
-  },
-];
-
-export const CellGrid: React.FC<CellGridProps> = ({ children }) => {
-  const [renderScheme, setRenderScheme] = useState<[NewsletterDataTypes[], string]>([[], ""]);
-
+export const CellGrid: React.FC<CellGridProps> = ({ data }) => {
   const GridGenerator = (dataArray: NewsletterDataTypes[]): [NewsletterDataTypes[], string] => {
     var result: NewsletterDataTypes[] = dataArray;
     var notFitted: NewsletterDataTypes[] = [];
@@ -349,7 +72,6 @@ export const CellGrid: React.FC<CellGridProps> = ({ children }) => {
     result = handleSize(result);
 
     var cellsHeightPerLevel = 2;
-    // var allElementsHeightSum = result.reduce((acc, curr) => acc + curr.scheme.size!.height, 0);
     var maxLevel = result[result.length - 1].scheme.level[0] * cellsHeightPerLevel;
     var gridTemplateResult: string[][] = matrix(4, maxLevel, ".");
     var notFitted: NewsletterDataTypes[] = [];
@@ -363,11 +85,9 @@ export const CellGrid: React.FC<CellGridProps> = ({ children }) => {
           row > data.scheme.level[0] * cellsHeightPerLevel + data.scheme.size!.height ||
           gridTemplateResult[row] === undefined
         ) {
-          // console.log("не нашёл место");
           notFitted.push(data);
           return false;
         }
-        // console.log("running");
 
         // если нет целевого стратового индекса в строке
         if (targetColumn === null) {
@@ -393,13 +113,11 @@ export const CellGrid: React.FC<CellGridProps> = ({ children }) => {
           recoursiveFind();
         } else {
           // если есть индекс старта
-
           for (var i = 0; i < data.scheme.size!.height; i++) {
             for (var j = 0; j < data.scheme.size!.width; j++) {
               gridTemplateResult[row + i][targetColumn + j] = id;
             }
           }
-
           console.log(gridTemplateResult);
 
           return true;
@@ -416,9 +134,7 @@ export const CellGrid: React.FC<CellGridProps> = ({ children }) => {
     return [result, "'" + gridTemplateResult.map((arr) => arr.join(" ")).join("' '") + "'"];
   };
 
-  useEffect(() => {
-    setRenderScheme(GridGenerator(dataExample));
-  }, []);
+  const [renderScheme] = useState<[NewsletterDataTypes[], string]>(() => GridGenerator(data));
 
   return (
     <ul className='cell-grid' style={{ gridTemplateAreas: renderScheme[1] }}>
