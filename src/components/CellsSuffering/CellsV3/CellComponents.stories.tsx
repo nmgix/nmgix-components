@@ -12,139 +12,204 @@ export default {
 
 const mockData: DataSize[] = [
   {
+    id: "1",
     sizes: [
+      // {
+      //   width: 2,
+      //   height: 2,
+      // },
       {
-        id: "1",
-        width: 2,
-        height: 2,
-      },
-      {
-        id: "1",
         width: 2,
         height: 1,
       },
       {
-        id: "1",
         width: 2,
         height: 3,
       },
+      // {
+      //   width: 3,
+      //   height: 2,
+      // },
     ],
   },
   {
+    id: "2",
     sizes: [
+      // {
+      //   width: 2,
+      //   height: 2,
+      // },
       {
-        id: "2",
-        width: 2,
-        height: 2,
-      },
-      {
-        id: "2",
         width: 2,
         height: 1,
       },
       {
-        id: "2",
-        width: 2,
-        height: 3,
-      },
-    ],
-  },
-  {
-    sizes: [
-      {
-        id: "3",
-        width: 2,
-        height: 3,
-      },
-    ],
-  },
-  {
-    sizes: [
-      {
-        id: "4",
         width: 1,
         height: 2,
       },
+      // {
+      //   width: 2,
+      //   height: 3,
+      // },
+      // {
+      //   width: 3,
+      //   height: 2,
+      // },
     ],
   },
   {
+    id: "3",
     sizes: [
       {
-        id: "5",
-        width: 1,
-        height: 2,
-      },
-    ],
-  },
-  {
-    sizes: [
-      {
-        id: "6",
-        width: 2,
-        height: 2,
-      },
-      {
-        id: "6",
         width: 2,
         height: 3,
       },
     ],
   },
   {
+    id: "4",
     sizes: [
       {
-        id: "7",
+        width: 1,
+        height: 2,
+      },
+      {
         width: 2,
         height: 1,
       },
     ],
   },
   {
+    id: "5",
     sizes: [
       {
-        id: "8",
         width: 1,
         height: 2,
+      },
+      {
+        width: 2,
+        height: 1,
       },
     ],
   },
   {
+    id: "6",
     sizes: [
       {
-        id: "9",
+        width: 2,
+        height: 2,
+      },
+      {
+        width: 2,
+        height: 3,
+      },
+      {
+        width: 1,
+        height: 3,
+      },
+      {
+        width: 3,
+        height: 1,
+      },
+    ],
+  },
+  {
+    id: "7",
+    sizes: [
+      {
+        width: 2,
+        height: 1,
+      },
+      {
         width: 2,
         height: 2,
       },
     ],
   },
   {
+    id: "8",
     sizes: [
       {
-        id: "10",
-        width: 2,
-        height: 2,
-      },
-      {
-        id: "10",
         width: 1,
         height: 2,
       },
     ],
   },
   {
+    id: "9",
     sizes: [
       {
-        id: "11",
+        width: 2,
+        height: 2,
+      },
+    ],
+  },
+  {
+    id: "10",
+    sizes: [
+      {
+        width: 2,
+        height: 2,
+      },
+      {
+        width: 2,
+        height: 1,
+      },
+      {
+        width: 1,
+        height: 2,
+      },
+    ],
+  },
+  {
+    id: "11",
+    sizes: [
+      {
         width: 1,
         height: 2,
       },
       {
-        id: "11",
         width: 2,
         height: 3,
       },
     ],
   },
+  {
+    id: "12",
+    sizes: [
+      {
+        width: 1,
+        height: 1,
+      },
+    ],
+  },
+  // {
+  //   id: "13",
+  //   sizes: [
+  //     {
+  //       width: 1,
+  //       height: 1,
+  //     },
+  //   ],
+  // },
+  // {
+  //   id: "14",
+  //   sizes: [
+  //     {
+  //       width: 1,
+  //       height: 1,
+  //     },
+  //   ],
+  // },
+  // {
+  //   id: "15",
+  //   sizes: [
+  //     {
+  //       width: 1,
+  //       height: 1,
+  //     },
+  //   ],
+  // },
 ];
 
 const GenericCellGrid: ComponentStory<typeof CellGroup> = (args) => (

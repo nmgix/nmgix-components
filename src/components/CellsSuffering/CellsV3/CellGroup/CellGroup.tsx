@@ -1,12 +1,12 @@
 import { useState } from "react";
-import "./_cell.scss";
+import "../_cell.scss";
 
 export type DataSize = {
+  id: string;
   sizes: Size[];
 };
 
 export type Size = {
-  id: string;
   width: number;
   height: number;
 };
@@ -18,12 +18,17 @@ type Pointer = {
 
 export const CellGroup: React.FC<{ data: DataSize[] }> = ({ data }) => {
   function createMap(data: DataSize[]): any {
-    function generateRandomSize(sizesData: DataSize): Size {
+    function generateRandomSize(sizesData: DataSize): DataSize {
       const { sizes } = sizesData;
-      return sizes[Math.floor(Math.random() * sizes.length)];
+      sizesData.sizes = [sizes[Math.floor(Math.random() * sizes.length)]];
+      return sizesData;
     }
-    function assamble(cells: Size[]): string[][] {
+    function assamble(cells: DataSize[]): string[][] {
       let map: string[][] = [];
+      cells = cells
+        .map((val) => ({ value: val, sort: Math.random() }))
+        .sort((a, b) => a.sort - b.sort)
+        .map(({ value }) => value);
 
       let pointer: Pointer = {
         x: 0,
@@ -46,7 +51,8 @@ export const CellGroup: React.FC<{ data: DataSize[] }> = ({ data }) => {
           }
         }
 
-        let { width, height, id } = cells[c];
+        let { id, sizes } = cells[c];
+        let { width, height } = sizes[0];
 
         function recoursivePointer(startFromY: number = 0): Pointer {
           let emptyCell = findEmpty(map, startFromY);
@@ -104,8 +110,8 @@ export const CellGroup: React.FC<{ data: DataSize[] }> = ({ data }) => {
   return (
     <ul style={{ gridTemplateAreas: "'" + map.map((row) => row.join(" ")).join("' '") + "'" }} className={"cell-group"}>
       {data.map((cell, i) => (
-        <li className={`cell`} style={{ gridArea: `cell-${cell.sizes[0].id}` }}>
-          {i}
+        <li className={`cell`} style={{ gridArea: `cell-${cell.id}` }}>
+          {i + 1}
         </li>
       ))}
     </ul>
