@@ -3,12 +3,16 @@ export interface Cell {
   height: number;
 }
 
+// export type SchemeType = {
+
+// }
+
 export type Scheme = {
   size: Cell | null;
   level: number[];
   defaultSize: Cell;
-  minimumSize: Cell[];
-  desirableSize: Cell[];
+  minSize: Cell[];
+  maxSize: Cell[];
 };
 
 export interface DefaultData {

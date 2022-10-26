@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { CellComponent } from "../CellComponent";
-import { getRandomInt, matrix } from "../helpers";
+import { getRandomInt, matrix } from "../../../../helpers/cellHelpers";
 import { NewsletterDataTypes, ReverseShift, Scheme } from "../types";
 import { Cell } from "../types";
 import "../_cell.scss";
@@ -62,8 +62,8 @@ export const CellGrid: React.FC<CellGridProps> = ({ data }) => {
         var minMax = getRandomInt(0, 1);
         data.scheme.size =
           minMax === 0
-            ? data.scheme.minimumSize[getRandomInt(0, data.scheme.minimumSize.length - 1)]
-            : data.scheme.desirableSize[getRandomInt(0, data.scheme.desirableSize.length - 1)];
+            ? data.scheme.minSize[getRandomInt(0, data.scheme.minSize.length - 1)]
+            : data.scheme.maxSize[getRandomInt(0, data.scheme.maxSize.length - 1)];
         return data;
       });
 

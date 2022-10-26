@@ -8,6 +8,8 @@ The component will be marked as done when all the conditions for creating and co
 > The problem was that webpack didn't want to recognize fonts and was trying to combine them with .ts and .tsx extensions. Key to solution was to use url("/resources/fonts/FONT_NAME/FONT.EXTENSION") (not "./", "/" as it is absoulte path) where root was ./src (storybook package.json setup to seek static files in "./src").
 > Also I didn't had to load index.scss file in .storybook/preview.js to run it properly.
 
+- [ ] Re-write styles on CSS-Modules
+
 - [ ] Setup compilation so scss files get in final build
 
 ## [x] Component Alert

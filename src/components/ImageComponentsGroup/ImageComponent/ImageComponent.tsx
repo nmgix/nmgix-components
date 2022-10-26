@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { CSSProperties, useState } from "react";
 import "./_image.scss";
 
 export type ImageProps = {
@@ -7,9 +7,10 @@ export type ImageProps = {
   labelOnHover?: boolean;
   showLabel?: boolean;
   index?: number;
+  styles?: CSSProperties;
 };
 
-export const Image: React.FC<ImageProps> = ({ src, label, labelOnHover, showLabel, index }) => {
+export const Image: React.FC<ImageProps> = ({ src, label, labelOnHover, showLabel, index, styles }) => {
   const [shownLabel, setShowLabel] = useState<boolean>(
     labelOnHover !== undefined ? labelOnHover : showLabel !== undefined ? showLabel : true
   );
@@ -19,7 +20,7 @@ export const Image: React.FC<ImageProps> = ({ src, label, labelOnHover, showLabe
     }
   };
   return (
-    <div className='image-component'>
+    <div className='image-component' style={styles}>
       <img
         src={src}
         onMouseEnter={() => handleLabelShow(true)}

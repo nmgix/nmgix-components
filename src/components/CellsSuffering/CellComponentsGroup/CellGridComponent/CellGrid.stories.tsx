@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { AppContainer } from "../../AppContainer";
-import { Link } from "../../LinkComponent";
+import { AppContainer } from "../../../AppContainer";
+import { Link } from "../../../LinkComponent";
 import { CellComponent, CellProps } from "../CellComponent";
 import { NewsletterDataTypes } from "../types";
 import { CellGrid } from "./CellGridComponent";
@@ -25,13 +25,13 @@ const dataExample: NewsletterDataTypes[] = [
         width: 2,
         height: 2,
       },
-      desirableSize: [
+      maxSize: [
         {
           width: 2,
           height: 2,
         },
       ],
-      minimumSize: [
+      minSize: [
         {
           width: 2,
           height: 2,
@@ -56,13 +56,13 @@ const dataExample: NewsletterDataTypes[] = [
         width: 2,
         height: 2,
       },
-      desirableSize: [
+      maxSize: [
         {
           width: 2,
           height: 2,
         },
       ],
-      minimumSize: [
+      minSize: [
         {
           width: 1,
           height: 2,
@@ -94,13 +94,13 @@ const dataExample: NewsletterDataTypes[] = [
         width: 2,
         height: 2,
       },
-      desirableSize: [
+      maxSize: [
         {
           width: 2,
           height: 2,
         },
       ],
-      minimumSize: [
+      minSize: [
         {
           width: 2,
           height: 2,
@@ -128,13 +128,13 @@ const dataExample: NewsletterDataTypes[] = [
         width: 2,
         height: 1,
       },
-      desirableSize: [
+      maxSize: [
         {
           width: 2,
           height: 1,
         },
       ],
-      minimumSize: [
+      minSize: [
         {
           width: 2,
           height: 1,
@@ -192,13 +192,13 @@ const dataExample: NewsletterDataTypes[] = [
         width: 2,
         height: 2,
       },
-      desirableSize: [
+      maxSize: [
         {
           width: 2,
           height: 2,
         },
       ],
-      minimumSize: [
+      minSize: [
         {
           width: 2,
           height: 1,
@@ -219,13 +219,13 @@ const dataExample: NewsletterDataTypes[] = [
         width: 2,
         height: 2,
       },
-      desirableSize: [
+      maxSize: [
         {
           width: 2,
           height: 2,
         },
       ],
-      minimumSize: [
+      minSize: [
         {
           width: 2,
           height: 1,
@@ -244,13 +244,13 @@ const dataExample: NewsletterDataTypes[] = [
         width: 2,
         height: 3,
       },
-      desirableSize: [
+      maxSize: [
         {
           width: 2,
           height: 3,
         },
       ],
-      minimumSize: [
+      minSize: [
         {
           width: 2,
           height: 1,
