@@ -23,7 +23,7 @@ export const CellGroup: React.FC<{ data: DataSize[] }> = ({ data }) => {
       sizesData.sizes = [sizes[Math.floor(Math.random() * sizes.length)]];
       return sizesData;
     }
-    function assamble(cells: DataSize[]): string[][] {
+    function assamble(cells: DataSize[], tries: number = 0): string[][] {
       let map: string[][] = [];
       cells = cells
         .map((val) => ({ value: val, sort: Math.random() }))
@@ -91,7 +91,30 @@ export const CellGroup: React.FC<{ data: DataSize[] }> = ({ data }) => {
         }
       }
 
-      return map;
+      let holesMap = [...map];
+      let lastRowsIdxs: number[] = [];
+      holesMap.forEach((row, i) => {
+        let lastElement = cells[cells.length - 1];
+        if (row.includes(`cell-${lastElement.id}`) && row.includes(".")) {
+          lastRowsIdxs.push(i);
+        }
+      });
+      if (lastRowsIdxs.length > 0) {
+        holesMap.splice(lastRowsIdxs[0], lastRowsIdxs.length);
+      }
+
+      let gapsCount = 0;
+      holesMap.forEach((row) => {
+        if (row.includes(".")) {
+          gapsCount++;
+        }
+      });
+      // (gapsCount > 0 && tries < 15) || (lastRowsIdxs.length > 0 && tries < 15)
+      if (gapsCount > 0 && tries < 15) {
+        return assamble(cells, ++tries);
+      } else {
+        return map;
+      }
     }
 
     function init() {

@@ -183,33 +183,72 @@ const mockData: DataSize[] = [
       },
     ],
   },
-  // {
-  //   id: "13",
-  //   sizes: [
-  //     {
-  //       width: 1,
-  //       height: 1,
-  //     },
-  //   ],
-  // },
-  // {
-  //   id: "14",
-  //   sizes: [
-  //     {
-  //       width: 1,
-  //       height: 1,
-  //     },
-  //   ],
-  // },
-  // {
-  //   id: "15",
-  //   sizes: [
-  //     {
-  //       width: 1,
-  //       height: 1,
-  //     },
-  //   ],
-  // },
+  {
+    id: "13",
+    sizes: [
+      {
+        width: 1,
+        height: 1,
+      },
+    ],
+  },
+  {
+    id: "14",
+    sizes: [
+      {
+        width: 1,
+        height: 1,
+      },
+      {
+        width: 2,
+        height: 3,
+      },
+      {
+        width: 3,
+        height: 2,
+      },
+      {
+        width: 2,
+        height: 4,
+      },
+    ],
+  },
+  {
+    id: "15",
+    sizes: [
+      {
+        width: 1,
+        height: 1,
+      },
+    ],
+  },
+  {
+    id: "16",
+    sizes: [
+      {
+        width: 1,
+        height: 1,
+      },
+    ],
+  },
+  {
+    id: "17",
+    sizes: [
+      {
+        width: 4,
+        height: 2,
+      },
+    ],
+  },
+  {
+    id: "18",
+    sizes: [
+      {
+        width: 3,
+        height: 1,
+      },
+    ],
+  },
 ];
 
 const GenericCellGrid: ComponentStory<typeof CellGroup> = (args) => (
