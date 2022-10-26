@@ -22,8 +22,8 @@ export const CellGroup: React.FC<{ data: DataSize[] }> = ({ data }) => {
       const { sizes } = sizesData;
       return sizes[Math.floor(Math.random() * sizes.length)];
     }
-    function assamble(cells: Size[], map: string[][]): string[][] {
-      let localMap = [...map];
+    function assamble(cells: Size[]): string[][] {
+      let map: string[][] = [];
 
       let pointer: Pointer = {
         x: 0,
@@ -49,12 +49,20 @@ export const CellGroup: React.FC<{ data: DataSize[] }> = ({ data }) => {
         let { width, height, id } = cells[c];
 
         function recoursivePointer(startFromY: number = 0): Pointer {
-          let emptyCell = findEmpty(map, startFromY)!;
+          let emptyCell = findEmpty(map, startFromY);
+
+          if (!emptyCell) {
+            map.push([...Array(4).fill(".")]);
+            emptyCell = findEmpty(map, startFromY)!;
+          }
 
           let available = 0;
 
           for (let i = emptyCell.y; i < emptyCell.y + height; i++) {
             for (let j = emptyCell.x; j < emptyCell.x + width; j++) {
+              if (map[i] === undefined) {
+                map.push([...Array(4).fill(".")]);
+              }
               if (map[i][j] === ".") {
                 available++;
               }
@@ -72,23 +80,19 @@ export const CellGroup: React.FC<{ data: DataSize[] }> = ({ data }) => {
 
         for (let i = pointer.y; i < pointer.y + height; i++) {
           for (let j = pointer.x; j < pointer.x + width; j++) {
-            localMap[i][j] = id;
+            map[i][j] = id;
           }
         }
       }
 
-      return localMap;
+      return map;
     }
 
     function init() {
-      let map = Array(30)
-        .fill(0)
-        .map(() => Array(4).fill("."));
-
       const cells = data.map((d) => generateRandomSize(d));
-
-      map = assamble(cells, map);
+      let map: string[][] = assamble(cells);
       console.log(map);
+
       return map;
     }
 

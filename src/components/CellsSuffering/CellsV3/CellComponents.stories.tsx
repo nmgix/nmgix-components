@@ -83,6 +83,11 @@ const mockData: DataSize[] = [
         width: 2,
         height: 2,
       },
+      {
+        id: "6",
+        width: 2,
+        height: 3,
+      },
     ],
   },
   {
@@ -119,6 +124,11 @@ const mockData: DataSize[] = [
         width: 2,
         height: 2,
       },
+      {
+        id: "10",
+        width: 1,
+        height: 2,
+      },
     ],
   },
   {
@@ -127,6 +137,11 @@ const mockData: DataSize[] = [
         id: "11",
         width: 1,
         height: 2,
+      },
+      {
+        id: "11",
+        width: 2,
+        height: 3,
       },
     ],
   },
