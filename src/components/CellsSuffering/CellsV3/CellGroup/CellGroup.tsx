@@ -1,5 +1,5 @@
-import { reduce } from "lodash";
 import { useState } from "react";
+import "./_cell.scss";
 
 export type DataSize = {
   sizes: Size[];
@@ -80,7 +80,7 @@ export const CellGroup: React.FC<{ data: DataSize[] }> = ({ data }) => {
 
         for (let i = pointer.y; i < pointer.y + height; i++) {
           for (let j = pointer.x; j < pointer.x + width; j++) {
-            map[i][j] = id;
+            map[i][j] = `cell-${id}`;
           }
         }
       }
@@ -99,16 +99,15 @@ export const CellGroup: React.FC<{ data: DataSize[] }> = ({ data }) => {
     return init();
   }
 
-  const [map] = useState(() => createMap(data));
+  const [map] = useState<string[][]>(() => createMap(data));
 
   return (
-    <div>
+    <ul style={{ gridTemplateAreas: "'" + map.map((row) => row.join(" ")).join("' '") + "'" }} className={"cell-group"}>
       {data.map((cell, i) => (
-        <div key={cell.sizes[0].id}>
-          <h4>cell no. {i}</h4>
-          <p></p>
-        </div>
+        <li className={`cell`} style={{ gridArea: `cell-${cell.sizes[0].id}` }}>
+          {i}
+        </li>
       ))}
-    </div>
+    </ul>
   );
 };
