@@ -30,8 +30,12 @@ export const dataExample: NewsletterDataTypes[] = [
     date: "15/03/22",
     url: "test-funbox",
     sizes: [
+      // {
+      //   width: 4,
+      //   height: 2,
+      // },
       {
-        width: 4,
+        width: 2,
         height: 2,
       },
     ],

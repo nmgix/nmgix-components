@@ -112,17 +112,20 @@ export const CellGroup: React.FC<{ data: NewsletterDataTypes[] }> = ({ data }) =
       const cells = data.map((d) => generateRandomSize(d));
       let map: string[][] = assamble(cells);
 
-      return map;
+      return {
+        map,
+        cells,
+      };
     }
 
     return init();
   }
 
-  const [map] = useState<string[][]>(() => createMap(data));
+  const [{ map, cells }] = useState<{ map: string[][]; cells: NewsletterDataTypes[] }>(() => createMap(data));
 
   return (
     <ul style={{ gridTemplateAreas: "'" + map.map((row) => row.join(" ")).join("' '") + "'" }} className={"cell-group"}>
-      {data.map((cell, i) => (
+      {cells.map((cell, i) => (
         <Cell {...cell} />
       ))}
     </ul>

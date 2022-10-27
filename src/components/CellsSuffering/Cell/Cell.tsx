@@ -2,6 +2,8 @@ import { Image } from "../../ImageComponentsGroup";
 import { NewsletterDataTypes } from "../types";
 
 const NewsletterDataComponent: React.FC<NewsletterDataTypes> = (cell) => {
+  const { width, height } = cell.sizes[0];
+
   switch (cell.type) {
     case "git": {
       return (
@@ -66,32 +68,58 @@ const NewsletterDataComponent: React.FC<NewsletterDataTypes> = (cell) => {
       );
     }
     case "article": {
-      return (
-        <div className='cell-type-article'>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "flex-end",
-              flexWrap: "wrap",
-            }}>
-            <span>{cell.time} мин на чтение</span>
-            <span>{cell.date}</span>
+      if (width === 2 && height === 1) {
+        return (
+          <div className='cell-type-article-2x1'>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "flex-end",
+                flexWrap: "wrap",
+              }}>
+              <span>{cell.time} мин на чтение</span>
+              <span>{cell.date}</span>
+            </div>
+            <ul className='article-techstack'>
+              {cell.techStack.map((technology) => (
+                <li key={technology}>{technology}</li>
+              ))}
+            </ul>
           </div>
-          <ul className='article-techstack'>
-            {cell.techStack.map((technology) => (
-              <li key={technology}>{technology}</li>
-            ))}
-          </ul>
-        </div>
-      );
+        );
+      } else {
+        return (
+          <div className='cell-type-article-2x2' style={{ display: "flex", flexDirection: "column" }}>
+            {cell.image ? (
+              <img style={{ height: "50%" }} />
+            ) : (
+              <div className='placeholder' style={{ height: "50%" }}></div>
+            )}
+            <h3>{cell.title}</h3>
+            <div style={{ display: "flex", flexDirection: "column", padding: "0 15px" }}>
+              <div className='time' style={{ display: "flex", flexDirection: "row", opacity: "0.5" }}>
+                <span>{cell.time} мин на чтение</span>
+                <span>{cell.date}</span>
+              </div>
+              <ul className='article-techstack' style={{ display: "flex", flexDirection: "row" }}>
+                {cell.techStack.map((technology) => (
+                  <li key={technology} style={{ opacity: "0.7" }}>
+                    <b>{technology}</b>
+                  </li>
+                ))}
+              </ul>
+              <p style={{ textOverflow: "ellipsis", overflow: "hidden" }}>{cell.description}</p>
+            </div>
+          </div>
+        );
+      }
     }
   }
 };
 
 export const Cell: React.FC<NewsletterDataTypes> = (cellData) => {
   const { id, sizes } = cellData;
-  const { width, height } = sizes[0];
 
   return (
     <li
