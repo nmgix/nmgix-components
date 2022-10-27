@@ -67,6 +67,7 @@ export const dataExample: NewsletterDataTypes[] = [
     id: 3,
     title: "Github Stats",
     type: "git",
+    borderColor: "#07090c",
     gitData: {
       commitsImg: "../example-data/github-example.png",
       issuesPersentage: 0,

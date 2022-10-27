@@ -84,7 +84,13 @@ export const Cell: React.FC<NewsletterDataTypes> = (cellData) => {
   const { width, height } = sizes[0];
 
   return (
-    <li className={`cell`} style={{ gridArea: `cell-${id}` }} key={id}>
+    <li
+      className={`cell`}
+      style={{
+        gridArea: `cell-${id}`,
+        border: cellData.type === "courses" || cellData.type === "git" ? `3px solid ${cellData.borderColor}` : "",
+      }}
+      key={id}>
       <NewsletterDataComponent {...cellData} />
     </li>
   );

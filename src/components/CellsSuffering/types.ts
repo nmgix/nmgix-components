@@ -41,6 +41,7 @@ export interface CoursesData extends DefaultData {
 
 export interface GitData extends DefaultData {
   type: "git";
+  borderColor: string;
   gitData: {
     commitsPerYear: number;
     commitsImg: string;
