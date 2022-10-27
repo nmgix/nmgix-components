@@ -50,6 +50,26 @@
     &-github {
       background-color: #0d1117;
       height: calc(100% - 20px);
+
+      h3 {
+        text-align: center;
+        color: #ffffff60;
+        margin: 0;
+      }
+
+      & > div {
+        display: flex;
+        justify-content: space-between;
+
+        span {
+          color: rgba(var(--color-background-alter), 1);
+          font-size: 14px;
+        }
+      }
+
+      .image-component {
+        margin: 5px 0;
+      }
     }
   }
 }

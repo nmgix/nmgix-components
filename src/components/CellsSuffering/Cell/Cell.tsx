@@ -6,22 +6,22 @@ const NewsletterDataComponent: React.FC<NewsletterDataTypes> = (cell) => {
     case "git": {
       return (
         <div className='cell-type-github'>
-          <h3 style={{ textAlign: "center", color: "#FFFFFF60", margin: "0px" }}>Github Stats</h3>
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <span style={{ color: "#FFFFFF", fontSize: "14px" }}>
+          <h3>Github Stats</h3>
+          <div>
+            <span>
               <b>{cell.gitData.commitsPerYear}</b> коммитов в год
             </span>
-            <span style={{ color: "#FFFFFF", fontSize: "14px" }}>
+            <span>
               <b>{cell.gitData.codeReviewPersentage}%</b> код-ревью в год
             </span>
           </div>
           {/* cell.gitData.commitsImg */}
-          <Image src={require("../example-data/github-example.png")} label={"guthub-stats"} showLabel={false} />
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <span style={{ color: "#FFFFFF", fontSize: "14px" }}>
+          <Image src={require("../example-data/github-example.png")} label={"github-stats"} showLabel={false} />
+          <div>
+            <span>
               <b>{cell.gitData.issuesPersentage}%</b> тикетов
             </span>
-            <span style={{ color: "#FFFFFF", fontSize: "14px" }}>
+            <span>
               <b>{cell.gitData.pullRequestsPersentage}%</b> пулл-реквесты
             </span>
           </div>
