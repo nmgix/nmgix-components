@@ -36,6 +36,7 @@ export interface CoursesData extends DefaultData {
       starsMax: number;
     };
     completePersantage: number;
+    link: string;
   }[];
 }
 

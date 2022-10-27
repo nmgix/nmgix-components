@@ -33,26 +33,36 @@ const NewsletterDataComponent: React.FC<NewsletterDataTypes> = (cell) => {
     }
     case "courses": {
       return (
-        <ul
-          className='cell-type-courses'
-          style={{
-            display: "flex",
-            flexDirection: "column",
-          }}>
-          {cell.courses.map((course) => (
-            <li key={course.title}>
-              {/* тут попробую использовать p чтобы обрезать текст с его троеточиями */}
-              <p>{course.title}</p>
-              <p>{course.teacher}</p>
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <span>
-                  {course.mark.stars}/{course.mark.starsMax}
-                </span>
-                <span>{course.completePersantage}%</span>
-              </div>
-            </li>
-          ))}
-        </ul>
+        <div className='cell-type-courses'>
+          <h3 dangerouslySetInnerHTML={{ __html: cell.title }} />
+          <ul
+            className='cell-type-courses-content'
+            style={{
+              display: "flex",
+              flexDirection: "column",
+            }}>
+            {cell.courses.map((course) => (
+              <li key={course.title} style={{ border: `4px solid ${cell.borderColor}` }}>
+                <a href={course.link} referrerPolicy='no-referrer'>
+                  <div className='course-main'>
+                    <p>{course.title}</p>
+                    <p>{course.teacher}</p>
+                  </div>
+                  <div className='course-stats'>
+                    <span>
+                      <b>
+                        {course.mark.stars}/{course.mark.starsMax}
+                      </b>
+                    </span>
+                    <span>
+                      <b>{course.completePersantage}%</b>
+                    </span>
+                  </div>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
       );
     }
     case "article": {

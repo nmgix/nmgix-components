@@ -84,7 +84,7 @@ export const dataExample: NewsletterDataTypes[] = [
   },
   {
     id: 4,
-    title: "Пройденные курсы Udemy",
+    title: "Пройденные курсы <b>Udemy</b>",
     type: "courses",
     borderColor: "#5624D0",
     courses: [
@@ -96,6 +96,7 @@ export const dataExample: NewsletterDataTypes[] = [
           starsMax: 5,
         },
         completePersantage: 100,
+        link: "",
       },
       {
         title: "React с нуля",
@@ -105,6 +106,7 @@ export const dataExample: NewsletterDataTypes[] = [
           starsMax: 5,
         },
         completePersantage: 90,
+        link: "",
       },
       {
         title: "Typescript: The Comlete Developer's Guide",
@@ -114,6 +116,7 @@ export const dataExample: NewsletterDataTypes[] = [
           starsMax: 5,
         },
         completePersantage: 75,
+        link: "",
       },
       {
         title: "The Ultimate MySQL Bootcamp: Go from SQL Beginner to Expert",
@@ -123,6 +126,7 @@ export const dataExample: NewsletterDataTypes[] = [
           starsMax: 5,
         },
         completePersantage: 50,
+        link: "",
       },
     ],
     sizes: [
@@ -134,10 +138,10 @@ export const dataExample: NewsletterDataTypes[] = [
   },
   {
     id: 5,
-    title: "Пройденные курсы FreeCodeCamp",
+    title: "Пройденные курсы <b>FreeCodeCamp</b>",
     type: "courses",
     courses: [],
-    borderColor: "dark-blue",
+    borderColor: "#130a60",
     sizes: [
       {
         width: 1,

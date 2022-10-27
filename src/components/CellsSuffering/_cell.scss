@@ -26,9 +26,61 @@
 
   &-type {
     &-courses {
-      li {
-        p {
-          margin: 5px 0;
+      h3 {
+        font-weight: 500;
+        margin: 0;
+        font-size: 16px;
+        text-align: center;
+        flex: 0 1;
+        line-height: 20px;
+        margin-bottom: 3px;
+      }
+
+      &-content {
+        li {
+          a {
+            color: rgba(var(--color-background-default), 1);
+            text-decoration: none;
+          }
+
+          margin-top: 3px;
+          &:not(:last-child) {
+            margin-bottom: 3px;
+          }
+
+          display: block;
+          border-radius: 7px;
+          font-size: 14px;
+          padding: 3px;
+
+          p {
+            margin: 5px 0;
+          }
+
+          .course {
+            &-main {
+              display: block;
+
+              p {
+                font-size: 14px;
+                line-height: 14px;
+                margin: 0.5px;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+
+                &:first-child {
+                  font-weight: 700;
+                }
+              }
+            }
+
+            &-stats {
+              display: flex;
+              justify-content: space-between;
+              font-size: 12px;
+            }
+          }
         }
       }
     }
