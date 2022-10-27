@@ -1,29 +1,21 @@
 import { useState } from "react";
+import { Cell } from "../Cell/Cell";
+import { DefaultData, NewsletterDataTypes } from "../types";
 import "../_cell.scss";
-
-export type DataSize = {
-  id: string;
-  sizes: Size[];
-};
-
-export type Size = {
-  width: number;
-  height: number;
-};
 
 type Pointer = {
   x: number;
   y: number;
 };
 
-export const CellGroup: React.FC<{ data: DataSize[] }> = ({ data }) => {
-  function createMap(data: DataSize[]): any {
-    function generateRandomSize(sizesData: DataSize): DataSize {
+export const CellGroup: React.FC<{ data: NewsletterDataTypes[] }> = ({ data }) => {
+  function createMap(data: NewsletterDataTypes[]): any {
+    function generateRandomSize(sizesData: DefaultData): DefaultData {
       const { sizes } = sizesData;
       sizesData.sizes = [sizes[Math.floor(Math.random() * sizes.length)]];
       return sizesData;
     }
-    function assamble(cells: DataSize[], tries: number = 0): string[][] {
+    function assamble(cells: DefaultData[], tries: number = 0): string[][] {
       let map: string[][] = [];
       cells = cells
         .map((val) => ({ value: val, sort: Math.random() }))
@@ -109,8 +101,7 @@ export const CellGroup: React.FC<{ data: DataSize[] }> = ({ data }) => {
           gapsCount++;
         }
       });
-      // (gapsCount > 0 && tries < 15) || (lastRowsIdxs.length > 0 && tries < 15)
-      if (gapsCount > 0 && tries < 15) {
+      if (gapsCount > 0 && tries < 30) {
         return assamble(cells, ++tries);
       } else {
         return map;
@@ -120,7 +111,6 @@ export const CellGroup: React.FC<{ data: DataSize[] }> = ({ data }) => {
     function init() {
       const cells = data.map((d) => generateRandomSize(d));
       let map: string[][] = assamble(cells);
-      console.log(map);
 
       return map;
     }
@@ -133,9 +123,7 @@ export const CellGroup: React.FC<{ data: DataSize[] }> = ({ data }) => {
   return (
     <ul style={{ gridTemplateAreas: "'" + map.map((row) => row.join(" ")).join("' '") + "'" }} className={"cell-group"}>
       {data.map((cell, i) => (
-        <li className={`cell`} style={{ gridArea: `cell-${cell.id}` }}>
-          {i + 1}
-        </li>
+        <Cell {...cell} />
       ))}
     </ul>
   );

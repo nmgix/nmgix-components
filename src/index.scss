@@ -43,3 +43,9 @@ html[data-theme="hacker"] {
   --color-background-default: 0, 0, 0;
   --color-background-alter: 14, 168, 0;
 }
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}

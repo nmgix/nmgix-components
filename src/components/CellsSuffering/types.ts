@@ -1,25 +1,13 @@
-export interface Cell {
+export type Size = {
   width: number;
   height: number;
-}
-
-// export type SchemeType = {
-
-// }
-
-export type Scheme = {
-  size: Cell | null;
-  level: number[];
-  defaultSize: Cell;
-  minSize: Cell[];
-  maxSize: Cell[];
 };
 
 export interface DefaultData {
   type: string;
   id: number;
   title: string;
-  scheme: Scheme;
+  sizes: Size[];
   image?: string;
   description?: string | string[] | React.ReactNode | React.ReactNode[];
 }
@@ -35,7 +23,7 @@ export interface ArticleData extends DefaultData {
 }
 
 export interface CoursesData extends DefaultData {
-  type: "lessons";
+  type: "courses";
 
   //   пока что неиспользуемая переменная, будет отвечать за окраску окантовки курсов и общего блока -> будет необходимо
   // немного переделать метод рендера чтобы родитель окрашивался (вряд ли полностью переделывать рендер, скорее какой-то аля switch case)
@@ -70,8 +58,3 @@ export interface BioData extends DefaultData {
 }
 
 export type NewsletterDataTypes = ArticleData | CoursesData | BioData | GitData;
-
-export type ReverseShift = {
-  level: number;
-  shiftAmount: number;
-};

@@ -1,16 +1,6 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { AppContainer } from "../../../AppContainer";
-import { Link } from "../../../LinkComponent";
-import { CellComponent, CellProps } from "../CellComponent";
 import { NewsletterDataTypes } from "../types";
-import { CellGrid } from "./CellGridComponent";
 
-export default {
-  title: "Generic/Cells/Cell Grid",
-  component: CellGrid,
-} as ComponentMeta<typeof CellGrid>;
-
-const dataExample: NewsletterDataTypes[] = [
+export const dataExample: NewsletterDataTypes[] = [
   {
     id: 0,
     type: "article",
@@ -18,26 +8,16 @@ const dataExample: NewsletterDataTypes[] = [
     description: "Небольшое приложение со стандартным функционалом и записью всех действий в LocalStorage.",
     date: "15/03/22",
     url: "test-mindbox",
-    scheme: {
-      size: null,
-      level: [1, 2],
-      defaultSize: {
+    sizes: [
+      {
+        width: 2,
+        height: 1,
+      },
+      {
         width: 2,
         height: 2,
       },
-      maxSize: [
-        {
-          width: 2,
-          height: 2,
-        },
-      ],
-      minSize: [
-        {
-          width: 2,
-          height: 2,
-        },
-      ],
-    },
+    ],
     techStack: ["React", "Typescript", "Local Storage"],
     time: 5,
     // image: "test-mindbox-preview.jpeg",
@@ -49,30 +29,12 @@ const dataExample: NewsletterDataTypes[] = [
     description: "Небольшое приложение со стандартным функционалом и записью всех действий в LocalStorage.",
     date: "15/03/22",
     url: "test-funbox",
-    scheme: {
-      size: null,
-      level: [1, 2],
-      defaultSize: {
-        width: 2,
+    sizes: [
+      {
+        width: 4,
         height: 2,
       },
-      maxSize: [
-        {
-          width: 2,
-          height: 2,
-        },
-      ],
-      minSize: [
-        {
-          width: 1,
-          height: 2,
-        },
-        {
-          width: 2,
-          height: 1,
-        },
-      ],
-    },
+    ],
     techStack: ["React", "Typescript"],
     time: 5,
     // image: "test-funbox-preview.jpeg",
@@ -87,26 +49,16 @@ const dataExample: NewsletterDataTypes[] = [
     description:
       "Проект сделан как верстка одной страницы по макету, дальше додумывался дизайн и сама верстка, которая подразумевала собой только первую страницу.",
     date: "15/03/22",
-    scheme: {
-      size: null,
-      level: [1, 2],
-      defaultSize: {
+    sizes: [
+      {
         width: 2,
-        height: 2,
+        height: 1,
       },
-      maxSize: [
-        {
-          width: 2,
-          height: 2,
-        },
-      ],
-      minSize: [
-        {
-          width: 2,
-          height: 2,
-        },
-      ],
-    },
+      {
+        width: 2,
+        height: 3,
+      },
+    ],
     techStack: ["React", "Typescript"],
     time: 5,
     // image: "iga-bank-preview.jpeg",
@@ -121,31 +73,17 @@ const dataExample: NewsletterDataTypes[] = [
       commitPersentage: 96,
       pullRequestsPersentage: 4,
     },
-    scheme: {
-      size: null,
-      level: [2],
-      defaultSize: {
+    sizes: [
+      {
         width: 2,
         height: 1,
       },
-      maxSize: [
-        {
-          width: 2,
-          height: 1,
-        },
-      ],
-      minSize: [
-        {
-          width: 2,
-          height: 1,
-        },
-      ],
-    },
+    ],
   },
   {
     id: 4,
     title: "Пройденные курсы Udemy",
-    type: "lessons",
+    type: "courses",
     borderColor: "#5624D0",
     courses: [
       {
@@ -185,78 +123,40 @@ const dataExample: NewsletterDataTypes[] = [
         completePersantage: 50,
       },
     ],
-    scheme: {
-      size: null,
-      level: [4, 5],
-      defaultSize: {
-        width: 2,
+    sizes: [
+      {
+        width: 1,
         height: 2,
       },
-      maxSize: [
-        {
-          width: 2,
-          height: 2,
-        },
-      ],
-      minSize: [
-        {
-          width: 2,
-          height: 1,
-        },
-      ],
-    },
+    ],
   },
   {
     id: 5,
     title: "Пройденные курсы FreeCodeCamp",
-    type: "lessons",
+    type: "courses",
     courses: [],
     borderColor: "dark-blue",
-    scheme: {
-      size: null,
-      level: [4],
-      defaultSize: {
-        width: 2,
+    sizes: [
+      {
+        width: 1,
         height: 2,
       },
-      maxSize: [
-        {
-          width: 2,
-          height: 2,
-        },
-      ],
-      minSize: [
-        {
-          width: 2,
-          height: 1,
-        },
-      ],
-    },
+    ],
   },
   {
     id: 6,
     title: "Немного о себе",
     type: "bio",
-    scheme: {
-      size: null,
-      level: [7],
-      defaultSize: {
+    sizes: [
+      {
+        width: 2,
+        height: 2,
+      },
+      {
         width: 2,
         height: 3,
       },
-      maxSize: [
-        {
-          width: 2,
-          height: 3,
-        },
-      ],
-      minSize: [
-        {
-          width: 2,
-          height: 1,
-        },
-      ],
-    },
+    ],
     // пока что временно ReactNode, а не ReactNode[]
     description: (
       <>
@@ -284,11 +184,3 @@ const dataExample: NewsletterDataTypes[] = [
     ),
   },
 ];
-
-const GenericCellGrid: ComponentStory<typeof CellGrid> = (args) => (
-  <AppContainer loaded={true}>
-    <CellGrid data={dataExample} />
-  </AppContainer>
-);
-
-export const DefaultCellGrid = GenericCellGrid.bind({});
