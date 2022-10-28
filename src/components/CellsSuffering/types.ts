@@ -11,7 +11,6 @@ export interface DefaultData {
   image?: string;
   description?: string | string[] | React.ReactNode | React.ReactNode[];
 }
-// в зависимости от scheme, description может не рендериться
 
 // может быть будет генератор ссылок по типу информации, хз
 export interface ArticleData extends DefaultData {
@@ -20,6 +19,8 @@ export interface ArticleData extends DefaultData {
   date: string;
   url: string;
   techStack: string[];
+  // залить фон цветом или градиентом
+  backgroundColor?: string[];
 }
 
 export interface CoursesData extends DefaultData {

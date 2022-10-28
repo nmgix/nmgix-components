@@ -29,6 +29,7 @@ export const dataExample: NewsletterDataTypes[] = [
     description: "Небольшое приложение со стандартным функционалом и записью всех действий в LocalStorage.",
     date: "15/03/22",
     url: "test-funbox",
+    backgroundColor: ["#ff6b3a", "#ffc13a"],
     sizes: [
       // {
       //   width: 4,
@@ -57,6 +58,7 @@ export const dataExample: NewsletterDataTypes[] = [
     description:
       "Проект сделан как верстка одной страницы по макету, дальше додумывался дизайн и сама верстка, которая подразумевала собой только первую страницу.",
     date: "15/03/22",
+    backgroundColor: ["#0a339b"],
     sizes: [
       {
         width: 2,

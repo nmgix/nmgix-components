@@ -70,7 +70,15 @@ const NewsletterDataComponent: React.FC<NewsletterDataTypes> = (cell) => {
     case "article": {
       if (width === 2 && height === 1) {
         return (
-          <div className='cell-type-article cell-type-article-2x1'>
+          <div
+            className='cell-type-article cell-type-article-2x1'
+            style={{
+              background: cell.backgroundColor
+                ? cell.backgroundColor.length > 1
+                  ? `linear-gradient(180deg, ${cell.backgroundColor.join(",")})`
+                  : cell.backgroundColor[0]
+                : "",
+            }}>
             <div className='image-wrapper'>{cell.image ? <img /> : <div className='image-placeholder'></div>}</div>
             <div className='cell-type-article-main'>
               <h3>
@@ -94,7 +102,15 @@ const NewsletterDataComponent: React.FC<NewsletterDataTypes> = (cell) => {
         );
       } else {
         return (
-          <div className='cell-type-article cell-type-article-2x2'>
+          <div
+            className='cell-type-article cell-type-article-2x2'
+            style={{
+              background: cell.backgroundColor
+                ? cell.backgroundColor.length > 1
+                  ? `linear-gradient(180deg, ${cell.backgroundColor.join(",")})`
+                  : cell.backgroundColor[0]
+                : "",
+            }}>
             <div className='image-wrapper'>{cell.image ? <img /> : <div className='image-placeholder'></div>}</div>
             <h3>
               <a href={cell.url} referrerPolicy='same-origin'>
