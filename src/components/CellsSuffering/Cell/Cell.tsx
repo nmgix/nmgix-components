@@ -71,21 +71,25 @@ const NewsletterDataComponent: React.FC<NewsletterDataTypes> = (cell) => {
       if (width === 2 && height === 1) {
         return (
           <div className='cell-type-article cell-type-article-2x1'>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "flex-end",
-                flexWrap: "wrap",
-              }}>
-              <span>{cell.time} мин на чтение</span>
-              <span>{cell.date}</span>
+            <div className='image-wrapper'>{cell.image ? <img /> : <div className='image-placeholder'></div>}</div>
+            <div className='cell-type-article-main'>
+              <h3>
+                <a href={cell.url} referrerPolicy='same-origin'>
+                  {cell.title}
+                </a>
+              </h3>
+              <div className='article-time'>
+                <span>{cell.time} мин на чтение</span>
+                <span>{cell.date}</span>
+              </div>
+              <ul className='article-techstack'>
+                {cell.techStack.map((technology) => (
+                  <li key={technology}>
+                    <b>{technology}</b>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <ul className='article-techstack'>
-              {cell.techStack.map((technology) => (
-                <li key={technology}>{technology}</li>
-              ))}
-            </ul>
           </div>
         );
       } else {
