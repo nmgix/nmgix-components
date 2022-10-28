@@ -139,14 +139,27 @@
       &-2x1 {
         flex-direction: row;
 
-        .article {
+        // можно вниз пропускать & родителя, но это перебор для одного случая
+        .cell-type-article {
           &-main {
             max-width: 65%;
-          }
+            justify-content: space-evenly;
 
+            h3 {
+              margin-top: 0;
+            }
+          }
+        }
+
+        .article {
           &-time {
             flex-direction: column !important;
             align-items: center !important;
+            font-size: 14px;
+          }
+
+          &-techstack {
+            font-size: 14px;
           }
         }
       }
@@ -167,7 +180,7 @@
 
         &-placeholder {
           background-color: rgba(var(--color-background-alter), 1);
-          box-shadow: 0 0px 10px 0px rgba(var(--color-background-default), 0.35);
+          box-shadow: 0 5px 20px -8px rgba(var(--color-background-default), 0.5);
         }
 
         img {

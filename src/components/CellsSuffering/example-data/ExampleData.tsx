@@ -34,10 +34,10 @@ export const dataExample: NewsletterDataTypes[] = [
       //   width: 4,
       //   height: 2,
       // },
-      // {
-      //   width: 2,
-      //   height: 2,
-      // },
+      {
+        width: 2,
+        height: 2,
+      },
       {
         width: 2,
         height: 1,
@@ -61,6 +61,10 @@ export const dataExample: NewsletterDataTypes[] = [
       {
         width: 2,
         height: 1,
+      },
+      {
+        width: 2,
+        height: 2,
       },
       {
         width: 2,
