@@ -131,7 +131,37 @@ const NewsletterDataComponent: React.FC<NewsletterDataTypes> = (cell) => {
                   </li>
                 ))}
               </ul>
-              <p className='article-description'>{cell.description}</p>
+              {cell.description ? (
+                <div style={{ position: "relative" }}>
+                  <p
+                    className='article-description'
+                    dangerouslySetInnerHTML={{
+                      __html: `${cell.description.toString().slice(0, 90)}${
+                        cell.description.toString().length > 90 ? "..." : ""
+                      }`,
+                    }}
+                  />
+                  {cell.description.toString().length > 90 ? (
+                    <div
+                      style={{
+                        position: "absolute",
+                        width: "100%",
+                        height: "50%",
+                        background: `linear-gradient(180deg, #00000000, ${
+                          cell.backgroundColor
+                            ? cell.backgroundColor[cell.backgroundColor.length - 1]
+                            : "rgba(var(--color-background-alter), 1)"
+                        })`,
+                        bottom: 0,
+                      }}
+                    />
+                  ) : (
+                    <></>
+                  )}
+                </div>
+              ) : (
+                <></>
+              )}
             </div>
           </div>
         );

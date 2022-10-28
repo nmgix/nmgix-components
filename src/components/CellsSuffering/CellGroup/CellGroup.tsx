@@ -130,7 +130,7 @@ export const CellGroup: React.FC<{ data: NewsletterDataTypes[] }> = ({ data }) =
   return (
     <ul style={{ gridTemplateAreas: "'" + map.map((row) => row.join(" ")).join("' '") + "'" }} className={"cell-group"}>
       {cells.map((cell, i) => (
-        <Cell {...cell} />
+        <Cell {...cell} key={cell.id} />
       ))}
     </ul>
   );
