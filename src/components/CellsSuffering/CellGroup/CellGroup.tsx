@@ -9,6 +9,12 @@ type Pointer = {
   y: number;
 };
 
+/**
+ * Cell Group Component.
+ * That component is a grid for cell components that are randomly placed.
+ * @param data array of news, articles e.t.c.
+ * @returns {React.FC<{ data: NewsletterDataTypes[] }>} Functional Component
+ */
 export const CellGroup: React.FC<{ data: NewsletterDataTypes[] }> = ({ data }) => {
   const { width, height } = useWindowDimentions();
 

@@ -170,6 +170,12 @@ const NewsletterDataComponent: React.FC<NewsletterDataTypes> = (cell) => {
   }
 };
 
+/**
+ * Cell Component.
+ * Component used to render data, basing on data type and size of a cell.
+ * @param data data t render, includes basic information (id, size) and type-specific (description, images, e.t.c.).
+ * @returns {React.FC<NewsletterDataTypes>} Functional Component
+ */
 export const Cell: React.FC<NewsletterDataTypes> = (cellData) => {
   const { id, sizes } = cellData;
 
