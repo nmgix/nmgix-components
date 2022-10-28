@@ -17,6 +17,7 @@ html,
 * {
   font-family: "Inter";
   transition: all 100ms ease-in-out;
+  box-sizing: border-box;
 
   @each $key, $value in $colors {
     --#{$key}: #{red($value), green($value), blue($value)};
@@ -48,4 +49,14 @@ ul {
   margin: 0;
   padding: 0;
   list-style-type: none;
+}
+
+a {
+  position: relative;
+  &::after {
+    content: "link";
+    position: absolute;
+    opacity: 0.35;
+    font-size: 12px;
+  }
 }

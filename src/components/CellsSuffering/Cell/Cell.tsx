@@ -70,7 +70,7 @@ const NewsletterDataComponent: React.FC<NewsletterDataTypes> = (cell) => {
     case "article": {
       if (width === 2 && height === 1) {
         return (
-          <div className='cell-type-article-2x1'>
+          <div className='cell-type-article cell-type-article-2x1'>
             <div
               style={{
                 display: "flex",
@@ -90,26 +90,26 @@ const NewsletterDataComponent: React.FC<NewsletterDataTypes> = (cell) => {
         );
       } else {
         return (
-          <div className='cell-type-article-2x2' style={{ display: "flex", flexDirection: "column" }}>
-            {cell.image ? (
-              <img style={{ height: "50%" }} />
-            ) : (
-              <div className='placeholder' style={{ height: "50%" }}></div>
-            )}
-            <h3>{cell.title}</h3>
-            <div style={{ display: "flex", flexDirection: "column", padding: "0 15px" }}>
-              <div className='time' style={{ display: "flex", flexDirection: "row", opacity: "0.5" }}>
+          <div className='cell-type-article cell-type-article-2x2'>
+            <div className='image-wrapper'>{cell.image ? <img /> : <div className='image-placeholder'></div>}</div>
+            <h3>
+              <a href={cell.url} referrerPolicy='same-origin'>
+                {cell.title}
+              </a>
+            </h3>
+            <div className='cell-type-article-main'>
+              <div className='article-time'>
                 <span>{cell.time} мин на чтение</span>
                 <span>{cell.date}</span>
               </div>
-              <ul className='article-techstack' style={{ display: "flex", flexDirection: "row" }}>
+              <ul className='article-techstack'>
                 {cell.techStack.map((technology) => (
-                  <li key={technology} style={{ opacity: "0.7" }}>
+                  <li key={technology}>
                     <b>{technology}</b>
                   </li>
                 ))}
               </ul>
-              <p style={{ textOverflow: "ellipsis", overflow: "hidden" }}>{cell.description}</p>
+              <p className='article-description'>{cell.description}</p>
             </div>
           </div>
         );
