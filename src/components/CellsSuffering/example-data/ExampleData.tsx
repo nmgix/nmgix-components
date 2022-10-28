@@ -82,6 +82,7 @@ export const dataExample: NewsletterDataTypes[] = [
     title: "Github Stats",
     type: "git",
     borderColor: "#07090c",
+    url: "https://github.com/nmgix",
     gitData: {
       commitsImg: "../example-data/github-example.png",
       issuesPersentage: 0,

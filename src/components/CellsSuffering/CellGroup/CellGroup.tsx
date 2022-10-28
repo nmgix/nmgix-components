@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Cell } from "../Cell/Cell";
 import { DefaultData, NewsletterDataTypes } from "../types";
 import "../_cell.scss";
+import useWindowDimentions from "../../../helpers/useWindowDimentions";
 
 type Pointer = {
   x: number;
@@ -9,7 +10,10 @@ type Pointer = {
 };
 
 export const CellGroup: React.FC<{ data: NewsletterDataTypes[] }> = ({ data }) => {
+  const { width, height } = useWindowDimentions();
+
   function createMap(data: NewsletterDataTypes[]): any {
+    const rowWidth = width < 800 ? 2 : 4;
     function generateRandomSize(sizesData: DefaultData): DefaultData {
       const { sizes } = sizesData;
       sizesData.sizes = [sizes[Math.floor(Math.random() * sizes.length)]];
@@ -50,7 +54,7 @@ export const CellGroup: React.FC<{ data: NewsletterDataTypes[] }> = ({ data }) =
           let emptyCell = findEmpty(map, startFromY);
 
           if (!emptyCell) {
-            map.push([...Array(4).fill(".")]);
+            map.push([...Array(rowWidth).fill(".")]);
             emptyCell = findEmpty(map, startFromY)!;
           }
 
@@ -59,7 +63,7 @@ export const CellGroup: React.FC<{ data: NewsletterDataTypes[] }> = ({ data }) =
           for (let i = emptyCell.y; i < emptyCell.y + height; i++) {
             for (let j = emptyCell.x; j < emptyCell.x + width; j++) {
               if (map[i] === undefined) {
-                map.push([...Array(4).fill(".")]);
+                map.push([...Array(rowWidth).fill(".")]);
               }
               if (map[i][j] === ".") {
                 available++;
