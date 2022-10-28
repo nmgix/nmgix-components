@@ -4,7 +4,7 @@ import { dataExample } from "./example-data/ExampleData";
 import { CellGroup } from "./CellGroup/CellGroup";
 
 export default {
-  title: "test-cells-V3",
+  title: "Generic/Uncommon/Cells",
   component: CellGroup,
 } as ComponentMeta<typeof CellGroup>;
 
