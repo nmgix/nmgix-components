@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Cell } from "../Cell/Cell";
 import { DefaultData, NewsletterDataTypes } from "../types";
 import "../_cell.scss";
-import useWindowDimentions from "../../../helpers/useWindowDimentions";
+import useWindowDimentions from "../../../hooks/useWindowDimentions";
 
 type Pointer = {
   x: number;

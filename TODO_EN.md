@@ -67,8 +67,8 @@ Need to do:
 
 Need to do:
 
-- [ ] The logic of the hint location (most likely a fixed position relative to a given point or anchor point)
-- [ ] A tooltip can be of two types: - `hint-info` > It is purely informative, it is possible to completely disable it in the settings - `hint-mode` > Mandatory hint, which is not turned off through the settings, is necessary to notify a user about the current mode (for example, the highlight mode of the current block in the window focus)
+- [x] The logic of the hint location (most likely a fixed position relative to a given point or anchor point)
+- [x] A tooltip can be of two types: - `hint-info` > It is purely informative, it is possible to completely disable it in the settings - `hint-mode` > Mandatory hint, which is not turned off through the settings, is necessary to notify a user about the current mode (for example, the highlight mode of the current block in the window focus)
 - [ ] Write tests for:
 
   1.  checking the correct location in conjunction with other components
@@ -76,8 +76,8 @@ Need to do:
   3.  checking the mock state after disabling the mock setting by pressing the "turn off this mode" button
   4.  Checking for prompt deletion after timeout
 
-- [ ] Setup history
-- [ ] Document component (TSDoc)
+- [x] Setup history
+- [x] Document component (TSDoc)
 
 ## [ ] Component Highlight TextBox In Focus (HTIV)
 

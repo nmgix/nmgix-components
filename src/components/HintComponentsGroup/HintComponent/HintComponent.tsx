@@ -14,6 +14,18 @@ export type HintProps = {
   switchOption?: (e: any) => void;
 };
 
+/**
+ * Hint Component.
+ * Component used to stick information at specific place in text or in absolute (with scroll).
+ * @warning Used only in couple with HTIV component.
+ * @param type fixed - stick at some place in text, absolute- floats in specific point in window.
+ * @param content title and description of hint.
+ * @param hideTimeout hide hint after predefined time.
+ * @param id hint id.
+ * @param styles optional custom styles.
+ * @param switchOption if defined, will be triggered on additional-button click.
+ * @returns {React.FC<HintProps>} Functional Component
+ */
 export const Hint: React.FC<HintProps> = ({ content, hideTimeout, switchOption, styles, id }) => {
   const [activeHint, setActiveHint] = useState<boolean>(true);
   useEffect(() => {
@@ -40,7 +52,7 @@ export const Hint: React.FC<HintProps> = ({ content, hideTimeout, switchOption, 
         />
         {switchOption ? (
           <Button
-            children='выключить этот режим'
+            children='переключить этот режим'
             opacity={0.25}
             size={"s"}
             color='warning'
