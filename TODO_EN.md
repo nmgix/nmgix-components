@@ -24,10 +24,10 @@ Need to do:
 - [x] Fixed position for WindowFixedAlert in the window
 - [x] Fixed position for FixedAlert in the page
 - [x] Alert Stack
-- [ ] Write tests for:
+- [-] Write tests for:
 
   1. [x] maintaining the correct position when scrolling the page
-  2. [ ] testing Alert Stack functionality (adding and removing alerts, with and without timer)
+  2. [-] testing Alert Stack functionality (adding and removing alerts, with and without timer)
 
 - [x] Setup stories for each component
 - [x] Document components (TSDoc)
@@ -38,7 +38,7 @@ Need to do:
 
 - [x] Several presets (colors (like alert or information) and sizes)
 - [x] Design flexibility: changeable border, background color, shadow
-- [ ] Write tests for:
+- [-] Write tests for:
 
   1.  content overflow
   2.  practicing the function that was set during creation
@@ -69,7 +69,7 @@ Need to do:
 
 - [x] The logic of the hint location (most likely a fixed position relative to a given point or anchor point)
 - [x] A tooltip can be of two types: - `hint-info` > It is purely informative, it is possible to completely disable it in the settings - `hint-mode` > Mandatory hint, which is not turned off through the settings, is necessary to notify a user about the current mode (for example, the highlight mode of the current block in the window focus)
-- [ ] Write tests for:
+- [-] Write tests for:
 
   1.  checking the correct location in conjunction with other components
   2.  check if the settings match (some hints will be fixed in the window)
@@ -89,7 +89,7 @@ Need to do:
 - [x] Add ability to place hints
 - [x] Make highlighting option switchable
 - [x] Change fixed-to-element hints' position on window witdh change
-- [ ] Write tests for:
+- [-] Write tests for:
 
   1.  there is no block highlighting if this mode is turned off in the general context
   2.  checking the highlight of the block when scrolling the page (the difference between the blocks in terms of content)
@@ -146,12 +146,12 @@ Need to do:
 - [ ] Setup history
 - [ ] Document component (TSDoc)
 
-## [ ] Component Theme
+## [x] Component Theme
 
 Need to do:
 
 - [x] Change theme hook to handle theme state
-- [ ] Write tests for:
+- [-] Write tests for:
 
   1. checking conformity of current theme and colors of components dependent on it
   2. checking saving current theme in mock localStorage
