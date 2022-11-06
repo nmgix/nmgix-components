@@ -1,7 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Hint, HintProps } from "../HintComponent";
 import "./_hintsWrapper.scss";
 
+/**
+ * Hint Component.
+ * Component used to stick information at specific place in text or in absolute (with scroll).
+ * @warning Used only in couple with HTIV component.
+ * @param hints array of hints to render, renders only absolute-positioned hints, fixed hints are rendered caclulated on text height.
+ * @returns {React.FC<{ hints: HintProps[] }>} Functional Component
+ */
 export const HintsWrapper: React.FC<{ hints: HintProps[] }> = ({ hints }) => {
   return (
     <ul className='hints-wrapper'>

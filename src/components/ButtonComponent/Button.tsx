@@ -91,13 +91,19 @@ export const Button: React.FC<ButtonProps & ButtonType> = ({
 }) => {
   return (
     <button
-      className={`button ${icon.exists === true ? "button-icon" : ""} button-size-${size}`}
+      className={`button 
+      button-size-${size} 
+      ${icon.exists === true ? "button-icon" : ""}`}
       onClick={onClick}
       style={{
         border:
-          border && color ? `2px solid var(--color-${color})` : border ? `2px solid var(--color-background-alter)` : "",
+          border && color
+            ? `2px solid rgba(var(--color-${color}),1)`
+            : border
+            ? `2px solid rgba(var(--color-background-alter),1)`
+            : "",
         opacity: opacity ? opacity : 1,
-        color: color ? `var(--color-${color})` : `var(--color-background-alter)`,
+        color: color ? `rgba(var(--color-${color}, 1)` : `rgba(var(--color-background-alter),1)`,
         backgroundColor: backgroundColor ? `rgba(var(--color-${backgroundColor}), 0.3)` : "",
       }}>
       {children}

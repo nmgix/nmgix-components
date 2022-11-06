@@ -7,6 +7,10 @@ export default {
   component: ThemeWrapper,
 } as ComponentMeta<typeof ThemeWrapper>;
 
-const GenericThemeWrapper: ComponentStory<typeof ThemeWrapper> = (args) => <ThemeWrapper />;
+const GenericThemeWrapper: ComponentStory<typeof ThemeWrapper> = (args) => (
+  <ThemeWrapper>
+    <div></div>
+  </ThemeWrapper>
+);
 
 export const DefaultThemeWrapper = GenericThemeWrapper.bind({});
