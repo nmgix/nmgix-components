@@ -1,5 +1,5 @@
 // HighlightTextInViewComponent
-import "./_htiv.scss";
+import "./_htiv.module.scss";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Hint, HintProps, HintsWrapper } from "../HintComponentsGroup";
 

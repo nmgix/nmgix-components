@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./_input.scss";
+import "./_input.module.scss";
 
 type InputProps = {
   label: React.ReactNode;

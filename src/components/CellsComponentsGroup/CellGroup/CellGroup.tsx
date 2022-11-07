@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Cell } from "../Cell/Cell";
-import { DefaultData, NewsletterDataTypes } from "../types";
-import "../_cell.scss";
+import { DefaultData, NewsletterDataTypes, Size } from "../types";
+import "../_cell.module.scss";
 import useWindowDimentions from "../../../hooks/useWindowDimentions";
 
 type Pointer = {
@@ -20,6 +20,48 @@ export const CellGroup: React.FC<{ data: NewsletterDataTypes[] }> = ({ data }) =
 
   function createMap(data: NewsletterDataTypes[]): any {
     const rowWidth = width < 800 ? 2 : 4;
+
+    function findEmpty(map: string[][], startFrom: number = 0) {
+      for (let i = startFrom; i < map.length; i++) {
+        for (let j = 0; j < map.length; j++) {
+          if (map[i][j] === ".") {
+            return {
+              x: j,
+              y: i,
+            };
+          }
+        }
+      }
+    }
+
+    function recoursivePointer(map: string[][], cellSize: Size, startFromY: number = 0): Pointer {
+      let emptyCell = findEmpty(map, startFromY);
+
+      if (!emptyCell) {
+        map.push([...Array(rowWidth).fill(".")]);
+        emptyCell = findEmpty(map, startFromY)!;
+      }
+
+      let available = 0;
+
+      for (let i = emptyCell.y; i < emptyCell.y + cellSize.height; i++) {
+        if (map[i] === undefined) {
+          map.push([...Array(rowWidth).fill(".")]);
+        }
+        for (let j = emptyCell.x; j < emptyCell.x + cellSize.width; j++) {
+          if (map[i][j] === ".") {
+            available++;
+          }
+        }
+      }
+
+      if (available === cellSize.width * cellSize.height) {
+        return emptyCell;
+      } else {
+        return recoursivePointer(map, cellSize, emptyCell ? ++emptyCell.y : ++startFromY);
+      }
+    }
+
     function generateRandomSize(sizesData: DefaultData): DefaultData {
       const { sizes } = sizesData;
       sizesData.sizes = [sizes[Math.floor(Math.random() * sizes.length)]];
@@ -38,53 +80,10 @@ export const CellGroup: React.FC<{ data: NewsletterDataTypes[] }> = ({ data }) =
       };
 
       for (let c = 0; c < cells.length; c++) {
-        function findEmpty(map: string[][], startFrom: number = 0) {
-          let localMap = [...map];
-
-          for (let i = startFrom; i < localMap.length; i++) {
-            for (let j = 0; j < localMap.length; j++) {
-              if (localMap[i][j] === ".") {
-                return {
-                  x: j,
-                  y: i,
-                };
-              }
-            }
-          }
-        }
-
         let { id, sizes } = cells[c];
         let { width, height } = sizes[0];
 
-        function recoursivePointer(startFromY: number = 0): Pointer {
-          let emptyCell = findEmpty(map, startFromY);
-
-          if (!emptyCell) {
-            map.push([...Array(rowWidth).fill(".")]);
-            emptyCell = findEmpty(map, startFromY)!;
-          }
-
-          let available = 0;
-
-          for (let i = emptyCell.y; i < emptyCell.y + height; i++) {
-            for (let j = emptyCell.x; j < emptyCell.x + width; j++) {
-              if (map[i] === undefined) {
-                map.push([...Array(rowWidth).fill(".")]);
-              }
-              if (map[i][j] === ".") {
-                available++;
-              }
-            }
-          }
-
-          if (available === width * height) {
-            return emptyCell;
-          } else {
-            return recoursivePointer(emptyCell.y + 1);
-          }
-        }
-
-        pointer = recoursivePointer();
+        pointer = recoursivePointer(map, sizes[0]);
 
         for (let i = pointer.y; i < pointer.y + height; i++) {
           for (let j = pointer.x; j < pointer.x + width; j++) {

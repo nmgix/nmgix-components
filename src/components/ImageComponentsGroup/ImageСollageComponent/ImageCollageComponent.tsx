@@ -1,6 +1,6 @@
 import React from "react";
 import { ImageProps, Image } from "../ImageComponent";
-import "./_imageCollage.scss";
+import "./_imageCollage.module.scss";
 
 type ImageCollageProps = {
   images: ImageProps[];

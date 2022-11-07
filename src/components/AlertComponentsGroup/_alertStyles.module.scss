@@ -1,4 +1,4 @@
-@use "../../index";
+@use "../../resources/external.styles/colors.module.scss";
 
 .alert {
   &-component {
@@ -51,23 +51,23 @@
 
   &-preset {
     &-notification {
-      color: transparentize(index.$color-notification, 0.3);
-      background-color: index.$color-notification;
+      color: transparentize(colors.$color-notification, 0.3);
+      background-color: colors.$color-notification;
     }
 
     &-warning {
-      color: transparentize(index.$color-warning, 0.3);
-      background-color: index.$color-warning;
+      color: transparentize(colors.$color-warning, 0.3);
+      background-color: colors.$color-warning;
     }
 
     &-interest {
-      color: transparentize(index.$color-interest, 0.3);
-      background-color: index.$color-interest;
+      color: transparentize(colors.$color-interest, 0.3);
+      background-color: colors.$color-interest;
     }
 
     &-success {
-      color: transparentize(index.$color-success, 0.3);
-      background-color: index.$color-success;
+      color: transparentize(colors.$color-success, 0.3);
+      background-color: colors.$color-success;
     }
   }
 

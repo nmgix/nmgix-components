@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export enum Themes {
   "dark",
@@ -8,20 +8,24 @@ export enum Themes {
 
 export const useTheme = () => {
   const [currentTheme, setTheme] = useState<keyof typeof Themes>(() => {
-    var localTheme = localStorage.getItem("nmgix-components-theme");
-    if (localTheme) {
-      return localTheme as keyof typeof Themes;
-    } else {
-      const isDarkScheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      if (isDarkScheme) {
-        return "dark";
+    if (typeof window !== "undefined") {
+      let localTheme = localStorage.getItem("nmgix-components-theme");
+      if (localTheme) {
+        return localTheme as keyof typeof Themes;
       } else {
-        return "light";
+        const isDarkScheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        if (isDarkScheme) {
+          return "dark";
+        } else {
+          return "light";
+        }
       }
+    } else {
+      return "dark";
     }
   });
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     document.documentElement.setAttribute("data-theme", currentTheme);
   }, [currentTheme]);
 

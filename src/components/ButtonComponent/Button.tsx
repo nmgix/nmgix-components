@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import React from "react";
 import { AvailableSchemes } from "../AlertComponentsGroup/types";
-import "./_button.scss";
+import "./_button.module.scss";
 
 export type ButtonType = {
   border: boolean;

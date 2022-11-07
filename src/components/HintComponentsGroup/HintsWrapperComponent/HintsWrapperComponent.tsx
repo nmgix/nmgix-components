@@ -1,6 +1,6 @@
 import React from "react";
 import { Hint, HintProps } from "../HintComponent";
-import "./_hintsWrapper.scss";
+import "./_hintsWrapper.module.scss";
 
 /**
  * Hint Component.

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, buttonTypes } from "../../../components/ButtonComponent";
-import "./_hint.scss";
+import "./_hint.module.scss";
 
 export type HintProps = {
   type: "fixed" | "absolute";
@@ -37,10 +37,8 @@ export const Hint: React.FC<HintProps> = ({ content, hideTimeout, switchOption, 
     };
   }, []);
   return (
-    <div
-      className='hint-wrapper'
-      id={`hint-component${"-" + id}`}
-      style={{ display: activeHint ? "block" : "none", ...styles }}>
+    <div className='hint-wrapper' id={`hint-component${"-" + id}`} style={{ display: activeHint ? "block" : "none" }}>
+      {/* , ...(styles as React.CSSProperties | undefined)  */}
       <div className='hint-control'>
         {/* <button onClick={() => setActiveHint(false)}>убрать эту информацию Х</button> */}
         <Button

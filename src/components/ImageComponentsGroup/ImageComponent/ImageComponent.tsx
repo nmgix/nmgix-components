@@ -1,5 +1,5 @@
 import React, { CSSProperties, useState } from "react";
-import "./_image.scss";
+import "./_image.module.scss";
 
 export type ImageProps = {
   src: string;
@@ -20,7 +20,8 @@ export const Image: React.FC<ImageProps> = ({ src, label, labelOnHover, showLabe
     }
   };
   return (
-    <div className='image-component' style={styles}>
+    <div className='image-component'>
+      {/*  style={styles} */}
       <img
         src={src}
         onMouseEnter={() => handleLabelShow(true)}

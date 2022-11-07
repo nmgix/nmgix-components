@@ -1,7 +1,7 @@
 import ReactDOMServer from "react-dom/server";
 import React, { useEffect, useRef } from "react";
 import { AlertProps } from "../types";
-import "./_alert.scss";
+import "./_alert.module.scss";
 
 /**
  * Alert Component.
@@ -13,7 +13,7 @@ import "./_alert.scss";
  * @returns {React.FC<AlertProps>} Functional Component.
  */
 export const Alert: React.FC<AlertProps> = ({ children, scheme, type }) => {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = React.createRef<HTMLDivElement>();
 
   return (
     <div className={`alert-component alert-${type} alert-preset-${scheme}`} ref={ref}>

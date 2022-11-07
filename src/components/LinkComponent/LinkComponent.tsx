@@ -1,5 +1,5 @@
 import React from "react";
-import "./_link.scss";
+import "./_link.module.scss";
 
 type InputProps = {
   content: string;

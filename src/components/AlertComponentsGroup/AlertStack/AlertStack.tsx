@@ -1,6 +1,6 @@
 import { forwardRef, Ref, useEffect, useImperativeHandle, useState } from "react";
 import { Alert } from "../Alert/";
-import "./_alertStack.scss";
+import "./_alertStack.module.scss";
 import { AlertProps, AlertRef, AlertStackChildProps } from "../types";
 
 /**
