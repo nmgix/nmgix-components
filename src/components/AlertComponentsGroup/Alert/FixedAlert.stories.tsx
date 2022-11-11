@@ -18,6 +18,6 @@ const GenericAlert: ComponentStory<typeof Alert> = (args) => (
 export const DefaultFixedAlert = GenericAlert.bind({});
 DefaultFixedAlert.args = {
   children: <>Добавлен новый предмет!</>,
-  scheme: "notification",
-  type: "fixed",
+  scheme: "Notification",
+  type: "Fixed",
 };

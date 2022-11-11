@@ -1,14 +1,14 @@
 export enum AvailableSchemes {
-  "notification",
-  "warning",
-  "interest",
-  "success",
+  "Notification",
+  "Warning",
+  "Interest",
+  "Success",
 }
 
 export type AlertProps = {
   children: React.ReactElement;
   scheme: keyof typeof AvailableSchemes;
-  type: "header" | "window-fixed" | "fixed";
+  type: "Header" | "WindowFixed" | "Fixed";
 };
 
 export type AlertStackChildProps = AlertProps & { id: number };

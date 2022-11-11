@@ -22,13 +22,13 @@ DefaultAlert.args = {
       Какой-то sample текст, чтобы обратить <b>внимание</b> читателя на эту информацию
     </>
   ),
-  scheme: "notification",
-  type: "header",
+  scheme: "Notification",
+  type: "Header",
 };
 
 export const RunningTextAlert = GenericAlert.bind({});
 RunningTextAlert.args = {
-  children: <>Какая-то запределеьно длинная новость, которая совсем не хочет влазить в ширину навбара, так как...</>,
-  scheme: "notification",
-  type: "header",
+  children: <>Какая-то запредельно длинная новость, которая совсем не хочет влазить в ширину навбара, так как...</>,
+  scheme: "Notification",
+  type: "Header",
 };

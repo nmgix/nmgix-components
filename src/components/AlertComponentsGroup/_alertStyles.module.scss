@@ -1,16 +1,16 @@
 @use "../../resources/external.styles/colors.module.scss";
 
 .alert {
-  &-component {
+  &Component {
     display: flex;
     justify-content: center;
     overflow: hidden;
 
     padding: 10px 15px;
-    max-width: calc(100% - 30px);
+    // max-width: calc(100% - 30px);
   }
 
-  &-stack {
+  &Stack {
     list-style-type: none;
     padding: 0;
 
@@ -19,13 +19,13 @@
     }
   }
 
-  &-content {
+  &Content {
     color: #fff;
     font-weight: 200;
     text-align: center;
     font-size: 14px;
 
-    &-scroll {
+    &Scroll {
       @keyframes scrollText {
         from {
           transform: translateX(0%);
@@ -49,29 +49,29 @@
     }
   }
 
-  &-preset {
-    &-notification {
+  &Preset {
+    &Notification {
       color: transparentize(colors.$color-notification, 0.3);
       background-color: colors.$color-notification;
     }
 
-    &-warning {
+    &Warning {
       color: transparentize(colors.$color-warning, 0.3);
       background-color: colors.$color-warning;
     }
 
-    &-interest {
+    &Interest {
       color: transparentize(colors.$color-interest, 0.3);
       background-color: colors.$color-interest;
     }
 
-    &-success {
+    &Success {
       color: transparentize(colors.$color-success, 0.3);
       background-color: colors.$color-success;
     }
   }
 
-  &-header {
+  &Header {
     position: fixed;
     top: 0;
     left: 50%;
@@ -87,8 +87,8 @@
     box-shadow: 0px -2px 25px;
   }
 
-  &-window-fixed,
-  &-fixed {
+  &WindowFixed,
+  &Fixed {
     width: fit-content;
     height: auto;
 
@@ -99,7 +99,7 @@
     /* margin: 10px; */
   }
 
-  &-window-fixed {
+  &WindowFixed {
     position: fixed;
   }
 }

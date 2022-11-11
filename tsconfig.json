@@ -1,21 +1,16 @@
 {
   "compilerOptions": {
     /* Language and Environment */
-    "target": "es5" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
+    "target": "ES5" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
     "lib": [
-      "es5",
-      "es6",
-      "es7",
-      "es2017",
       "dom",
-      "dom.iterable",
-      "esnext"
+      "dom.iterable"
     ] /* Specify a set of bundled library declaration files that describe the target runtime environment. */,
 
     /* Modules */
-    "module": "commonjs",
+    "module": "CommonJS",
     "baseUrl": ".",
-    "outDir": "build/lib" /* Specify what module code is generated. */,
+    // "outDir": "build/lib" /* Specify what module code is generated. */,
     "jsx": "react-jsx",
     "allowJs": false,
     "sourceMap": true,

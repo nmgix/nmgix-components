@@ -3,6 +3,7 @@ import { Cell } from "../Cell/Cell";
 import { DefaultData, NewsletterDataTypes, Size } from "../types";
 import "../_cell.module.scss";
 import useWindowDimentions from "../../../hooks/useWindowDimentions";
+import React from "react";
 
 type Pointer = {
   x: number;

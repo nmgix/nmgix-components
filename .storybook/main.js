@@ -6,20 +6,23 @@ module.exports = {
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
-    "storybook-addon-sass-postcss",
-  ],
-  webpackFinal: async (config, { configType }) => {
-    config.module.rules.push({
-      test: /\.scss$/,
-      use: [
-        require.resolve("postcss-loader"),
-        {
-          loader: require.resolve("sass-loader"),
+    {
+      name: "storybook-addon-sass-postcss",
+      options: {
+        loadSassAfterPostCSS: true,
+        postcssLoaderOptions: {
+          implementation: require("postcss"),
         },
-      ],
-    });
-    return config;
-  },
+        rule: {
+          test: /\.(scss|sass)$/i,
+        },
+      },
+    },
+  ],
+  // webpackFinal: async (config, { configType }) => {
+
+  //   return config;
+  // },
   framework: "@storybook/react",
   core: {
     builder: "@storybook/builder-webpack5",
