@@ -11,7 +11,7 @@
     "module": "CommonJS",
     "baseUrl": ".",
     // "outDir": "build/lib" /* Specify what module code is generated. */,
-    "jsx": "react-jsx",
+    "jsx": "react",
     "allowJs": false,
     "sourceMap": true,
     "moduleResolution": "node",

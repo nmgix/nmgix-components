@@ -7,22 +7,9 @@ module.exports = {
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
     {
-      name: "storybook-addon-sass-postcss",
-      options: {
-        loadSassAfterPostCSS: true,
-        postcssLoaderOptions: {
-          implementation: require("postcss"),
-        },
-        rule: {
-          test: /\.(scss|sass)$/i,
-        },
-      },
+      name: "@storybook/preset-scss",
     },
   ],
-  // webpackFinal: async (config, { configType }) => {
-
-  //   return config;
-  // },
   framework: "@storybook/react",
   core: {
     builder: "@storybook/builder-webpack5",

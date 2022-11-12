@@ -1,8 +1,7 @@
 import ReactDOMServer from "react-dom/server";
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { AlertProps } from "../types";
 import styles from "../_alertStyles.module.scss";
-// import cn from "classnames";
 import { clsx } from "clsx";
 
 /**
