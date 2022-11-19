@@ -1,7 +1,8 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { AppContainer } from "../AppContainer";
+import { AppThemeContainer } from "../AppThemeContainer";
 import { dataExample } from "./example-data/ExampleData";
 import { CellGroup } from "./CellGroup/CellGroup";
+import React from "react";
 
 export default {
   title: "Generic/Uncommon/Cells",
@@ -9,9 +10,9 @@ export default {
 } as ComponentMeta<typeof CellGroup>;
 
 const GenericCellGrid: ComponentStory<typeof CellGroup> = (args) => (
-  <AppContainer loaded={true}>
+  <AppThemeContainer loaded={true}>
     <CellGroup data={dataExample} />
-  </AppContainer>
+  </AppThemeContainer>
 );
 
 export const DefaultCellGrid = GenericCellGrid.bind({});

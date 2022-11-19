@@ -1,5 +1,5 @@
 import React, { forwardRef, useImperativeHandle } from "react";
-import { Themes, useTheme } from "../../hooks/useTheme";
+import { Themes, useTheme } from "../../../hooks/useTheme";
 
 export type ThemeRef = {
   currentTheme: keyof typeof Themes;

@@ -105,7 +105,7 @@ export const Button: React.FC<ButtonProps & ButtonType> = ({
 
   return (
     <button
-      className={clsx(buttonSize, icon.exists && styles.buttonIcon)}
+      className={clsx(styles.button, buttonSize, icon.exists && styles.buttonIcon)}
       onClick={onClick}
       style={{
         border:

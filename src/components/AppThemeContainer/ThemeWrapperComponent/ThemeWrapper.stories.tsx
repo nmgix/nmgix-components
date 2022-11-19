@@ -1,4 +1,5 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
+import React from "react";
 import { useEffect, useRef } from "react";
 import { ThemeWrapper } from "./ThemeWrapper";
 

@@ -1,11 +1,12 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
+import React from "react";
 import { HTIV, HTIVProps } from "../HTIVComponent";
-import { AppContainer } from "./AppContainer";
+import { AppThemeContainer } from "./AppThemeContainer";
 
 export default {
-  title: "Generic/AppContainer",
-  component: AppContainer,
-} as ComponentMeta<typeof AppContainer>;
+  title: "Generic/AppThemeContainer",
+  component: AppThemeContainer,
+} as ComponentMeta<typeof AppThemeContainer>;
 
 const HTIVData: HTIVProps = {
   children: (
@@ -183,8 +184,8 @@ const HTIVData: HTIVProps = {
   ],
 };
 
-const GenericAppContainer: ComponentStory<typeof AppContainer> = () => (
-  <AppContainer loaded={true}>
+const GenericAppThemeContainer: ComponentStory<typeof AppThemeContainer> = () => (
+  <AppThemeContainer loaded={true}>
     <div
       style={{
         color: "var(--color-background-alter)",
@@ -199,7 +200,7 @@ const GenericAppContainer: ComponentStory<typeof AppContainer> = () => (
       Здесь будет заголовок статьи
     </div>
     <HTIV {...HTIVData} />
-  </AppContainer>
+  </AppThemeContainer>
 );
 
-export const DefaultAppContainer = GenericAppContainer.bind({});
+export const DefaultAppContainer = GenericAppThemeContainer.bind({});

@@ -1,0 +1,17 @@
+$color-notification: #0057ff;
+$color-warning: #ff0000;
+$color-interest: #ffc700;
+$color-success: #00ba29;
+
+$colors: (
+  "color-notification": #0057ff,
+  "color-warning": #ff0000,
+  "color-interest": #ffc700,
+  "color-success": #00ba29,
+);
+
+// @each $color, $value in $colors {
+//   :export {
+//     $color: $value;
+//   }
+// }

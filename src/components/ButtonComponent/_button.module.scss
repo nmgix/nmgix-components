@@ -6,11 +6,11 @@ $opacityList: (
   "full-opacity": 1,
 );
 $sizes: (
-  "xs": 0.25em,
-  "s": 0.75em,
-  "m": 1em,
-  "x": 1.25em,
-  "xl": 1.5em,
+  "Xs": 0.25em,
+  "S": 0.75em,
+  "M": 1em,
+  "X": 1.25em,
+  "Xl": 1.5em,
 );
 
 .button {
@@ -42,7 +42,7 @@ $sizes: (
 
   @each $size, $value in $sizes {
     $key: $size;
-    &-size-#{$key} {
+    &Size#{$key} {
       font-size: #{$value};
 
       svg {
