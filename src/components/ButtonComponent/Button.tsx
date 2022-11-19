@@ -2,7 +2,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import React from "react";
 import { AvailableSchemes } from "../AlertComponentsGroup/types";
-import "./_button.module.scss";
+import styles from "./_button.module.scss";
+import clsx from "clsx";
 
 export type ButtonType = {
   border: boolean;
@@ -89,11 +90,22 @@ export const Button: React.FC<ButtonProps & ButtonType> = ({
   border,
   icon,
 }) => {
+  const buttonSize =
+    size === "m"
+      ? styles.buttonSizeM
+      : size === "s"
+      ? styles.buttonSizeS
+      : size === "xs"
+      ? styles.buttonSizeXs
+      : size === "x"
+      ? styles.buttonSizeX
+      : size === "xl"
+      ? styles.buttonSizeXl
+      : styles.buttonSizeM;
+
   return (
     <button
-      className={`button 
-      button-size-${size} 
-      ${icon.exists === true ? "button-icon" : ""}`}
+      className={clsx(buttonSize, icon.exists && styles.buttonIcon)}
       onClick={onClick}
       style={{
         border:

@@ -1,5 +1,8 @@
+import React from "react";
 import { Image } from "../../ImageComponentsGroup";
 import { NewsletterDataTypes } from "../types";
+import styles from "../_cell.module.scss";
+import clsx from "clsx";
 
 const NewsletterDataComponent: React.FC<NewsletterDataTypes> = (cell) => {
   const { width, height } = cell.sizes[0];
@@ -7,7 +10,7 @@ const NewsletterDataComponent: React.FC<NewsletterDataTypes> = (cell) => {
   switch (cell.type) {
     case "git": {
       return (
-        <div className='cell-type-github'>
+        <div className={clsx(styles.cellTypeGithub)}>
           <a href={cell.url} referrerPolicy='no-referrer'>
             <h3>Github Stats</h3>
             <div>
@@ -33,14 +36,14 @@ const NewsletterDataComponent: React.FC<NewsletterDataTypes> = (cell) => {
       );
     }
     case "bio": {
-      return <div className='cell-type-bio'>{cell.description}</div>;
+      return <div className={clsx(styles.cellTypeBio)}>{cell.description}</div>;
     }
     case "courses": {
       return (
-        <div className='cell-type-courses'>
+        <div className={clsx(styles.cellTypeCourses)}>
           <h3 dangerouslySetInnerHTML={{ __html: cell.title }} />
           <ul
-            className='cell-type-courses-content'
+            className={clsx(styles.cellTypeCoursesContent)}
             style={{
               display: "flex",
               flexDirection: "column",
@@ -48,11 +51,11 @@ const NewsletterDataComponent: React.FC<NewsletterDataTypes> = (cell) => {
             {cell.courses.map((course) => (
               <li key={course.title} style={{ border: `4px solid ${cell.borderColor}` }}>
                 <a href={course.link} referrerPolicy='no-referrer'>
-                  <div className='course-main'>
+                  <div className={clsx(styles.courseMain)}>
                     <p>{course.title}</p>
                     <p>{course.teacher}</p>
                   </div>
-                  <div className='course-stats'>
+                  <div className={clsx(styles.courseStats)}>
                     <span>
                       <b>
                         {course.mark.stars}/{course.mark.starsMax}
@@ -73,7 +76,8 @@ const NewsletterDataComponent: React.FC<NewsletterDataTypes> = (cell) => {
       if (width === 2 && height === 1) {
         return (
           <div
-            className='cell-type-article cell-type-article-2x1'
+            // className='cell-type-article cell-type-article-2x1'
+            className={clsx(styles.cellTypeArticle, styles.cellTypeArticle2x1)}
             style={{
               background: cell.backgroundColor
                 ? cell.backgroundColor.length > 1
@@ -81,18 +85,20 @@ const NewsletterDataComponent: React.FC<NewsletterDataTypes> = (cell) => {
                   : cell.backgroundColor[0]
                 : "",
             }}>
-            <div className='image-wrapper'>{cell.image ? <img /> : <div className='image-placeholder'></div>}</div>
-            <div className='cell-type-article-main'>
+            <div className={clsx(styles.imageWrapper)}>
+              {cell.image ? <img /> : <div className={clsx(styles.imagePlaceholder)}></div>}
+            </div>
+            <div className={clsx(styles.cellTypeArticleMain)}>
               <h3>
                 <a href={cell.url} referrerPolicy='same-origin'>
                   {cell.title}
                 </a>
               </h3>
-              <div className='article-time'>
+              <div className={clsx(styles.articleTime)}>
                 <span>{cell.time} мин на чтение</span>
                 <span>{cell.date}</span>
               </div>
-              <ul className='article-techstack'>
+              <ul className={clsx(styles.articleTechstack)}>
                 {cell.techStack.map((technology) => (
                   <li key={technology}>
                     <b>{technology}</b>
@@ -105,7 +111,8 @@ const NewsletterDataComponent: React.FC<NewsletterDataTypes> = (cell) => {
       } else {
         return (
           <div
-            className='cell-type-article cell-type-article-2x2'
+            // className='cell-type-article cell-type-article-2x2'
+            className={clsx(styles.cellTypeArticle, styles.cellTypeArticle2x2)}
             style={{
               background: cell.backgroundColor
                 ? cell.backgroundColor.length > 1
@@ -113,18 +120,20 @@ const NewsletterDataComponent: React.FC<NewsletterDataTypes> = (cell) => {
                   : cell.backgroundColor[0]
                 : "",
             }}>
-            <div className='image-wrapper'>{cell.image ? <img /> : <div className='image-placeholder'></div>}</div>
+            <div className={clsx(styles.imageWrapper)}>
+              {cell.image ? <img /> : <div className={clsx(styles.imagePlaceholder)}></div>}
+            </div>
             <h3>
               <a href={cell.url} referrerPolicy='same-origin'>
                 {cell.title}
               </a>
             </h3>
-            <div className='cell-type-article-main'>
-              <div className='article-time'>
+            <div className={clsx(styles.cellTypeArticleMain)}>
+              <div className={clsx(styles.articleTime)}>
                 <span>{cell.time} мин на чтение</span>
                 <span>{cell.date}</span>
               </div>
-              <ul className='article-techstack'>
+              <ul className={clsx(styles.articleTechstack)}>
                 {cell.techStack.map((technology) => (
                   <li key={technology}>
                     <b>{technology}</b>
@@ -134,7 +143,7 @@ const NewsletterDataComponent: React.FC<NewsletterDataTypes> = (cell) => {
               {cell.description ? (
                 <div style={{ position: "relative" }}>
                   <p
-                    className='article-description'
+                    className={clsx(styles.articleDescription)}
                     dangerouslySetInnerHTML={{
                       __html: `${cell.description.toString().slice(0, 90)}${
                         cell.description.toString().length > 90 ? "..." : ""
@@ -181,7 +190,7 @@ export const Cell: React.FC<NewsletterDataTypes> = (cellData) => {
 
   return (
     <li
-      className={`cell`}
+      className={clsx(styles.cell)}
       style={{
         gridArea: `cell-${id}`,
         border: cellData.type === "courses" || cellData.type === "git" ? `3px solid ${cellData.borderColor}` : "",

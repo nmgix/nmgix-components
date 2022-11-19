@@ -1,10 +1,11 @@
 import React, { useRef } from "react";
 // import { Themes } from "../../hooks/useTheme";
 import { ThemeRef, ThemeWrapper } from "../ThemeWrapperComponent";
-import "./_appContainer.module.scss";
+import styles from "./_appContainer.module.scss";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faArrowRightLong, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Button, buttonTypes } from "../ButtonComponent";
+import clsx from "clsx";
 
 /**
  * AppContainer component.
@@ -32,7 +33,11 @@ export const AppContainer: React.FC<{ children: React.ReactNode; loaded: boolean
         {...buttonTypes.border}
       /> */
     // {
-    loaded ? <div className='app-container'>{children}</div> : <div className='app-container loading'>loader</div>
+    loaded ? (
+      <div className={clsx(styles.appContainer)}>{children}</div>
+    ) : (
+      <div className={clsx(styles.appContainer, styles.loading)}>loader</div>
+    )
     // }
     /* </ThemeWrapper> */
   );

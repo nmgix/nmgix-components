@@ -1,4 +1,5 @@
 export const button: string;
+export const buttonIcon: string;
 export const buttonSizeM: string;
 export const buttonSizeS: string;
 export const buttonSizeX: string;

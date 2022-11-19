@@ -1,16 +1,5 @@
 @use "resources/fonts/Inter/fontsInter.module";
-
-$color-notification: #0057ff;
-$color-warning: #ff0000;
-$color-interest: #ffc700;
-$color-success: #00ba29;
-
-$colors: (
-  "color-notification": #0057ff,
-  "color-warning": #ff0000,
-  "color-interest": #ffc700,
-  "color-success": #00ba29,
-);
+@use "./colors.module.scss";
 
 body,
 html,
@@ -19,7 +8,7 @@ html,
   transition: all 100ms ease-in-out;
   box-sizing: border-box;
 
-  @each $key, $value in $colors {
+  @each $key, $value in colors.$colors {
     --#{$key}: #{red($value), green($value), blue($value)};
   }
 }

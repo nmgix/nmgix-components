@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Cell } from "../Cell/Cell";
 import { DefaultData, NewsletterDataTypes, Size } from "../types";
-import "../_cell.module.scss";
+import styles from "../_cell.module.scss";
 import useWindowDimentions from "../../../hooks/useWindowDimentions";
 import React from "react";
+import clsx from "clsx";
 
 type Pointer = {
   x: number;
@@ -134,7 +135,9 @@ export const CellGroup: React.FC<{ data: NewsletterDataTypes[] }> = ({ data }) =
   const [{ map, cells }] = useState<{ map: string[][]; cells: NewsletterDataTypes[] }>(() => createMap(data));
 
   return (
-    <ul style={{ gridTemplateAreas: "'" + map.map((row) => row.join(" ")).join("' '") + "'" }} className={"cell-group"}>
+    <ul
+      style={{ gridTemplateAreas: "'" + map.map((row) => row.join(" ")).join("' '") + "'" }}
+      className={clsx(styles.cellGroup)}>
       {cells.map((cell, i) => (
         <Cell {...cell} key={cell.id} />
       ))}

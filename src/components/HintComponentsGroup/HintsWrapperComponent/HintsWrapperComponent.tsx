@@ -1,6 +1,7 @@
 import React from "react";
 import { Hint, HintProps } from "../HintComponent";
-import "./_hintsWrapper.module.scss";
+import styles from "./_hintsWrapper.module.scss";
+import clsx from "clsx";
 
 /**
  * Hint Component.
@@ -11,7 +12,7 @@ import "./_hintsWrapper.module.scss";
  */
 export const HintsWrapper: React.FC<{ hints: HintProps[] }> = ({ hints }) => {
   return (
-    <ul className='hints-wrapper'>
+    <ul className={clsx(styles.hintsWrapper)}>
       {hints
         .filter((hint) => hint.type === "absolute")
         .map((hint, i) => (

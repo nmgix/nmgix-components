@@ -2,7 +2,7 @@ import ReactDOMServer from "react-dom/server";
 import React from "react";
 import { AlertProps } from "../types";
 import styles from "../_alertStyles.module.scss";
-import { clsx } from "clsx";
+import clsx from "clsx";
 
 /**
  * Alert Component.

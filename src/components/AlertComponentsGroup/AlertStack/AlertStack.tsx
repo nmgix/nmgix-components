@@ -1,7 +1,9 @@
 import { forwardRef, Ref, useEffect, useImperativeHandle, useState } from "react";
 import { Alert } from "../Alert/";
-import "./_alertStack.module.scss";
+import styles from "./_alertStack.module.scss";
 import { AlertProps, AlertRef, AlertStackChildProps } from "../types";
+import React from "react";
+import clsx from "clsx";
 
 /**
  * Alert Stack Child component.
@@ -61,7 +63,7 @@ export const AlertStack = forwardRef<AlertRef, { alerts: AlertProps[]; timeout: 
     }));
 
     return (
-      <ul className='alert-stack'>
+      <ul className={clsx(styles.alertStack)}>
         {currentAlerts.map((alert) => (
           <AlertStackChild alert={alert} timeout={timeout} removeElement={removeAlert} key={alert.id} />
         ))}

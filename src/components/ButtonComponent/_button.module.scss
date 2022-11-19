@@ -29,6 +29,10 @@ $sizes: (
   color: var(--color-background-alter);
   background-color: var(--color-background-default);
 
+  &Icon {
+    opacity: 1;
+  }
+
   &:hover {
     opacity: 1 !important;
   }
