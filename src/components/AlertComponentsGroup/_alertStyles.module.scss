@@ -14,8 +14,14 @@
     list-style-type: none;
     padding: 0;
 
-    & > *:not(:last-child) {
-      margin-bottom: 15px;
+    & > li {
+      div {
+        position: unset;
+      }
+
+      &:not(:last-child) {
+        margin-bottom: 15px;
+      }
     }
   }
 

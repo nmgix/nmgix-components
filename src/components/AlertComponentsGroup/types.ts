@@ -1,8 +1,8 @@
 export enum AvailableSchemes {
-  "Notification",
-  "Warning",
-  "Interest",
-  "Success",
+  "notification",
+  "warning",
+  "interest",
+  "success",
 }
 
 export type AlertProps = {

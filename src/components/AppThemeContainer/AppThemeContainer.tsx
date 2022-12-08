@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { Themes } from "../../hooks/useTheme";
 import { ThemeRef, ThemeWrapper } from "./ThemeWrapperComponent";
-import styles from "./_appContainer.module.scss";
+import styles from "./_appThemeContainer.module.scss";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faArrowRightLong, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Button, buttonTypes } from "../ButtonComponent";
