@@ -50,7 +50,7 @@ export const AlertStack = forwardRef<AlertRef, { alerts: AlertProps[]; timeout: 
     );
 
     const addAlert = (alert: AlertProps): void => {
-      var index = currentAlerts.length > 0 ? currentAlerts[currentAlerts.length - 1].id + 1 : 0;
+      let index = currentAlerts.length > 0 ? currentAlerts[currentAlerts.length - 1].id + 1 : 0;
       setCurrentAlerts(() => [...currentAlerts, { ...alert, id: index }]);
     };
     const removeAlert = (id: number): void => {

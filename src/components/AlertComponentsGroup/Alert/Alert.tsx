@@ -21,11 +21,12 @@ export const Alert: React.FC<AlertProps> = ({ children, scheme, type }) => {
       className={clsx(
         styles.alertComponent,
         type === "Fixed" ? styles.alertFixed : type === "Header" ? styles.alertHeader : styles.alertWindowFixed,
-        scheme === "Notification"
+
+        scheme === "notification"
           ? styles.alertPresetNotification
-          : scheme === "Interest"
+          : scheme === "interest"
           ? styles.alertPresetInterest
-          : scheme === "Success"
+          : scheme === "success"
           ? styles.alertPresetSuccess
           : styles.alertPresetWarning
       )}
