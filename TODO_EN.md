@@ -38,6 +38,7 @@ Need to do:
 
 - [x] Several presets (colors (like alert or information) and sizes)
 - [x] Design flexibility: changeable border, background color, shadow
+- [ ] Fix outline in focus
 - [-] Write tests for:
 
   1.  content overflow
@@ -130,6 +131,7 @@ Need to do:
 - [ ] Decide to separate the component into several types or make it universal (for example, for a form, for a file, for a checkbox)
 - [ ] Styling the checkbox in the CheckboxInput (if you still separate the component)
 - [ ] Make templates for inputs like email or number
+- [ ] Fix outline in focus
 - [ ] Write tests for:
 
   1.  checking the compliance of the input processing with its type (file upload, text filling for text inputs)
