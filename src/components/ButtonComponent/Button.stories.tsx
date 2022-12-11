@@ -20,9 +20,8 @@ export const DefaultButton = GenericButton.bind({});
 DefaultButton.args = {
   border: true,
   children: "Пример текста",
-  color: "Notification",
+  color: "notification",
   icon: {
-    exists: true,
     icon: "arrow-right-long",
   },
   opacity: 1,

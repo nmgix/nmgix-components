@@ -3,6 +3,8 @@ export enum AvailableSchemes {
   "warning",
   "interest",
   "success",
+  "background-default",
+  "background-alter",
 }
 
 export type AlertProps = {

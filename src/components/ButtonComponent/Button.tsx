@@ -7,8 +7,7 @@ import clsx from "clsx";
 
 export type ButtonType = {
   border: boolean;
-  icon: {
-    exists: boolean;
+  icon?: {
     icon?: string;
   };
 };
@@ -18,41 +17,31 @@ export type ButtonTypes = { [buttonName: string]: ButtonType };
 export const buttonTypes: ButtonTypes = {
   border: {
     border: true,
-    icon: {
-      exists: false,
-    },
   },
   borderCross: {
     border: true,
     icon: {
-      exists: true,
       icon: "xmark",
     },
   },
   borderArrow: {
     border: true,
     icon: {
-      exists: true,
       icon: "arrow-right-long",
     },
   },
   noBorder: {
     border: false,
-    icon: {
-      exists: false,
-    },
   },
   noBorderCross: {
     border: false,
     icon: {
-      exists: true,
       icon: "xmark",
     },
   },
   noBorderArrow: {
     border: false,
     icon: {
-      exists: true,
       icon: "arrow-right-long",
     },
   },
@@ -105,7 +94,7 @@ export const Button: React.FC<ButtonProps & ButtonType> = ({
 
   return (
     <button
-      className={clsx(styles.button, buttonSize, icon.exists && styles.buttonIcon)}
+      className={clsx(styles.button, buttonSize, icon && styles.buttonIcon)}
       onClick={onClick}
       style={{
         border:
@@ -119,7 +108,7 @@ export const Button: React.FC<ButtonProps & ButtonType> = ({
         backgroundColor: backgroundColor ? `rgba(var(--color-${backgroundColor}), 0.3)` : "",
       }}>
       {children}
-      {icon.exists === true ? <FontAwesomeIcon icon={icon.icon as IconProp} /> : <></>}
+      {icon ? <FontAwesomeIcon icon={icon.icon as IconProp} /> : <></>}
     </button>
   );
 };

@@ -14,7 +14,12 @@ import clsx from "clsx";
  * @param {Boolean} loaded if true, component renders children, otherwise loader.
  * @returns {React.FC} Functional Component.
  */
-export const AppThemeContainer: React.FC<{ children: React.ReactNode; loaded: boolean }> = ({ children, loaded }) => {
+export const AppThemeContainer: React.FC<{
+  children: React.ReactNode;
+  loaded: boolean;
+  noButton?: boolean;
+  classNames?: string[];
+}> = ({ children, loaded, noButton, classNames }) => {
   library.add(faArrowRightLong, faXmark);
   const themeRef = React.createRef<ThemeRef>();
 
@@ -23,14 +28,16 @@ export const AppThemeContainer: React.FC<{ children: React.ReactNode; loaded: bo
   // };
 
   return (
-    <ThemeWrapper ref={themeRef}>
-      <Button
-        children='Сменить на другую тему'
-        opacity={0.3}
-        size={"s"}
-        onClick={() => themeRef?.current?.changeToNextTheme()}
-        {...buttonTypes.border}
-      />
+    <ThemeWrapper ref={themeRef} classNames={classNames}>
+      {!noButton && (
+        <Button
+          children='Сменить на другую тему'
+          opacity={0.3}
+          size={"s"}
+          onClick={() => themeRef?.current?.changeToNextTheme()}
+          {...buttonTypes.border}
+        />
+      )}
       {loaded ? (
         <div className={clsx(styles.appContainer)}>{children}</div>
       ) : (

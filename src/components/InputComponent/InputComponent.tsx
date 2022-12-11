@@ -1,19 +1,24 @@
+import clsx from "clsx";
 import React, { useState } from "react";
-import "./_input.module.scss";
+import styles from "./_input.module.scss";
 
 type InputProps = {
-  label: React.ReactNode;
-};
+  label?: React.ReactNode;
+} & React.HTMLAttributes<HTMLInputElement>;
 
-export const Input: React.FC<InputProps> = ({ label }) => {
+export const Input: React.FC<InputProps> = (props) => {
+  const { label } = props;
+
   const [state, setState] = useState<string>("");
-  const handleChange = (e: React.ChangeEvent) => {
-    //
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    return setState(e.currentTarget.value);
   };
+
   return (
     <div>
-      <label>{label}</label>
-      <input value={state} onChange={handleChange} />
+      {label ? <label>{label}</label> : <></>}
+      <input {...props} value={state} onChange={onChange} className={clsx(styles.input)} />
     </div>
   );
 };
