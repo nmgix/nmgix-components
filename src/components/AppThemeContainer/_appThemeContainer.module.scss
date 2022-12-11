@@ -1,3 +1,5 @@
+@use '../../breakpoints.module.scss';
+
 .appContainer {
   display: flex;
   flex-direction: column;
@@ -5,6 +7,10 @@
   width: 600px;
   min-height: calc(100vh - 100px);
   margin: 50px auto;
+
+  @media screen and (max-width: breakpoints.$breakpoint-tablet) {
+    width: 80%;
+  }
 
   &.loading {
     align-content: center;
