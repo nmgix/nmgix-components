@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Cell } from "../Cell/Cell";
 import { DefaultData, NewsletterDataTypes, Size } from "../types";
 import styles from "../_cell.module.scss";
@@ -19,6 +19,23 @@ type Pointer = {
  */
 export const CellGroup: React.FC<{ data: NewsletterDataTypes[] }> = ({ data }) => {
   const { width, height } = useWindowDimentions();
+  const [{ map, cells }, setCells] = useState<{ map: string[][]; cells: NewsletterDataTypes[] }>(() => createMap(data));
+  const [domLoaded, setDomLoaded] = useState(false);
+  const [mobile, setMobile] = useState<boolean>(width < 800);
+  useEffect(() => {
+    setMobile((wasMobile) => {
+      if (wasMobile === true && width > 800) {
+        return false;
+      } else if (wasMobile === false && width < 801) {
+        return true;
+      } else {
+        return wasMobile;
+      }
+    });
+  }, [width]);
+  useEffect(() => {
+    setCells(() => createMap(data));
+  }, [mobile]);
 
   function createMap(data: NewsletterDataTypes[]): any {
     const rowWidth = width < 800 ? 2 : 4;
@@ -132,15 +149,23 @@ export const CellGroup: React.FC<{ data: NewsletterDataTypes[] }> = ({ data }) =
     return init();
   }
 
-  const [{ map, cells }] = useState<{ map: string[][]; cells: NewsletterDataTypes[] }>(() => createMap(data));
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setDomLoaded(true);
+    }
+  }, []);
 
   return (
-    <ul
-      style={{ gridTemplateAreas: "'" + map.map((row) => row.join(" ")).join("' '") + "'" }}
-      className={clsx(styles.cellGroup)}>
-      {cells.map((cell, i) => (
-        <Cell {...cell} key={cell.id} />
-      ))}
-    </ul>
+    <>
+      {domLoaded && (
+        <ul
+          style={{ gridTemplateAreas: "'" + map.map((row) => row.join(" ")).join("' '") + "'" }}
+          className={clsx(styles.cellGroup)}>
+          {cells.map((cell, i) => (
+            <Cell {...cell} key={cell.id} />
+          ))}
+        </ul>
+      )}
+    </>
   );
 };

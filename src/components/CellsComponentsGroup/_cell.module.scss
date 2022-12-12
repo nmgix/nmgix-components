@@ -9,7 +9,7 @@
     column-gap: 1em;
     row-gap: 1em;
     grid-auto-rows: 10em;
-    grid-auto-columns: 10em;
+    // grid-auto-columns: 10em;
   }
 
   border-radius: 10px;
@@ -62,7 +62,7 @@
           }
 
           .course {
-            &-main {
+            &Main {
               display: block;
 
               p {

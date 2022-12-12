@@ -11,7 +11,7 @@ const NewsletterDataComponent: React.FC<NewsletterDataTypes> = (cell) => {
     case "git": {
       return (
         <div className={clsx(styles.cellTypeGithub)}>
-          <a href={cell.url} referrerPolicy='no-referrer'>
+          <a href={cell.url} target='_blank' referrerPolicy='no-referrer'>
             <h3>Github Stats</h3>
             <div>
               <span>
