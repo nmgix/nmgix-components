@@ -15,6 +15,5 @@ export const cellTypeGithub: string;
 export const courseMain: string;
 export const courseStats: string;
 export const image: string;
-export const imageComponent: string;
 export const imagePlaceholder: string;
 export const imageWrapper: string;

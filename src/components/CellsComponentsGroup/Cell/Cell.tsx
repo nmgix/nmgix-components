@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { Image } from "../../ImageComponentsGroup";
 import { NewsletterDataTypes } from "../types";
 import styles from "../_cell.module.scss";
@@ -22,7 +22,7 @@ const NewsletterDataComponent: React.FC<NewsletterDataTypes> = (cell) => {
               </span>
             </div>
             {/* cell.gitData.commitsImg */}
-            <Image src={require("../example-data/github-example.png")} label={"github-stats"} showLabel={false} />
+            <Image src={cell.gitData.commitsImg} label={"github-stats"} showLabel={false} />
             <div>
               <span>
                 <b>{cell.gitData.issuesPersentage}%</b> тикетов
@@ -86,7 +86,7 @@ const NewsletterDataComponent: React.FC<NewsletterDataTypes> = (cell) => {
                 : "",
             }}>
             <div className={clsx(styles.imageWrapper)}>
-              {cell.image ? <img /> : <div className={clsx(styles.imagePlaceholder)}></div>}
+              {cell.image ? <img src={cell.image} /> : <div className={clsx(styles.imagePlaceholder)}></div>}
             </div>
             <div className={clsx(styles.cellTypeArticleMain)}>
               <h3>
@@ -121,7 +121,7 @@ const NewsletterDataComponent: React.FC<NewsletterDataTypes> = (cell) => {
                 : "",
             }}>
             <div className={clsx(styles.imageWrapper)}>
-              {cell.image ? <img /> : <div className={clsx(styles.imagePlaceholder)}></div>}
+              {cell.image ? <img src={cell.image} /> : <div className={clsx(styles.imagePlaceholder)}></div>}
             </div>
             <h3>
               <a href={cell.url} referrerPolicy='same-origin'>
@@ -185,18 +185,21 @@ const NewsletterDataComponent: React.FC<NewsletterDataTypes> = (cell) => {
  * @param data data t render, includes basic information (id, size) and type-specific (description, images, e.t.c.).
  * @returns {React.FC<NewsletterDataTypes>} Functional Component
  */
-export const Cell: React.FC<NewsletterDataTypes> = (cellData) => {
-  const { id, sizes } = cellData;
+export const Cell: React.FC<NewsletterDataTypes> = memo(
+  (cellData) => {
+    const { id, sizes } = cellData;
 
-  return (
-    <li
-      className={clsx(styles.cell)}
-      style={{
-        gridArea: `cell-${id}`,
-        border: cellData.type === "courses" || cellData.type === "git" ? `3px solid ${cellData.borderColor}` : "",
-      }}
-      key={id}>
-      <NewsletterDataComponent {...cellData} />
-    </li>
-  );
-};
+    return (
+      <li
+        className={clsx(styles.cell)}
+        style={{
+          gridArea: `cell-${id}`,
+          border: cellData.type === "courses" || cellData.type === "git" ? `3px solid ${cellData.borderColor}` : "",
+        }}
+        key={id}>
+        <NewsletterDataComponent {...cellData} />
+      </li>
+    );
+  },
+  () => true
+);

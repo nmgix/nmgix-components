@@ -1,5 +1,7 @@
+import clsx from "clsx";
 import React, { CSSProperties, useState } from "react";
 import "./_image.module.scss";
+import styles from "./_image.module.scss";
 
 export type ImageProps = {
   src: string;
@@ -7,10 +9,10 @@ export type ImageProps = {
   labelOnHover?: boolean;
   showLabel?: boolean;
   index?: number;
-  styles?: CSSProperties;
+  customStyles?: CSSProperties;
 };
 
-export const Image: React.FC<ImageProps> = ({ src, label, labelOnHover, showLabel, index, styles }) => {
+export const Image: React.FC<ImageProps> = ({ src, label, labelOnHover, showLabel, index, customStyles }) => {
   const [shownLabel, setShowLabel] = useState<boolean>(
     labelOnHover !== undefined ? labelOnHover : showLabel !== undefined ? showLabel : true
   );
@@ -20,7 +22,7 @@ export const Image: React.FC<ImageProps> = ({ src, label, labelOnHover, showLabe
     }
   };
   return (
-    <div className='image-component'>
+    <div className={clsx(styles.imageComponent)}>
       {/*  style={styles} */}
       <img
         src={src}

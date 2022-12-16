@@ -23,6 +23,10 @@
 
   &Type {
     &Courses {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+
       h3 {
         font-weight: 500;
         margin: 0;
@@ -34,6 +38,11 @@
       }
 
       &Content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        flex: 1;
+
         li {
           display: block;
           border-radius: 7px;
@@ -109,6 +118,10 @@
 
       a {
         text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
 
         h3 {
           text-align: center;
@@ -120,14 +133,31 @@
           display: flex;
           justify-content: space-between;
 
+          img {
+            z-index: 0;
+            position: absolute;
+            height: 50%;
+            top: 60%;
+            transform: translateY(-50%);
+
+            object-fit: contain;
+          }
+
           span {
             color: rgba(var(--color-background-alter), 1);
-            font-size: 14px;
+            font-size: 12px;
+            z-index: 1;
           }
         }
 
-        .image-component {
-          margin: 5px 0;
+        & > * {
+          flex: 0;
+        }
+
+        & > div:last-child {
+          flex: 1;
+          display: flex;
+          align-items: flex-end;
         }
       }
     }
@@ -209,7 +239,7 @@
         flex: 0 1 auto;
 
         .article {
-          &-time {
+          &Time {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
@@ -233,6 +263,7 @@
             overflow: hidden;
             margin: 0;
             margin: 5px 0;
+            font-weight: 300;
           }
         }
       }
