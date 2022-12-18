@@ -71,7 +71,7 @@ export const HTIV: React.FC<HTIVProps> = ({ children, optionState, hints }) => {
                   var top = `${
                     (HTIVref.current!.children[j] as HTMLDivElement).offsetTop + HTIVref.current!.offsetTop
                   }px`;
-                  hint.styles =
+                  hint.stylesCustom =
                     (i + 1) % 2 == 0
                       ? {
                           position: "absolute",

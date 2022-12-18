@@ -58,7 +58,7 @@ export const Hint: React.FC<HintProps> = ({ content, hideTimeout, switchOption, 
             children='переключить этот режим'
             opacity={0.25}
             size={"s"}
-            color='Warning'
+            color='warning'
             onClick={(e) => {
               switchOption(e);
               setActiveHint(false);
