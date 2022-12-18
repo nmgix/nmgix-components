@@ -42,10 +42,16 @@ ul {
 
 a {
   position: relative;
+  color: rgba(var(--color-background-alter), 1);
   &::after {
-    content: "link";
+    width: 11px;
+    height: 11px;
+    content: "";
+    -webkit-mask: url(/icons/link-arrow.svg) no-repeat 50% 50%;
+    mask: url(/icons/link-arrow.svg) no-repeat 50% 50%;
+    -webkit-mask-size: cover;
+    mask-size: cover;
     position: absolute;
-    opacity: 0.35;
     font-size: 12px;
   }
 }
