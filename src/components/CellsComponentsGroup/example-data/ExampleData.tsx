@@ -1,4 +1,3 @@
-import React from "react";
 import { NewsletterDataTypes } from "../types";
 
 export const dataExample: NewsletterDataTypes[] = [
@@ -8,7 +7,7 @@ export const dataExample: NewsletterDataTypes[] = [
     title: "Тестовое TODO для Mindbox",
     description: "Небольшое приложение со стандартным функционалом и записью всех действий в LocalStorage.",
     date: "15/03/22",
-    url: "test-mindbox",
+    url: "article/test-mindbox",
     sizes: [
       {
         width: 2,
@@ -29,7 +28,7 @@ export const dataExample: NewsletterDataTypes[] = [
     title: "Тестовое в Funbox",
     description: "Небольшое приложение со стандартным функционалом и записью всех действий в LocalStorage.",
     date: "15/03/22",
-    url: "test-funbox",
+    url: "article/test-funbox",
     backgroundColor: ["#ff6b3a", "#ffc13a"],
     sizes: [
       // {
@@ -53,7 +52,7 @@ export const dataExample: NewsletterDataTypes[] = [
     id: 2,
     type: "article",
     title: "Liga Bank",
-    url: "liga-bank",
+    url: "article/liga-bank",
     // будет ограничение по кол-ву слов либо через тег <p> либо обрезать по кол-ву символов по-словно (не резать слова, если не влазит - просто удалять)
     // Проект сделан как верстка одной страницы по макету, дальше додумывался дизайн и сама верстка...
     description:

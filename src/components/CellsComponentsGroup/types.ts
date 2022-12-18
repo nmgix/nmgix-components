@@ -13,7 +13,7 @@ export interface DefaultData {
 }
 
 // может быть будет генератор ссылок по типу информации, хз
-export interface ArticleData extends DefaultData {
+export interface ArticleCellData extends DefaultData {
   type: "article";
   time: number; // to read, in minutes
   date: string;
@@ -23,7 +23,7 @@ export interface ArticleData extends DefaultData {
   backgroundColor?: string[];
 }
 
-export interface CoursesData extends DefaultData {
+export interface CoursesCellData extends DefaultData {
   type: "courses";
 
   //   пока что неиспользуемая переменная, будет отвечать за окраску окантовки курсов и общего блока -> будет необходимо
@@ -41,7 +41,7 @@ export interface CoursesData extends DefaultData {
   }[];
 }
 
-export interface GitData extends DefaultData {
+export interface GitCellData extends DefaultData {
   type: "git";
   borderColor: string;
   url: string;
@@ -55,10 +55,10 @@ export interface GitData extends DefaultData {
   };
 }
 
-export interface BioData extends DefaultData {
+export interface BioCellData extends DefaultData {
   type: "bio";
   // пока что временно ReactNode, а не ReactNode[]
   description: React.ReactNode;
 }
 
-export type NewsletterDataTypes = ArticleData | CoursesData | BioData | GitData;
+export type NewsletterDataTypes = ArticleCellData | CoursesCellData | BioCellData | GitCellData;
