@@ -2,8 +2,6 @@ import React, { useRef } from "react";
 import { Themes } from "../../hooks/useTheme";
 import { ThemeRef, ThemeWrapper } from "./ThemeWrapperComponent";
 import styles from "./_appThemeContainer.module.scss";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { faArrowRightLong, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Button, buttonTypes } from "../ButtonComponent";
 import clsx from "clsx";
 
@@ -20,7 +18,6 @@ export const AppThemeContainer: React.FC<{
   noButton?: boolean;
   classNames?: string[];
 }> = ({ children, loaded, noButton, classNames }) => {
-  library.add(faArrowRightLong, faXmark);
   const themeRef = React.createRef<ThemeRef>();
 
   // const changeTheme = (theme: keyof typeof Themes) => {

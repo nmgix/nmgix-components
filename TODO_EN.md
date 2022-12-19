@@ -12,6 +12,8 @@ The component will be marked as done when all the conditions for creating and co
 
 - [ ] Setup compilation so scss files get in final build
 
+- [ ] Remove Link from Next (CellComponent)
+
 ## [x] Component Alert
 
 Need to do:

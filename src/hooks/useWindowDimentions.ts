@@ -4,11 +4,6 @@ function getWindowDimentions() {
   if (typeof window !== "undefined") {
     const { innerWidth: width, innerHeight: height } = window;
 
-    // console.log({
-    //   width,
-    //   height,
-    // });
-
     return {
       width,
       height,

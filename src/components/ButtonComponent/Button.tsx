@@ -54,6 +54,7 @@ export type ButtonProps = {
   color?: keyof typeof AvailableSchemes;
   backgroundColor?: keyof typeof AvailableSchemes;
   opacity?: number;
+  classNames?: string[];
 };
 
 /**
@@ -66,7 +67,7 @@ export type ButtonProps = {
  * @param {string} size preset size of text font and icons.
  * @param {Function} onClick function called after button click.
  * @param {boolean} border boolean parameter, `true`- 2px solid $color, `false`-none.
- * @param {string} icon fontAwesome icon name, has to be initially set in AppWrapper `library` to use.
+ * @param {string[]} classNames string array, added after basic classnames.
  * @returns {React.FC} Functional Component.
  */
 export const Button: React.FC<ButtonProps & ButtonType> = ({
@@ -77,7 +78,7 @@ export const Button: React.FC<ButtonProps & ButtonType> = ({
   size,
   onClick,
   border,
-  icon,
+  classNames,
 }) => {
   const buttonSize =
     size === "m"
@@ -94,7 +95,7 @@ export const Button: React.FC<ButtonProps & ButtonType> = ({
 
   return (
     <button
-      className={clsx(styles.button, buttonSize, icon && styles.buttonIcon)}
+      className={clsx(styles.button, buttonSize, classNames)}
       onClick={onClick}
       style={{
         border:
@@ -102,13 +103,12 @@ export const Button: React.FC<ButtonProps & ButtonType> = ({
             ? `2px solid rgba(var(--color-${color}),1)`
             : border
             ? `2px solid rgba(var(--color-background-alter),1)`
-            : "",
+            : undefined,
         opacity: opacity ? opacity : 1,
-        color: color ? `rgba(var(--color-${color}, 1)` : `rgba(var(--color-background-alter),1)`,
-        backgroundColor: backgroundColor ? `rgba(var(--color-${backgroundColor}), 0.3)` : "",
+        backgroundColor: backgroundColor ? `rgb(var(--color-${backgroundColor}))` : undefined,
+        color: color ? `rgb(var(--color-${color})` : `rgb(var(--color-background-alter))`,
       }}>
       {children}
-      {icon ? <FontAwesomeIcon icon={icon.icon as IconProp} /> : <></>}
     </button>
   );
 };

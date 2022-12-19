@@ -5,5 +5,4 @@ export { Hint, HintsWrapper } from "./components/HintComponentsGroup";
 export { Image, ImageCollage } from "./components/ImageComponentsGroup";
 export { Link } from "./components/LinkComponent";
 export { AppThemeContainer } from "./components/AppThemeContainer";
-export { Cell, CellGroup } from "./components/CellsComponentsGroup";
 export { Input } from "./components/InputComponent";
