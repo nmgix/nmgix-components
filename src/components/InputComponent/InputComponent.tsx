@@ -1,24 +1,23 @@
 import clsx from "clsx";
-import React, { useState } from "react";
+import React, { memo } from "react";
 import styles from "./_input.module.scss";
 
 type InputProps = {
   label?: React.ReactNode;
-} & React.HTMLAttributes<HTMLInputElement>;
+} & React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 
-export const Input: React.FC<InputProps> = (props) => {
-  const { label } = props;
+export const Input: React.FC<InputProps> = memo(
+  (props) => {
+    const { label } = props;
 
-  const [state, setState] = useState<string>("");
+    const RenderLabel: React.FC = () => (label ? <label>{label}</label> : <></>);
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    return setState(e.currentTarget.value);
-  };
-
-  return (
-    <div>
-      {label ? <label>{label}</label> : <></>}
-      <input {...props} value={state} onChange={onChange} className={clsx(styles.input)} />
-    </div>
-  );
-};
+    return (
+      <div>
+        <RenderLabel />
+        <input {...props} className={clsx(styles.input)} />
+      </div>
+    );
+  },
+  (prev, next) => prev.value === next.value
+);
