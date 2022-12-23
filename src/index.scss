@@ -1,5 +1,5 @@
-@use "resources/fonts/Inter/fontsInter.module";
-@use "./colors.module.scss";
+@use "colors.module.scss";
+@use "fontsInter.module.scss";
 
 body,
 html,
@@ -17,6 +17,9 @@ body,
 html {
   background-color: rgba(var(--color-background-default), 1);
   color: rgba(var(--color-background-alter), 1);
+
+  min-width: 50vw;
+  min-height: 100vh;
 }
 
 html[data-theme="dark"] {

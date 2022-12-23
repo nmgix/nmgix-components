@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Button, buttonTypes } from "../../../components/ButtonComponent";
+import { Button } from "../../../components/ButtonComponent";
 import styles from "./_hint.module.scss";
 import clsx from "clsx";
-import { hintContentTitle } from "./_hint.module.scss";
 
 export type HintProps = {
   type: "fixed" | "absolute";
@@ -51,7 +50,7 @@ export const Hint: React.FC<HintProps> = ({ content, hideTimeout, switchOption, 
           opacity={0.3}
           size={"s"}
           onClick={() => setActiveHint(false)}
-          {...buttonTypes.noBorderCross}
+          buttonBorder={false}
         />
         {switchOption ? (
           <Button
@@ -63,7 +62,7 @@ export const Hint: React.FC<HintProps> = ({ content, hideTimeout, switchOption, 
               switchOption(e);
               setActiveHint(false);
             }}
-            {...buttonTypes.noBorderCross}
+            buttonBorder={false}
           />
         ) : (
           <></>

@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { Themes } from "../../hooks/useTheme";
 import { ThemeRef, ThemeWrapper } from "./ThemeWrapperComponent";
 import styles from "./_appThemeContainer.module.scss";
-import { Button, buttonTypes } from "../ButtonComponent";
+import { Button } from "../ButtonComponent";
 import clsx from "clsx";
 
 /**
@@ -32,7 +32,7 @@ export const AppThemeContainer: React.FC<{
           opacity={0.3}
           size={"s"}
           onClick={() => themeRef?.current?.changeToNextTheme()}
-          {...buttonTypes.border}
+          buttonBorder
         />
       )}
       {loaded ? (
