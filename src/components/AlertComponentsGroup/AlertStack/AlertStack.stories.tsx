@@ -21,7 +21,7 @@ const GenericAlertStack: ComponentStory<typeof AlertStack> = (args) => {
       stackRef.current?.addAlert({
         children: <>Текст уведомления</>,
         scheme: availableSchemes[randomNum(0, availableSchemes.length)] as keyof typeof AvailableSchemes,
-        type: "fixed",
+        type: "Fixed",
       });
     }
   };
@@ -40,17 +40,17 @@ DefaultAlertStack.args = {
     {
       children: <>Добавлен товар</>,
       scheme: "success",
-      type: "fixed",
+      type: "Fixed",
     },
     {
       children: <>Добавлен товар</>,
       scheme: "success",
-      type: "fixed",
+      type: "Fixed",
     },
     {
       children: <>Добавлен товар</>,
       scheme: "success",
-      type: "fixed",
+      type: "Fixed",
     },
   ],
   timeout: null,
@@ -62,17 +62,17 @@ TimeoutAlertStack.args = {
     {
       children: <>Добавлен товар</>,
       scheme: "success",
-      type: "fixed",
+      type: "Fixed",
     },
     {
       children: <>Добавлен товар</>,
       scheme: "success",
-      type: "fixed",
+      type: "Fixed",
     },
     {
       children: <>Добавлен товар</>,
       scheme: "success",
-      type: "fixed",
+      type: "Fixed",
     },
   ],
   timeout: 3000,

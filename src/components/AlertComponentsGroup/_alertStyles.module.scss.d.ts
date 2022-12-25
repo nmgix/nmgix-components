@@ -8,5 +8,6 @@ export const alertPresetNotification: string;
 export const alertPresetSuccess: string;
 export const alertPresetWarning: string;
 export const alertStack: string;
+export const alertStackWindowFixed: string;
 export const alertWindowFixed: string;
 export const scrollText: string;

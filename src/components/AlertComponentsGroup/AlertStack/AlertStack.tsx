@@ -34,6 +34,12 @@ export const AlertStackChild: React.FC<{
   );
 };
 
+export type AlertStackSettings = {
+  alerts: AlertProps[];
+  timeout: number | null;
+  windowFixed?: boolean;
+};
+
 /**
  * Alert Stack component.
  * Responsible for stacking fixed-type alerts in vertical stack with option to delete each node after timeout.
@@ -41,33 +47,34 @@ export const AlertStackChild: React.FC<{
  * @param {number | null} timeout after a period of time (in ms) last node will be removed from stack, can be set null
  * @returns {forwardRef} Functional Component.
  */
-export const AlertStack = forwardRef<AlertRef, { alerts: AlertProps[]; timeout: number | null }>(
-  ({ alerts, timeout }, ref) => {
-    const [currentAlerts, setCurrentAlerts] = useState<AlertStackChildProps[]>(
-      alerts.map((alert, i) => {
-        return { ...alert, id: i };
-      })
-    );
+export const AlertStack = forwardRef<AlertRef, AlertStackSettings>(({ alerts, timeout, windowFixed }, ref) => {
+  const [currentAlerts, setCurrentAlerts] = useState<AlertStackChildProps[]>(
+    alerts.map((alert, i) => {
+      return { ...alert, id: i };
+    })
+  );
 
-    const addAlert = (alert: AlertProps): void => {
-      let index = currentAlerts.length > 0 ? currentAlerts[currentAlerts.length - 1].id + 1 : 0;
-      setCurrentAlerts(() => [...currentAlerts, { ...alert, id: index }]);
-    };
-    const removeAlert = (id: number): void => {
-      setCurrentAlerts((state) => state.filter((alert) => alert.id !== id));
-    };
+  const addAlert = (alert: AlertProps): void => {
+    let index = currentAlerts.length > 0 ? currentAlerts[currentAlerts.length - 1].id + 1 : 0;
+    setCurrentAlerts(() => [...currentAlerts, { ...alert, id: index }]);
+  };
+  const removeAlert = (id: number): void => {
+    setCurrentAlerts((state) => state.filter((alert) => alert.id !== id));
+  };
 
-    useImperativeHandle(ref, () => ({
-      addAlert,
-      removeAlert,
-    }));
+  useImperativeHandle(ref, () => ({
+    addAlert,
+    removeAlert,
+  }));
 
-    return (
-      <ul className={clsx(styles.alertStack)}>
-        {currentAlerts.map((alert) => (
-          <AlertStackChild alert={alert} timeout={timeout} removeElement={removeAlert} key={alert.id} />
-        ))}
-      </ul>
-    );
-  }
-);
+  const alertStackComponent = (
+    <ul className={clsx(styles.alertStack, windowFixed ? styles.alertWindowFixed : undefined)}>
+      {currentAlerts.map((alert) => (
+        <AlertStackChild alert={alert} timeout={timeout} removeElement={removeAlert} key={alert.id} />
+      ))}
+    </ul>
+  );
+
+  const renderAlertStack = alerts.length > 0 ? alertStackComponent : <></>;
+  return renderAlertStack;
+});

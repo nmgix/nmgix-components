@@ -35,16 +35,6 @@ Need to do:
 - [x] Setup history
 - [x] Document (TSDoc)
 
-## [x] Component Cell
-
-Need to do:
-
-- [-] Cell arrangement logic > Grid cells should be located randomly, but relative to the limits of their level (for example, information about yourself can only be located from 2 cells and below)
-- [-] Make skeleton loading state for cells
-- [x] Different sizes (2x2 - default, 1x2 (2 _ 1x2), 2x1 (2 _ 2x1), 2x3 (and possibly 3x2), 2x4, 4x2, 3x4, 4x3, 4x4)
-- [x] Setup history
-- [x] Document each component (TSDoc)
-
 ## [ ] Component Tooltip
 
 Need to do:
@@ -105,14 +95,6 @@ Need to do:
 Need to do:
 
 - [x] Change theme hook to handle theme state
-- [x] Setup history
-- [x] Document component (TSDoc)
-
-## [ ] Component App Wrapper
-
-Need to do:
-
-- [x] Styling
 - [x] Setup history
 - [x] Document component (TSDoc)
 

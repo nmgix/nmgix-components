@@ -19,5 +19,5 @@ export const DefaultWindowFixedAlert = GenericAlert.bind({});
 DefaultWindowFixedAlert.args = {
   children: <>Добавлен новый предмет!</>,
   scheme: "notification",
-  type: "window-fixed",
+  type: "WindowFixed",
 };

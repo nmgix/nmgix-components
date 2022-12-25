@@ -6,7 +6,7 @@ import styles from "../_popupStyles.module.scss";
 export type PopupRef = {
   createPopup: (content: ReactNode) => void;
   deletePopup: (id: string) => void;
-};
+} | null;
 
 export const PopupStack = forwardRef<PopupRef, {}>(({}, ref) => {
   const [popups, setPopups] = useState<PopupProps[]>([]);
