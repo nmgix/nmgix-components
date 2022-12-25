@@ -45,10 +45,12 @@
   },
   "dependencies": {
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "@types/uuid": "^9.0.0",
     "clsx": "^1.2.1",
     "next": "^13.0.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "storybook": "^6.5.9"
+    "storybook": "^6.5.9",
+    "uuid": "^3.4.0"
   }
 }

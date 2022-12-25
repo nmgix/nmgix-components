@@ -1,4 +1,3 @@
-import React from "react";
 import { Hint, HintProps } from "../HintComponent";
 import styles from "./_hintsWrapper.module.scss";
 import clsx from "clsx";

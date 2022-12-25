@@ -1,4 +1,3 @@
-import React from "react";
 import { ImageProps, Image } from "../ImageComponent";
 import "./_imageCollage.module.scss";
 

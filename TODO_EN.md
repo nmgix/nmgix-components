@@ -116,9 +116,9 @@ Need to do:
 - [x] Setup history
 - [x] Document component (TSDoc)
 
-## [ ] Component PopUp
+## [x] Component PopUp
 
 Need to do:
 
-- [ ] Wrapper component for all popups
-- [ ] Unversal PopUp component that accepts any JSX and css
+- [x] Wrapper component for all popups
+- [x] Unversal PopUp component that accepts any JSX and css

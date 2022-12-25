@@ -2,7 +2,7 @@ import { forwardRef, Ref, useEffect, useImperativeHandle, useState } from "react
 import { Alert } from "../Alert/";
 import styles from "./_alertStack.module.scss";
 import { AlertProps, AlertRef, AlertStackChildProps } from "../types";
-import React from "react";
+
 import clsx from "clsx";
 
 /**

@@ -1,4 +1,3 @@
-import React from "react";
 import "./_link.module.scss";
 
 type InputProps = {

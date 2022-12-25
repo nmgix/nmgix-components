@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import React from "react";
+
 import { HTIV, HTIVProps } from "../HTIVComponent";
 import { AppThemeContainer } from "./AppThemeContainer";
 
