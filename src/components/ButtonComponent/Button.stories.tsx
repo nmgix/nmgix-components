@@ -1,6 +1,5 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { AppThemeContainer } from "../AppThemeContainer";
 import { Button } from "./Button";
 
 export default {
@@ -9,21 +8,14 @@ export default {
 } as ComponentMeta<typeof Button>;
 
 const GenericButton: ComponentStory<typeof Button> = (args) => {
-  return (
-    <AppThemeContainer loaded={true}>
-      <Button {...args}>Default Content</Button>
-    </AppThemeContainer>
-  );
+  return <Button {...args}>Default Content</Button>;
 };
 
 export const DefaultButton = GenericButton.bind({});
 DefaultButton.args = {
-  border: true,
+  buttonBorder: true,
   children: "Пример текста",
   color: "notification",
-  icon: {
-    icon: "arrow-right-long",
-  },
   opacity: 1,
   size: "m",
 };
