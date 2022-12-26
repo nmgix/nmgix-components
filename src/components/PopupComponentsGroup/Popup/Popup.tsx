@@ -4,11 +4,18 @@ import styles from "../_popupStyles.module.scss";
 
 export type PopupContent = {
   children: ReactNode;
-  onDestroy?: (finished: boolean) => void;
+  onDestroy?: (status: keyof typeof PopupCloseStatues) => void;
 };
 
+export enum PopupCloseStatues {
+  "success",
+  "failure",
+  "error",
+  "close",
+}
+
 export type PopupControls = {
-  closePopup: () => void;
+  closePopup: (status: keyof typeof PopupCloseStatues) => void;
 };
 
 export type PopupProps = {
@@ -16,10 +23,9 @@ export type PopupProps = {
 } & PopupContent;
 
 export const Popup: React.FC<PopupProps & PopupRef> = memo(
-  ({ id, children, onDestroy, createPopup, deletePopup }) => {
-    const closePopup = () => {
-      onDestroy!(true);
-      deletePopup(id, true);
+  ({ id, children, deletePopup }) => {
+    const closePopup = (status: keyof typeof PopupCloseStatues) => {
+      deletePopup(id, status);
     };
 
     const childrenWithProps = Children.map(children, (child) => {
