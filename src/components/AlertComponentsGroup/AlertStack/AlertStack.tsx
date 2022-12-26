@@ -1,4 +1,4 @@
-import { forwardRef, Ref, useEffect, useImperativeHandle, useState } from "react";
+import React, { forwardRef, Ref, useEffect, useImperativeHandle, useState } from "react";
 import { Alert } from "../Alert/";
 import styles from "./_alertStack.module.scss";
 import { AlertProps, AlertRef, AlertStackChildProps } from "../types";
@@ -38,6 +38,7 @@ export type AlertStackSettings = {
   alerts: AlertProps[];
   timeout: number | null;
   windowFixed?: boolean;
+  customStyles?: React.CSSProperties;
 };
 
 /**
@@ -47,34 +48,44 @@ export type AlertStackSettings = {
  * @param {number | null} timeout after a period of time (in ms) last node will be removed from stack, can be set null
  * @returns {forwardRef} Functional Component.
  */
-export const AlertStack = forwardRef<AlertRef, AlertStackSettings>(({ alerts, timeout, windowFixed }, ref) => {
-  const [currentAlerts, setCurrentAlerts] = useState<AlertStackChildProps[]>(
-    alerts.map((alert, i) => {
-      return { ...alert, id: i };
-    })
-  );
+export const AlertStack = forwardRef<AlertRef, AlertStackSettings>(
+  ({ alerts, timeout, windowFixed, customStyles }, ref) => {
+    const [currentAlerts, setCurrentAlerts] = useState<AlertStackChildProps[]>(
+      alerts.map((alert, i) => {
+        return { ...alert, id: i };
+      })
+    );
 
-  const addAlert = (alert: AlertProps): void => {
-    let index = currentAlerts.length > 0 ? currentAlerts[currentAlerts.length - 1].id + 1 : 0;
-    setCurrentAlerts(() => [...currentAlerts, { ...alert, id: index }]);
-  };
-  const removeAlert = (id: number): void => {
-    setCurrentAlerts((state) => state.filter((alert) => alert.id !== id));
-  };
+    const addAlert = (alert: AlertProps): void => {
+      let index = currentAlerts.length > 0 ? currentAlerts[currentAlerts.length - 1].id + 1 : 0;
 
-  useImperativeHandle(ref, () => ({
-    addAlert,
-    removeAlert,
-  }));
+      if (currentAlerts.length > 10) {
+        setCurrentAlerts(() => [...currentAlerts.slice(1), { ...alert, id: index }]);
+      } else {
+        setCurrentAlerts(() => [...currentAlerts, { ...alert, id: index }]);
+      }
+    };
+    const removeAlert = (id: number): void => {
+      setCurrentAlerts((state) => state.filter((alert) => alert.id !== id));
+    };
 
-  const alertStackComponent = (
-    <ul className={clsx(styles.alertStack, windowFixed ? styles.alertWindowFixed : undefined)}>
-      {currentAlerts.map((alert) => (
-        <AlertStackChild alert={alert} timeout={timeout} removeElement={removeAlert} key={alert.id} />
-      ))}
-    </ul>
-  );
+    useImperativeHandle(ref, () => ({
+      addAlert,
+      removeAlert,
+    }));
 
-  const renderAlertStack = alerts.length > 0 ? alertStackComponent : <></>;
-  return renderAlertStack;
-});
+    const alertStackComponent = (
+      <ul
+        style={customStyles}
+        className={clsx(styles.alertStack, windowFixed ? styles.alertStackWindowFixed : undefined)}>
+        {currentAlerts.map((alert) => (
+          <AlertStackChild alert={alert} timeout={timeout} removeElement={removeAlert} key={alert.id} />
+        ))}
+      </ul>
+    );
+
+    // const renderAlertStack = alerts.length > 0 ? alertStackComponent : <></>;
+    // return renderAlertStack;
+    return alertStackComponent;
+  }
+);

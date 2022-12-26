@@ -11,11 +11,12 @@
   }
 
   &Stack {
+    z-index: 10;
     list-style-type: none;
     padding: 0;
 
     &WindowFixed {
-      position: absolute;
+      position: fixed;
     }
 
     & > li {
