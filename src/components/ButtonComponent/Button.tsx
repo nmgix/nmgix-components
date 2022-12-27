@@ -17,13 +17,14 @@ export type ButtonProps = {
 
 export const Button: React.FC<ButtonProps> = memo(
   (props) => {
-    const { children, color, backgroundColor, opacity, size, onClick, buttonBorder, classNames } = props;
+    const { children, color, backgroundColor, opacity, size, onClick, buttonBorder, classNames, type } = props;
 
     return (
       <button
         // @ts-ignore
         className={clsx(styles.button, styles[`buttonSize${size.charAt(0).toUpperCase() + size.slice(1)}`], classNames)}
         onClick={onClick}
+        type={type ?? "button"}
         style={{
           border: buttonBorder ? `2px solid rgba(var(--color-${color ?? "background-alter"}),1)` : undefined,
           opacity: opacity ?? 1,

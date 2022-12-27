@@ -28,12 +28,27 @@ $sizes: (
 
   color: var(--color-background-alter);
   background-color: var(--color-background-default);
+  outline-offset: 2px;
 
   &:hover {
     opacity: 1 !important;
   }
   &:active {
     opacity: 0.7 !important;
+  }
+
+  &:focus {
+    position: relative;
+  }
+
+  &:focus::after {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    outline: 5px auto -webkit-focus-ring-color;
   }
 
   @each $size, $value in $sizes {

@@ -1,4 +1,4 @@
-import React, { Children, memo, ReactNode } from "react";
+import React, { Children, memo, ReactNode, useEffect } from "react";
 import { PopupRef } from "../PopupStack/PopupStack";
 import styles from "../_popupStyles.module.scss";
 
@@ -27,6 +27,20 @@ export const Popup: React.FC<PopupProps & PopupRef> = memo(
     const closePopup = (status: keyof typeof PopupCloseStatues) => {
       deletePopup(id, status);
     };
+
+    useEffect(() => {
+      const eventName = "keydown";
+      const eventHandler = ({ key }: KeyboardEvent) => {
+        if (key === "Escape") {
+          closePopup!("close");
+        }
+      };
+
+      window.addEventListener(eventName, eventHandler);
+      return () => {
+        window.removeEventListener(eventName, eventHandler);
+      };
+    }, []);
 
     const childrenWithProps = Children.map(children, (child) => {
       if (React.isValidElement(child)) {
