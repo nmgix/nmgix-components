@@ -7,3 +7,5 @@ export { Link } from "./components/LinkComponent";
 export { Input } from "./components/InputComponent";
 export { PopupStack } from "./components/PopupComponentsGroup";
 export { ThemeWrapper } from "./components/ThemeWrapperComponent";
+
+export { InjectedProps, TransitionStyles } from "./types/Animation";

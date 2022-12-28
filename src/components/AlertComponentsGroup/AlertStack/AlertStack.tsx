@@ -1,9 +1,11 @@
-import React, { forwardRef, Ref, useEffect, useImperativeHandle, useState } from "react";
+import React, { forwardRef, Ref, useEffect, useImperativeHandle, useRef, useState } from "react";
 import { Alert } from "../Alert/";
-import styles from "./_alertStack.module.scss";
+import styles from "../_alertStyles.module.scss";
 import { AlertProps, AlertRef, AlertStackChildProps } from "../types";
 
 import clsx from "clsx";
+import { Transition, TransitionGroup } from "react-transition-group";
+import { TransitionStyles } from "types/Animation";
 
 /**
  * Alert Stack Child component.
@@ -14,13 +16,29 @@ import clsx from "clsx";
  * @returns {React.FC} Functional Component.
  */
 export const AlertStackChild: React.FC<{
+  animationState: string;
   alert: AlertStackChildProps;
   timeout: number | null;
   removeElement: (id: number) => void;
-}> = ({ alert, timeout, removeElement }) => {
+}> = ({ alert, timeout, removeElement, animationState }) => {
+  const transitionStyles: TransitionStyles = {
+    entering: { opacity: 0 },
+    entered: { opacity: 1 },
+    exiting: { opacity: 0 },
+    exited: { opacity: 0 },
+  };
+
+  const nodeRef = useRef(null);
+
+  const [rendered, setRendered] = useState<boolean>(false);
+  useEffect(() => {
+    setRendered(true);
+  }, []);
+
   useEffect(() => {
     if (timeout !== null) {
       var deleteTimeout = setTimeout(() => {
+        setRendered(false);
         removeElement(alert.id);
       }, timeout);
     }
@@ -28,7 +46,7 @@ export const AlertStackChild: React.FC<{
   }, []);
 
   return (
-    <li>
+    <li ref={nodeRef} style={{ ...transitionStyles[animationState as keyof TransitionStyles] }}>
       <Alert {...alert} />
     </li>
   );
@@ -66,6 +84,7 @@ export const AlertStack = forwardRef<AlertRef, AlertStackSettings>(
       }
     };
     const removeAlert = (id: number): void => {
+      console.log(id);
       setCurrentAlerts((state) => state.filter((alert) => alert.id !== id));
     };
 
@@ -78,9 +97,15 @@ export const AlertStack = forwardRef<AlertRef, AlertStackSettings>(
       <ul
         style={customStyles}
         className={clsx(styles.alertStack, windowFixed ? styles.alertStackWindowFixed : undefined)}>
-        {currentAlerts.map((alert) => (
-          <AlertStackChild alert={alert} timeout={timeout} removeElement={removeAlert} key={alert.id} />
-        ))}
+        <TransitionGroup component={null}>
+          {currentAlerts.map((alert) => (
+            <Transition timeout={100} unmountOnExit key={alert.id}>
+              {(state) => (
+                <AlertStackChild alert={alert} timeout={timeout} removeElement={removeAlert} animationState={state} />
+              )}
+            </Transition>
+          ))}
+        </TransitionGroup>
       </ul>
     );
 
