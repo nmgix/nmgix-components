@@ -76,7 +76,6 @@ export const AlertStack = forwardRef<AlertRef, AlertStackSettings>(
       }
     };
     const removeAlert = (id: number): void => {
-      console.log(id);
       setCurrentAlerts((state) => state.filter((alert) => alert.id !== id));
     };
 
