@@ -28,17 +28,9 @@ export const AlertStackChild: React.FC<{
     exited: { opacity: 0 },
   };
 
-  const nodeRef = useRef(null);
-
-  const [rendered, setRendered] = useState<boolean>(false);
-  useEffect(() => {
-    setRendered(true);
-  }, []);
-
   useEffect(() => {
     if (timeout !== null) {
       var deleteTimeout = setTimeout(() => {
-        setRendered(false);
         removeElement(alert.id);
       }, timeout);
     }
@@ -46,7 +38,7 @@ export const AlertStackChild: React.FC<{
   }, []);
 
   return (
-    <li ref={nodeRef} style={{ ...transitionStyles[animationState as keyof TransitionStyles] }}>
+    <li style={{ ...transitionStyles[animationState as keyof TransitionStyles] }}>
       <Alert {...alert} />
     </li>
   );
