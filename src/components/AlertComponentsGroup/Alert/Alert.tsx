@@ -3,10 +3,7 @@ import ReactDOMServer from "react-dom/server";
 import { AlertProps } from "../types";
 import styles from "../_alertStyles.module.scss";
 import clsx from "clsx";
-import { createRef, useEffect, useState } from "react";
-
-import { Transition } from "react-transition-group";
-import { TransitionStyles } from "types/Animation";
+import { createRef } from "react";
 
 /**
  * Alert Component.

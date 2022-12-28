@@ -22,9 +22,9 @@ export const AlertStackChild: React.FC<{
   removeElement: (id: number) => void;
 }> = ({ alert, timeout, removeElement, animationState }) => {
   const transitionStyles: TransitionStyles = {
-    entering: { opacity: 0 },
-    entered: { opacity: 1 },
-    exiting: { opacity: 0 },
+    entering: { opacity: 0, transform: "translateY(50px)" },
+    entered: { opacity: 1, transform: "translateY(0px)" },
+    exiting: { opacity: 0, transform: "translateY(-50px)" },
     exited: { opacity: 0 },
   };
 
