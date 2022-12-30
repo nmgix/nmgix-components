@@ -100,8 +100,6 @@ export const AlertStack = forwardRef<AlertRef, AlertStackSettings>(
       </ul>
     );
 
-    // const renderAlertStack = alerts.length > 0 ? alertStackComponent : <></>;
-    // return renderAlertStack;
     return alertStackComponent;
   }
 );
