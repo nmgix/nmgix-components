@@ -5,7 +5,7 @@ import { AlertProps, AlertRef, AlertStackChildProps } from "../types";
 
 import clsx from "clsx";
 import { Transition, TransitionGroup } from "react-transition-group";
-import { TransitionStyles } from "types/Animation";
+import { TransitionStyles } from "../../../types/Animation";
 
 /**
  * Alert Stack Child component.

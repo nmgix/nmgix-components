@@ -8,4 +8,4 @@ export { Input } from "./components/InputComponent";
 export { PopupStack } from "./components/PopupComponentsGroup";
 export { ThemeWrapper } from "./components/ThemeWrapperComponent";
 
-export { InjectedProps, TransitionStyles } from "./types/Animation";
+export type { InjectedProps, TransitionStyles } from "./types/Animation";
