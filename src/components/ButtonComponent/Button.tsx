@@ -35,5 +35,6 @@ export const Button: React.FC<ButtonProps> = memo(
       </button>
     );
   },
-  (prev, next) => prev.opacity === next.opacity && prev.backgroundColor === next.backgroundColor
+  (prev, next) =>
+    prev.opacity === next.opacity && prev.backgroundColor === next.backgroundColor && prev.onClick === next.onClick
 );
