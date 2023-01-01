@@ -15,26 +15,22 @@ export type ButtonProps = {
   type?: "submit";
 };
 
-export const Button: React.FC<ButtonProps> = memo(
-  (props) => {
-    const { children, color, backgroundColor, opacity, size, onClick, buttonBorder, classNames, type } = props;
+export const Button: React.FC<ButtonProps> = (props) => {
+  const { children, color, backgroundColor, opacity, size, onClick, buttonBorder, classNames, type } = props;
 
-    return (
-      <button
-        // @ts-ignore
-        className={clsx(styles.button, styles[`buttonSize${size.charAt(0).toUpperCase() + size.slice(1)}`], classNames)}
-        onClick={onClick}
-        type={type ?? "button"}
-        style={{
-          border: buttonBorder ? `2px solid rgba(var(--color-${color ?? "background-alter"}),1)` : undefined,
-          opacity: opacity ?? 1,
-          backgroundColor: backgroundColor ? `rgb(var(--color-${backgroundColor}))` : undefined,
-          color: `rgb(var(--color-${color ?? "background-alter"}))`,
-        }}>
-        {children}
-      </button>
-    );
-  },
-  (prev, next) =>
-    prev.opacity === next.opacity && prev.backgroundColor === next.backgroundColor && prev.onClick === next.onClick
-);
+  return (
+    <button
+      // @ts-ignore
+      className={clsx(styles.button, styles[`buttonSize${size.charAt(0).toUpperCase() + size.slice(1)}`], classNames)}
+      onClick={onClick}
+      type={type ?? "button"}
+      style={{
+        border: buttonBorder ? `2px solid rgba(var(--color-${color ?? "background-alter"}),1)` : undefined,
+        opacity: opacity ?? 1,
+        backgroundColor: backgroundColor ? `rgb(var(--color-${backgroundColor}))` : undefined,
+        color: `rgb(var(--color-${color ?? "background-alter"}))`,
+      }}>
+      {children}
+    </button>
+  );
+};
