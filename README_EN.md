@@ -1,4 +1,4 @@
-<img src="git.content/preview_en.png"/>
+<img src=".git.content/preview_en.png"/>
 
 # UI-kit for porfolio project
 
