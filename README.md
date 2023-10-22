@@ -1,4 +1,4 @@
-<img src="git.content/preview_ru.png"/>
+<img src=".git.content/preview_ru.png"/>
 
 # UI-библиотека для разработки сайта-портфолио
 
